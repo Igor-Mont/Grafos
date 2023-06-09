@@ -20,7 +20,7 @@ class Vertex:
     print("\n")
 
 
-class Graphs:
+class Graph:
   def __init__(self):
     self.vertices = {}
 
@@ -42,36 +42,36 @@ class Graphs:
       vertex_origin.remove_adjacent(vertex_removed)
       vertex_removed.remove_adjacent(vertex_origin)
 
-  def imprimir_graphs(self):
+  def imprimir_graph(self):
     for vertex in self.vertices.values():
       vertex.print_adjacent()
 
 # Exemplo de uso
-graphs = Graphs()
+graph = Graph()
 
 # Adicionando vértices
-graphs.add_vertex(0, 'A')
-graphs.add_vertex(1, 'B')
-graphs.add_vertex(2, 'C')
-graphs.add_vertex(3, 'D')
-graphs.add_vertex(5, 'E')
-graphs.add_vertex(6, 'F')
-graphs.add_vertex(7, 'G')
-graphs.add_vertex(8, 'H')
+graph.add_vertex(0, 'A')
+graph.add_vertex(1, 'B')
+graph.add_vertex(2, 'C')
+graph.add_vertex(3, 'D')
+graph.add_vertex(5, 'E')
+graph.add_vertex(6, 'F')
+graph.add_vertex(7, 'G')
+graph.add_vertex(8, 'H')
 
 # Adicionando arestas
-graphs.add_edge(0, 1)
-graphs.add_edge(0, 8)
-graphs.add_edge(0, 2)
-graphs.add_edge(6, 2)
-graphs.add_edge(1, 3)
-graphs.add_edge(1, 7)
-graphs.add_edge(8, 3)
-graphs.add_edge(5, 3)
-graphs.add_edge(5, 8)
-graphs.remove_edge(5, 3)
-graphs.remove_edge(1, 3)
-graphs.remove_edge(0, 1)
+graph.add_edge(0, 1)
+graph.add_edge(0, 8)
+graph.add_edge(0, 2)
+graph.add_edge(6, 2)
+graph.add_edge(1, 3)
+graph.add_edge(1, 7)
+graph.add_edge(8, 3)
+graph.add_edge(5, 3)
+graph.add_edge(5, 8)
+graph.remove_edge(5, 3)
+graph.remove_edge(1, 3)
+graph.remove_edge(0, 1)
 
-# Imprimindo o graphs
-graphs.imprimir_graphs()
+# Imprimindo o graph
+graph.imprimir_graph()
