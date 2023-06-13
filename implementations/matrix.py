@@ -8,11 +8,12 @@ class Vertex:
 
 class Graph:
   def __init__(self, type):
-    self.graph = dict()
     self.type = type
+    self.graph = dict()
+    self.edges = list()
     self.vertices = list()
     self.matrix = list()
-    self.edges = list()
+    self.edges_matrix = list()
 
   def add_vertex(self, vertex):
     if vertex not in self.graph:
@@ -38,10 +39,16 @@ class Graph:
       raise ValueError("One or both vertexes do not exist in the graph.")
     
   def add_edge_matrix(self, vertex1, vertex2):
-    index1 = self.vertices.index(vertex1)
-    index2 = self.vertices.index(vertex2)
-    self.matrix[index1][index2] = 1
-    self.matrix[index2][index1] = 1
+    if vertex1 in self.vertices and vertex2 in self.vertices:
+      index1 = self.vertices.index(vertex1)
+      index2 = self.vertices.index(vertex2)
+      self.matrix[index1][index2] += 1
+      self.matrix[index2][index1] += 1
+      edge = (vertex1.data, vertex2.data)
+      if tuple(reversed(edge)) not in self.edges_matrix:
+        self.edges_matrix.append(edge)
+    else:
+      raise ValueError("One or both vertexes do not exist in the graph.")
 
   def get_vertexes(self):
     return [vertex.data for vertex in self.graph.keys()]
@@ -65,6 +72,12 @@ class Graph:
       if vertex.index == index:
         return vertex.degree
     raise IndexError("list index out of range")
+  
+  # def vertex_degree_matrix(self, index):
+  #   for vertex in self.vertices:
+  #     if vertex.index == index:
+  #       return vertex.degree
+  #   raise IndexError("list index out of range")
 
   def neighboring_vertices(self, index_v1, index_v2):
     vertex1 = None
@@ -85,6 +98,20 @@ class Graph:
     reversed_edge = tuple(reversed(edge))
     if reversed_edge in self.edges:
       self.edges.remove(reversed_edge)
+      
+  def remove_edge_matrix(self, vertex1, vertex2):
+    if vertex1 in self.vertices and vertex2 in self.vertices:
+      index1 = self.vertices.index(vertex1)
+      index2 = self.vertices.index(vertex2)
+      self.matrix[index1][index2] -= 1
+      self.matrix[index2][index1] -= 1
+      edge = (vertex1.data, vertex2.data)
+      if edge in self.edges:
+        self.edges.remove(edge)
+        return
+      reversed_edge = tuple(reversed(edge))
+      if reversed_edge in self.edges:
+        self.edges.remove(reversed_edge)
 
   def print_graph(self):
     print("Quantidade de vértices:", len(self.get_vertexes()))
@@ -104,7 +131,7 @@ class Graph:
             print(self.matrix[i][j], end=" ")
         print()
 
-graph = Graph("")
+graph = Graph("matrix")
 
 vertex_a = Vertex("A", 1)
 vertex_b = Vertex("B", 2)
@@ -119,8 +146,11 @@ graph.add_vertex_matrix(vertex_d)
 graph.add_vertex_matrix(vertex_e)
 
 graph.add_edge_matrix(vertex_a, vertex_b)
+graph.add_edge_matrix(vertex_a, vertex_a)
+graph.add_edge_matrix(vertex_b, vertex_a)
 graph.add_edge_matrix(vertex_c, vertex_d)
 graph.add_edge_matrix(vertex_a, vertex_e)
+graph.remove_edge_matrix(vertex_a, vertex_a)
 graph.print_matrix()
 
 # graph.add_vertex(vertex_a)
