@@ -86,6 +86,14 @@ class LinkedList:
         pointer = pointer.next
       self._size -= 1
     raise ValueError("{} is not in list".format(elem))
+
+  def __contains__(self, item):
+    current = self.head
+    while current:
+      if current.data == item:
+        return True
+      current = current.next
+    return False
   
   def __repr__(self):
     r = ""
@@ -99,13 +107,3 @@ class LinkedList:
     return self.__repr__()
 
 lista = LinkedList()
-
-lista.append(2)
-lista.append(3)
-lista.append(4)
-lista.append(5)
-print(len(lista))
-lista.insert(len(lista), 5)
-print(len(lista), lista[2], lista.index(2))
-lista.remove(2)
-print(lista)
