@@ -106,18 +106,19 @@ graph.add_edge(vertex_d, vertex_e)
 graph.add_edge(vertex_e, vertex_b)
 
 class GrafoGUI:
-    def __init__(self, graph):
+    def __init__(self, graph, edges):
         self.graph = graph
+        self.edges = edges
         self.positions = list()
         self.actual_count = 0
         self.janela = tk.Tk()
         self.janela.title("Representação Gráfica de Grafo")
         self.canvas = tk.Canvas(self.janela, width=500, height=500)
         self.canvas.pack()
-        self.canvas.bind("<Button-1>", self.clique_mouse)
+        self.canvas.bind("<Button-1>", self.onclick)
         self.janela.mainloop()
 
-    def clique_mouse(self, event):
+    def onclick(self, event):
         vertex = list(self.graph.keys())[self.actual_count]
         x, y = event.x, event.y
         self.positions.append((x, y))
@@ -136,23 +137,66 @@ class GrafoGUI:
 
     def desenhar_arestas(self):
       self.canvas.delete("arestas")
-      visited = set()
-      i = 0
-      arestas = 0
-      for vertice in self.graph.keys():
-        x1, y1 = self.positions[i]
 
-        j = 0
-        for outro_vertice in self.graph.keys():
-          if vertice != outro_vertice:
-            if (vertice, outro_vertice) not in visited and (outro_vertice, vertice) not in visited:
-              x2, y2 = self.positions[j]
-              self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
-              visited.add((vertice, outro_vertice))
+      edge_counts = {}  # Dicionário para rastrear a contagem de ocorrências de cada aresta
 
-              arestas += 1
-          j += 1
-        i += 1
-      print(arestas)
+      for edge in self.edges:
+        print(edge in edge_counts, tuple(reversed(edge)) in edge_counts, edge)
+        if edge in edge_counts or tuple(reversed(edge)) in edge_counts:
+          edge_counts[edge] += 1
+        else:
+          edge_counts[edge] = 1
 
-grafo_gui = GrafoGUI(graph.graph)
+      for edge in self.edges:
+          vertex1_data, vertex2_data = edge
+          vertex1 = None
+          vertex2 = None
+
+          for vertex in self.graph.keys():
+              if vertex.data == vertex1_data:
+                  vertex1 = vertex
+              if vertex.data == vertex2_data:
+                  vertex2 = vertex
+
+          if vertex1 and vertex2:
+              x1, y1 = self.positions[vertex1.index - 1]
+              x2, y2 = self.positions[vertex2.index - 1]
+
+              if x1 == x2 and y1 == y2:
+                  # Desenhar um loop
+                  loop_radius = 20 * 1.5
+                  self.canvas.create_arc(x1 - loop_radius, y1 - loop_radius, x1, y1 + loop_radius, start=0, extent=50000,
+                                        style=tk.ARC, outline="red", tags="arestas")
+              else:
+                  edge_count = edge_counts[edge]
+                  if edge_count > 1:
+                    print("multipla")
+                    # Desenhar um arco para arestas paralelas
+                    center_x = (x1 + x2) / 2
+                    center_y = (y1 + y2) / 2
+                    radius = abs(x2 - x1) / 2
+
+                    if y2 < y1:
+                        start_angle = 0
+                        extent_angle = -180
+                    else:
+                        start_angle = 180
+                        extent_angle = 180
+
+                    self.canvas.create_arc(
+                        center_x - radius,
+                        center_y - radius,
+                        center_x + radius,
+                        center_y + radius,
+                        start=start_angle,
+                        extent=extent_angle,
+                        style=tk.ARC,
+                        outline="black",
+                        tags="arestas"
+                    )
+                  else:
+                    self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
+
+
+
+grafo_gui = GrafoGUI(graph.graph, graph.get_edges())
