@@ -1,8 +1,10 @@
 from linked_list import LinkedList
 
 class Vertex:
-  def __init__(self, data):
+  def __init__(self, data, index):
     self.data = data
+    self.index = index
+    self.degree = 0
 
 class Graph:
   def __init__(self, type):
@@ -16,6 +18,8 @@ class Graph:
 
   def add_edge(self, vertex1, vertex2):
     if vertex1 in self.graph and vertex2 in self.graph:
+      vertex1.degree += 1
+      vertex2.degree += 1
       self.graph[vertex1].append(vertex2)
       self.graph[vertex2].append(vertex1)
       edge = (vertex1.data, vertex2.data)
@@ -44,10 +48,7 @@ class Graph:
   def vertex_degree(self, index):
     for vertex in self.graph:
       if vertex.index == index:
-        length = len(self.graph[vertex])
-        if length:
-          return len(self.graph[vertex])
-        break
+        return vertex.degree
     raise IndexError("list index out of range")
 
   def neighboring_vertices(self, index_v1, index_v2):
@@ -75,7 +76,7 @@ class Graph:
     print("Quantidade de arestas:", len(self.get_edges()))
     print("Arestas:", self.get_edges())
     for vertex in self.graph:
-      print("Grau:", self.vertex_degree(vertex.index), "|", vertex.data, "->",
+      print("Grau:", vertex.degree, "|", vertex.data, "->",
             [neighbor.data for neighbor in self.graph[vertex]])
 
 
