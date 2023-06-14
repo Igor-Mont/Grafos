@@ -9,7 +9,7 @@ class Vertex:
 class Graph:
   def __init__(self, type):
     self.type = type
-    self.graph = dict()
+    self.adjacency_list = dict()
     self.edges = list()
     self.vertices = list()
     self.matrix = list()
@@ -17,8 +17,8 @@ class Graph:
     self.edge_count = 0
 
   def add_vertex_list(self, vertex):
-    if vertex not in self.graph:
-      self.graph[vertex] = LinkedList()
+    if vertex not in self.adjacency_list:
+      self.adjacency_list[vertex] = LinkedList()
       
   def add_vertex_matrix(self, vertex):
     if vertex not in self.vertices:
@@ -28,11 +28,11 @@ class Graph:
         row.append(0)
 
   def add_edge_list(self, vertex1, vertex2):
-    if vertex1 in self.graph and vertex2 in self.graph:
+    if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
       vertex1.degree += 1
       vertex2.degree += 1
-      self.graph[vertex1].append(vertex2)
-      self.graph[vertex2].append(vertex1)
+      self.adjacency_list[vertex1].append(vertex2)
+      self.adjacency_list[vertex2].append(vertex1)
       edge = (vertex1.data, vertex2.data)
       if tuple(reversed(edge)) not in self.edges:
         self.edges.append(edge)
@@ -54,7 +54,7 @@ class Graph:
       raise ValueError("One or both vertexes do not exist in the graph.")
 
   def get_vertexes_list(self):
-    return [vertex.data for vertex in self.graph.keys()]
+    return [vertex.data for vertex in self.adjacency_list.keys()]
   
   def get_vertexes_matrix(self):
     return [vertex.data for vertex in self.vertices]
@@ -73,9 +73,9 @@ class Graph:
     return self.edges_matrix
 
   def has_edge_list(self, vertex1, vertex2):
-    if vertex1 in self.graph and vertex2 in self.graph:
+    if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
       # aqui poderia ser apenas um lado ou outro do "and", mas fiz as duas pra garantir
-      return vertex2 in self.graph[vertex1] and vertex1 in self.graph[vertex2]
+      return vertex2 in self.adjacency_list[vertex1] and vertex1 in self.adjacency_list[vertex2]
     return False
   
   def has_edge_matrix(self, vertex1, vertex2):
@@ -96,7 +96,7 @@ class Graph:
     return self.has_edge_matrix(vertex1, vertex2)
      
   def vertex_degree_list(self, index):
-    for vertex in self.graph:
+    for vertex in self.adjacency_list:
       if vertex.index == index:
         return vertex.degree
     raise IndexError("list index out of range")
@@ -110,7 +110,7 @@ class Graph:
   def neighboring_vertices_list(self, index_v1, index_v2):
     vertex1 = None
     vertex2 = None
-    for vertex in self.graph:
+    for vertex in self.adjacency_list:
       if vertex.index == index_v1:
         vertex1 = vertex
       if vertex.index == index_v2:
@@ -146,12 +146,12 @@ class Graph:
 
 
   def print_list(self):
-    print("Quantidade de vértices:", len(self.get_vertexes_matrix()))
-    print("Quantidade de arestas:", len(self.get_edges()))
-    print("Arestas:", self.get_edges())
-    for vertex in self.graph:
+    print("Quantidade de vértices:", len(self.get_vertexes_list()))
+    print("Quantidade de arestas:", len(self.get_edges_list()))
+    print("Arestas:", self.get_edges_list())
+    for vertex in self.adjacency_list:
       print("Grau:", vertex.degree, "|", vertex.data, "->",
-            [neighbor.data for neighbor in self.graph[vertex]])
+            [neighbor.data for neighbor in self.adjacency_list[vertex]])
   
   def print_matrix(self):
     print("Quantidade de vertices:", len(self.get_vertexes_matrix()))
@@ -168,6 +168,7 @@ class Graph:
         print()
 
 graph = Graph("matrix")
+graph_2 = Graph("matrix")
 
 vertex_a = Vertex("A", 0)
 vertex_b = Vertex("B", 1)
@@ -175,13 +176,16 @@ vertex_b = Vertex("B", 1)
 # vertex_d = Vertex("D", 3)
 # vertex_e = Vertex("E", 4)
 
-graph.add_vertex_matrix(vertex_a)
-graph.add_vertex_matrix(vertex_b)
+# graph.add_vertex_matrix(vertex_a)
+# graph.add_vertex_matrix(vertex_b)
+
+graph_2.add_vertex_list(vertex_a)
+graph_2.add_vertex_list(vertex_b)
 # graph.add_vertex_matrix(vertex_c)
 # graph.add_vertex_matrix(vertex_d)
 # graph.add_vertex_matrix(vertex_e)
 
-graph.add_edge_matrix(vertex_a, vertex_a)
+graph_2.add_edge_list(vertex_a, vertex_b)
 # graph.add_edge_matrix(vertex_a, vertex_a)
 # graph.add_edge_matrix(vertex_b, vertex_a)
 # graph.add_edge_matrix(vertex_c, vertex_d)
@@ -196,7 +200,7 @@ graph.add_edge_matrix(vertex_a, vertex_a)
 
 # print(graph.neighboring_vertices_matrix(1, 2))
 
-graph.print_matrix()
+graph_2.print_list()
 
 # graph.add_vertex(vertex_a)
 # graph.add_vertex(vertex_b)
