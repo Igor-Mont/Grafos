@@ -9,7 +9,7 @@ class Vertex:
 class Graph:
   def __init__(self, representation_type):
     self.representation_type = representation_type
-    self.edge_count = 0
+    self._edge_count = 0
     self.is_representation_list = representation_type == "list"
     if not self.is_representation_list:
       self.matrix = list()
@@ -39,6 +39,9 @@ class Graph:
       for row in self.matrix[:-1]:
         row.append(0)
 
+  def get_edge_count(self):
+    return self._edge_count
+
   def add_edge(self, vertex1, vertex2):
     if self.is_representation_list:
       self._add_edge_list(vertex1, vertex2)
@@ -53,7 +56,7 @@ class Graph:
       self.adjacency_list[vertex2].append(vertex1)
       edge = (vertex1.data, vertex2.data)
       self.edges.append(edge)
-      self.edge_count += 1
+      self._edge_count += 1
     else:
       raise ValueError("One or both vertexes do not exist in the graph.")
     
@@ -67,7 +70,7 @@ class Graph:
       self.matrix[index2][index1] += 1
       edge = (vertex1.data, vertex2.data)
       self.edges_matrix.append(edge)
-      self.edge_count += 1
+      self._edge_count += 1
     else:
       raise ValueError("One or both vertexes do not exist in the graph.")
 
@@ -206,7 +209,7 @@ class Graph:
 
   def print_list(self):
     print("Quantidade de vértices:", len(self.get_vertices()))
-    print("Quantidade de arestas:", self.edge_count)
+    print("Quantidade de arestas:", self.get_edge_count())
     print("Arestas:", self.get_edges())
     for vertex in self.adjacency_list:
       print("Grau:", vertex.degree, "|", vertex.data, "->",
@@ -214,7 +217,7 @@ class Graph:
   
   def print_matrix(self):
     print("Quantidade de vertices:", len(self.get_vertices()))
-    print("Quantidade de arestas:", self.edge_count)
+    print("Quantidade de arestas:", self.get_edge_count())
     print("Arestas:", self.get_edges_matrix())
     print("  ", end="")
     for vertex in self.vertices:
