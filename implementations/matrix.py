@@ -21,10 +21,10 @@ class Graph:
       
   def add_vertex_matrix(self, vertex):
     if vertex not in self.vertices:
-            self.vertices.append(vertex)
-            self.matrix.append([0] * len(self.vertices))
-            for row in self.matrix:
-                row.append(0)    
+        self.vertices.append(vertex)
+        self.matrix.append([0] * len(self.vertices))
+        for row in self.matrix:
+            row.append(0)    
 
   def add_edge(self, vertex1, vertex2):
     if vertex1 in self.graph and vertex2 in self.graph:
@@ -172,11 +172,11 @@ graph.add_vertex_matrix(vertex_c)
 graph.add_vertex_matrix(vertex_d)
 graph.add_vertex_matrix(vertex_e)
 
-graph.add_edge_matrix(vertex_a, vertex_b)
 graph.add_edge_matrix(vertex_a, vertex_a)
-graph.add_edge_matrix(vertex_b, vertex_a)
-graph.add_edge_matrix(vertex_c, vertex_d)
-graph.add_edge_matrix(vertex_a, vertex_e)
+graph.add_edge_matrix(vertex_b, vertex_b)
+graph.add_edge_matrix(vertex_c, vertex_c)
+graph.add_edge_matrix(vertex_d, vertex_d)
+graph.add_edge_matrix(vertex_e, vertex_e)
 # graph.remove_edge_matrix(vertex_a, vertex_a)
 
 # print(graph.vertex_degree_matrix(1))
