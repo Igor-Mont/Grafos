@@ -219,15 +219,17 @@ class Graph:
     print("Quantidade de vertices:", len(self.get_vertices()))
     print("Quantidade de arestas:", self.get_edge_count())
     print("Arestas:", self.get_edges_matrix())
+
     print("  ", end="")
     for vertex in self.vertices:
-        print(vertex.data, end=" ")
+      print(vertex.data, end=" ")
     print()
+
     for i in range(len(self.vertices)):
-        print(self.vertices[i].data, end=" ")
-        for j in range(len(self.vertices)):
-            print(self.matrix[i][j], end=" ")
-        print()
+      print(self.vertices[i].data, end=" ")
+      for j in range(len(self.vertices)):
+        print(self.matrix[i][j], end=" ")
+      print()
 
 graph = Graph("list")
 graph_2 = Graph("list")
