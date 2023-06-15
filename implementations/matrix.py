@@ -46,7 +46,7 @@ class Graph:
     if self.is_representation_list:
       self._add_edge_list(vertex1, vertex2)
     else:
-      self._add_vertex_matrix(vertex1, vertex2)
+      self._add_edge_matrix(vertex1, vertex2)
 
   def _add_edge_list(self, vertex1, vertex2):
     if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
@@ -207,7 +207,13 @@ class Graph:
     else:
       raise ValueError("One or both vertices do not exist in the graph.")
 
-  def print_list(self):
+  def print_graph(self):
+    if self.is_representation_list:
+      self._print_list()
+    else:
+      self._print_matrix()
+
+  def _print_list(self):
     print("Quantidade de vértices:", len(self.get_vertices()))
     print("Quantidade de arestas:", self.get_edge_count())
     print("Arestas:", self.get_edges())
@@ -215,10 +221,10 @@ class Graph:
       print("Grau:", vertex.degree, "|", vertex.data, "->",
             [neighbor.data for neighbor in self.adjacency_list[vertex]])
   
-  def print_matrix(self):
+  def _print_matrix(self):
     print("Quantidade de vertices:", len(self.get_vertices()))
     print("Quantidade de arestas:", self.get_edge_count())
-    print("Arestas:", self.get_edges_matrix())
+    print("Arestas:", self.get_edges())
 
     print("  ", end="")
     for vertex in self.vertices:
@@ -231,81 +237,60 @@ class Graph:
         print(self.matrix[i][j], end=" ")
       print()
 
-graph = Graph("list")
-graph_2 = Graph("list")
+def exemplo2():
+  graph = Graph("list")
 
-vertex_a = Vertex("A", 0)
-vertex_b = Vertex("B", 1)
-# vertex_c = Vertex("C", 2)
-# vertex_d = Vertex("D", 3)
-# vertex_e = Vertex("E", 4)
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
 
-# graph.add_vertex_matrix(vertex_a)
-# graph.add_vertex_matrix(vertex_b)
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
 
-graph_2.add_vertex(vertex_a)
-graph_2.add_vertex(vertex_b)
-# graph.add_vertex_matrix(vertex_c)
-# graph.add_vertex_matrix(vertex_d)
-# graph.add_vertex_matrix(vertex_e)
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_a, vertex_e)
+  graph.add_edge(vertex_a, vertex_d)
+  graph.add_edge(vertex_a, vertex_c)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_e)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_d, vertex_e)
 
-graph_2.add_edge(vertex_a, vertex_b)
-# graph.add_edge_matrix(vertex_a, vertex_a)
-# graph.add_edge_matrix(vertex_b, vertex_a)
-# graph.add_edge_matrix(vertex_c, vertex_d)
-# graph.add_edge_matrix(vertex_a, vertex_e)
+  print("Estrutura de adjacência\n")
+  graph.print_graph()
+  graph = Graph("matrix")
 
-# graph.remove_edge_matrix(vertex_a, vertex_a)
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
 
-# print(graph.has_edge_matrix(vertex_a, vertex_a))
-# print(graph.has_edge_matrix(vertex_a, vertex_b))
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
 
-# print(graph.has_edge_matrix(vertex_c, vertex_d))
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_a, vertex_e)
+  graph.add_edge(vertex_a, vertex_d)
+  graph.add_edge(vertex_a, vertex_c)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_e)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_d, vertex_e)
 
-# print(graph.neighboring_vertices_matrix(1, 2))
+  print("\nMatriz de adjacência\n")
+  graph.print_graph()
 
-graph_2.print_list()
-
-# graph.add_vertex(vertex_a)
-# graph.add_vertex(vertex_b)
-# graph.add_vertex(vertex_c)
-# graph.add_vertex(vertex_d)
-# graph.add_vertex(vertex_e)
-
-# graph.add_edge(vertex_a, vertex_b)
-# graph.add_edge(vertex_b, vertex_c)
-# graph.add_edge(vertex_b, vertex_d)
-# graph.add_edge(vertex_b, vertex_e)
-# graph.add_edge(vertex_c, vertex_c)
-# graph.add_edge(vertex_c, vertex_d)
-# graph.add_edge(vertex_d, vertex_e)
-# graph.add_edge(vertex_e, vertex_b)
-
-# graph.print_graph()
-
-# graph2 = Graph("")
-
-# vertex_a = Vertex("A", 1)
-# vertex_b = Vertex("B", 2)
-# vertex_c = Vertex("C", 3)
-# vertex_d = Vertex("D", 4)
-# vertex_e = Vertex("E", 5)
-
-# graph2.add_vertex(vertex_a)
-# graph2.add_vertex(vertex_b)
-# graph2.add_vertex(vertex_c)
-# graph2.add_vertex(vertex_d)
-# graph2.add_vertex(vertex_e)
-
-# graph2.add_edge(vertex_a, vertex_b)
-# graph2.add_edge(vertex_a, vertex_e)
-# graph2.add_edge(vertex_a, vertex_d)
-# graph2.add_edge(vertex_a, vertex_c)
-# graph2.add_edge(vertex_b, vertex_c)
-# graph2.add_edge(vertex_b, vertex_d)
-# graph2.add_edge(vertex_b, vertex_e)
-# graph2.add_edge(vertex_c, vertex_e)
-# graph2.add_edge(vertex_c, vertex_d)
-# graph2.add_edge(vertex_d, vertex_e)
-
-# graph2.print_graph()
+exemplo2()
