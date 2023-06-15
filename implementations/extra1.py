@@ -1,3 +1,4 @@
+import math
 import tkinter as tk
 
 class Node:
@@ -378,6 +379,7 @@ class GrafoGUI:
         self.edges = edges
         self.positions = list()
         self.actual_count = 0
+        self.radius = 20
         self.janela = tk.Tk()
         self.janela.title("Representação Gráfica de Grafo")
         self.canvas = tk.Canvas(self.janela, width=500, height=500)
@@ -398,8 +400,7 @@ class GrafoGUI:
         
 
     def desenhar_vertice(self, x, y, vertice):
-        raio = 20
-        self.canvas.create_oval(x - raio, y - raio, x + raio, y + raio, fill="lightblue")
+        self.canvas.create_oval(x - self.radius, y - self.radius, x + self.radius, y + self.radius, fill="lightblue")
         self.canvas.create_text(x, y, text=str(vertice), fill="black")
 
     def desenhar_arestas(self):
@@ -407,19 +408,23 @@ class GrafoGUI:
 
       edge_counts = {}  # Dicionário para rastrear a contagem de ocorrências de cada aresta
       print("EDGES", self.edges, self.edges[0])
+      print("EDGES COUNT", edge_counts)
       for edge in self.edges:
-        print(edge in edge_counts, tuple(reversed(edge)) in edge_counts, edge)
-        print(edge)
         # or tuple(reversed(edge)) in edge_counts
+        if tuple(reversed(edge)) in edge_counts:
+          edge_counts[tuple(reversed(edge))] += 1
+          continue
         if edge in edge_counts:
-          if(tuple(reversed(edge)) in edge_counts):
-            edge_counts[edge] += 1
+          print("INN")
+          print(edge, tuple(reversed(edge)))
+          print(edge_counts[edge])
           edge_counts[edge] += 1
           
         else:
           edge_counts[edge] = 1
+      print("EDGES COUNT", edge_counts)
 
-      for edge in self.edges:
+      for edge in edge_counts:
         vertex1_data, vertex2_data = edge
         vertex1 = None
         vertex2 = None
@@ -436,7 +441,7 @@ class GrafoGUI:
 
           if x1 == x2 and y1 == y2:
             # Desenhar um loop
-            loop_radius = 20 * 1.5
+            loop_radius = self.radius * 1.5
             self.canvas.create_arc(x1 - loop_radius, y1 - loop_radius, x1, y1 + loop_radius, start=0, extent=50000,
                                   style=tk.ARC, outline="red", tags="arestas")
           else:
@@ -445,28 +450,15 @@ class GrafoGUI:
             if edge_count > 1:
               print("multipla")
               # Desenhar um arco para arestas paralelas
-              center_x = (x1 + x2) / 2
-              center_y = (y1 + y2) / 2
-              radius = abs(x2 - x1) / 2
 
-              if y2 < y1:
-                start_angle = 0
-                extent_angle = -180
-              else:
-                start_angle = 180
-                extent_angle = 180
-
-              self.canvas.create_arc(
-                  center_x - radius,
-                  center_y - radius,
-                  center_x + radius,
-                  center_y + radius,
-                  start=start_angle,
-                  extent=extent_angle,
-                  style=tk.ARC,
-                  outline="black",
-                  tags="arestas"
-              )
+              for i in range(edge_count):
+                if i % 2 != 0:
+                  self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
+                  continue
+                print((x1, y1), (x2, y2))
+                center_x = int((x1 + x2) / 2) + 50
+                center_y = int((y1 + y2) / 2) + 50
+                self.canvas.create_line(x1, y1, center_x, center_y, x2, y2, smooth=True, splinesteps=20, width=2, fill="red", tags="arestas")
             else:
               self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
