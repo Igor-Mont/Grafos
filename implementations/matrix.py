@@ -347,7 +347,7 @@ def exemplo1():
   graph_1.add_edge(vertex_c, vertex_d)
   graph_1.add_edge(vertex_d, vertex_e)
 
-  print("Matriz de adjacência\n")
+  print("\nMatriz de adjacência\n")
   graph_1.print_graph()
   
 exemplo1()
