@@ -295,3 +295,59 @@ def exemplo2():
   graph.print_graph()
 
 exemplo2()
+
+def exemplo1():
+  
+  graph_1 = Graph("list") 
+
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
+
+  graph_1.add_vertex(vertex_a)
+  graph_1.add_vertex(vertex_b)
+  graph_1.add_vertex(vertex_c)
+  graph_1.add_vertex(vertex_d)
+  graph_1.add_vertex(vertex_e)
+
+  graph_1.add_edge(vertex_a, vertex_b)
+  graph_1.add_edge(vertex_b, vertex_c)
+  graph_1.add_edge(vertex_b, vertex_d)
+  graph_1.add_edge(vertex_b, vertex_e)
+  graph_1.add_edge(vertex_b, vertex_e)
+  graph_1.add_edge(vertex_c, vertex_c)
+  graph_1.add_edge(vertex_c, vertex_d)
+  graph_1.add_edge(vertex_d, vertex_e)
+
+  print("Lista de adjacência\n")
+  graph_1.print_graph()
+
+  graph_1 = Graph("matrix") 
+
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
+
+  graph_1.add_vertex(vertex_a)
+  graph_1.add_vertex(vertex_b)
+  graph_1.add_vertex(vertex_c)
+  graph_1.add_vertex(vertex_d)
+  graph_1.add_vertex(vertex_e)
+
+  graph_1.add_edge(vertex_a, vertex_b)
+  graph_1.add_edge(vertex_b, vertex_c)
+  graph_1.add_edge(vertex_b, vertex_d)
+  graph_1.add_edge(vertex_b, vertex_e)
+  graph_1.add_edge(vertex_b, vertex_e)
+  graph_1.add_edge(vertex_c, vertex_c)
+  graph_1.add_edge(vertex_c, vertex_d)
+  graph_1.add_edge(vertex_d, vertex_e)
+
+  print("Matriz de adjacência\n")
+  graph_1.print_graph()
+  
+exemplo1()
