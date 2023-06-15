@@ -407,22 +407,16 @@ class GrafoGUI:
       self.canvas.delete("arestas")
 
       edge_counts = {}  # Dicionário para rastrear a contagem de ocorrências de cada aresta
-      print("EDGES", self.edges, self.edges[0])
-      print("EDGES COUNT", edge_counts)
       for edge in self.edges:
         # or tuple(reversed(edge)) in edge_counts
         if tuple(reversed(edge)) in edge_counts:
           edge_counts[tuple(reversed(edge))] += 1
           continue
         if edge in edge_counts:
-          print("INN")
-          print(edge, tuple(reversed(edge)))
-          print(edge_counts[edge])
           edge_counts[edge] += 1
           
         else:
           edge_counts[edge] = 1
-      print("EDGES COUNT", edge_counts)
 
       for edge in edge_counts:
         vertex1_data, vertex2_data = edge
@@ -446,16 +440,13 @@ class GrafoGUI:
                                   style=tk.ARC, outline="red", tags="arestas")
           else:
             edge_count = edge_counts[edge]
-            print("COUNT", edge_count)
             if edge_count > 1:
-              print("multipla")
               # Desenhar um arco para arestas paralelas
 
               for i in range(edge_count):
                 if i % 2 != 0:
                   self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
                   continue
-                print((x1, y1), (x2, y2))
                 center_x = int((x1 + x2) / 2) + 50
                 center_y = int((y1 + y2) / 2) + 50
                 self.canvas.create_line(x1, y1, center_x, center_y, x2, y2, smooth=True, splinesteps=20, width=2, fill="red", tags="arestas")
