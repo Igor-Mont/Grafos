@@ -352,3 +352,6 @@ def main():
   exemplo1()
   print("\nEXEMPLO 2:\n")
   exemplo2()
+
+if __name__ == "__main__":
+    main()
