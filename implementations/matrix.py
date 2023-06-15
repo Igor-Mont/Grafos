@@ -218,21 +218,22 @@ class Graph:
     print("Quantidade de arestas:", self.get_edge_count())
     print("Arestas:", self.get_edges())
     for vertex in self.adjacency_list:
-      print("Grau:", vertex.degree, "|", vertex.data, "->",
-            [neighbor.data for neighbor in self.adjacency_list[vertex]])
+      neighbors_data = [neighbor.data for neighbor in self.adjacency_list[vertex]]
+      print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
   
   def _print_matrix(self):
     print("Quantidade de vertices:", len(self.get_vertices()))
     print("Quantidade de arestas:", self.get_edge_count())
     print("Arestas:", self.get_edges())
 
-    print("  ", end="")
+    print(" "*12, end="")
     for vertex in self.vertices:
       print(vertex.data, end=" ")
     print()
 
     for i in range(len(self.vertices)):
-      print(self.vertices[i].data, end=" ")
+      vertex = self.vertices[i]
+      print("Grau: {} | {}".format(vertex.degree, vertex.data), end=" ")
       for j in range(len(self.vertices)):
         print(self.matrix[i][j], end=" ")
       print()
