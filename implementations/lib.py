@@ -159,8 +159,7 @@ class Graph:
 
   def _add_edge_list(self, vertex1, vertex2):
     if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
-      vertex1.degree += 1
-      vertex2.degree += 1
+      self._update_vertex_degrees(vertex1, vertex2)
       self.adjacency_list[vertex1].append(vertex2)
       self.adjacency_list[vertex2].append(vertex1)
       edge = (vertex1.data, vertex2.data)
@@ -173,15 +172,29 @@ class Graph:
     if vertex1 in self.vertices_matrix and vertex2 in self.vertices_matrix:
       index1 = self.vertices_matrix.index(vertex1)
       index2 = self.vertices_matrix.index(vertex2)
-      vertex1.degree += 1
-      vertex2.degree += 1
-      self.matrix[index1][index2] += 1
-      self.matrix[index2][index1] += 1
+      self._update_vertex_degrees(vertex1, vertex2)
+      self._update_matrix_entries(index1, index2)
       edge = (vertex1.data, vertex2.data)
       self.edges_matrix.append(edge)
       self._edge_count += 1
     else:
       raise ValueError("One or both vertexes do not exist in the graph.")
+  
+  def _update_vertex_degrees(self, vertex1, vertex2, increment=True):
+    if increment:
+      vertex1.degree += 1
+      vertex2.degree += 1
+    else:
+      vertex1.degree -= 1
+      vertex2.degree -= 1
+
+  def _update_matrix_entries(self, index1, index2, increment=True):
+    if increment:
+      self.matrix[index1][index2] += 1
+      self.matrix[index2][index1] += 1
+    else:
+      self.matrix[index1][index2] -= 1
+      self.matrix[index2][index1] -= 1
 
   def get_vertices(self):
     if self.is_representation_list:
@@ -290,8 +303,7 @@ class Graph:
   def _remove_edge_list(self, vertex1, vertex2):
     if vertex1 in self.adjacency_list and vertex2 in self.adjacency_list:
       if self.has_edge(vertex1, vertex2):
-        vertex1.degree -= 1
-        vertex2.degree -= 1
+        self._update_vertex_degrees(vertex1, vertex2, increment=False)
         edge = (vertex1.data, vertex2.data)
         if edge in self.edges_list:
           self.edges_list.remove(edge)
@@ -308,10 +320,8 @@ class Graph:
       if self.has_edge(vertex1, vertex2):
         index1 = self.vertices_matrix.index(vertex1)
         index2 = self.vertices_matrix.index(vertex2)
-        vertex1.degree -= 1
-        vertex2.degree -= 1
-        self.matrix[index1][index2] -= 1
-        self.matrix[index2][index1] -= 1
+        self._update_vertex_degrees(vertex1, vertex2, increment=False)
+        self._update_matrix_entries(index1, index2, increment=False)
         edge = (vertex1.data, vertex2.data)
         if edge in self.edges_matrix:
           self.edges_matrix.remove(edge)
