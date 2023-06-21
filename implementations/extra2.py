@@ -391,86 +391,131 @@ graph.add_edge(vertex_c, vertex_c)
 graph.add_edge(vertex_c, vertex_d)
 graph.add_edge(vertex_d, vertex_e)
 
+graph2 = Graph("matrix")
+
+vertex_1 = Vertex("A", 1)
+vertex_2 = Vertex("B", 2)
+vertex_3 = Vertex("C", 3)
+vertex_4 = Vertex("D", 4)
+vertex_5 = Vertex("E", 5) 
+
+graph2.add_vertex(vertex_1)
+graph2.add_vertex(vertex_2)
+graph2.add_vertex(vertex_3)
+graph2.add_vertex(vertex_4)
+graph2.add_vertex(vertex_5)
+
+graph2.add_edge(vertex_1, vertex_2)
+graph2.add_edge(vertex_1, vertex_3)
+graph2.add_edge(vertex_1, vertex_4)
+graph2.add_edge(vertex_1, vertex_5)
+graph2.add_edge(vertex_2, vertex_3)
+graph2.add_edge(vertex_2, vertex_4)
+graph2.add_edge(vertex_2, vertex_5)
+graph2.add_edge(vertex_3, vertex_4)
+graph2.add_edge(vertex_3, vertex_5)
+graph2.add_edge(vertex_4, vertex_5)
+
 
 class GrafoGUI:
-    def __init__(self, graph, edges):
-        self.graph = graph
-        self.edges = edges
-        self.positions = list()
-        self.actual_count = 0
-        self.radius = 20
-        self.janela = tk.Tk()
-        self.janela.title("Representação Gráfica de Grafo")
-        self.canvas = tk.Canvas(self.janela, width=500, height=500)
-        self.canvas.pack()
-        self.canvas.bind("<Button-1>", self.onclick)
-        self.janela.mainloop()
+  def __init__(self, graph, edges, type):
+    self.is_representation_list = type == "list"
+    self.graph = graph
+    self.edges = edges
+    self.type = type
+    self.positions = list()
+    self.actual_count = 0
+    self.radius = 20
+    self.janela = tk.Tk()
+    self.janela.title("Representação Gráfica de Grafo")
+    self.canvas = tk.Canvas(self.janela, width=500, height=500)
+    self.canvas.pack()
+    self.canvas.bind("<Button-1>", self.onclick)
+    self.janela.mainloop()
 
-    def onclick(self, event):
-        vertex = list(self.graph.keys())[self.actual_count]
-        x, y = event.x, event.y
-        self.positions.append((x, y))
-        self.desenhar_vertice(x, y, vertex.index)
-        self.actual_count += 1
+  def onclick(self, event):
+    if self.is_representation_list:
+      vertex = list(self.graph.keys())[self.actual_count]
+      x, y = event.x, event.y
+      self.positions.append((x, y))
+      self.desenhar_vertice(x, y, vertex.index)
+      self.actual_count += 1
 
-        if self.actual_count == len(self.graph.keys()):
-          self.desenhar_arestas()
-          return
+      if self.actual_count == len(self.graph.keys()):
+        self.desenhar_arestas()
+        return
+    else: 
+      vertex = list(self.graph)[self.actual_count]
+      x, y = event.x, event.y
+      self.positions.append((x, y))
+      self.desenhar_vertice(x, y, vertex.index)
+      self.actual_count += 1
+
+      if self.actual_count == len(self.graph):
+        self.desenhar_arestas()
+        return
         
 
-    def desenhar_vertice(self, x, y, vertice):
-        self.canvas.create_oval(x - self.radius, y - self.radius, x + self.radius, y + self.radius, fill="lightblue")
-        self.canvas.create_text(x, y, text=str(vertice), fill="black")
+  def desenhar_vertice(self, x, y, vertice):
+      self.canvas.create_oval(x - self.radius, y - self.radius, x + self.radius, y + self.radius, fill="lightblue")
+      self.canvas.create_text(x, y, text=str(vertice), fill="black")
 
-    def desenhar_arestas(self):
-      self.canvas.delete("arestas")
+  def desenhar_arestas(self):
+    self.canvas.delete("arestas")
 
-      edge_counts = {}  # Dicionário para rastrear a contagem de ocorrências de cada aresta
-      for edge in self.edges:
-        # or tuple(reversed(edge)) in edge_counts
-        if tuple(reversed(edge)) in edge_counts:
-          edge_counts[tuple(reversed(edge))] += 1
-          continue
-        if edge in edge_counts:
-          edge_counts[edge] += 1
-          
-        else:
-          edge_counts[edge] = 1
+    edge_counts = {}  # Dicionário para rastrear a contagem de ocorrências de cada aresta
+    for edge in self.edges:
+      # or tuple(reversed(edge)) in edge_counts
+      if tuple(reversed(edge)) in edge_counts:
+        edge_counts[tuple(reversed(edge))] += 1
+        continue
+      if edge in edge_counts:
+        edge_counts[edge] += 1
+        
+      else:
+        edge_counts[edge] = 1
 
-      for edge in edge_counts:
-        vertex1_data, vertex2_data = edge
-        vertex1 = None
-        vertex2 = None
-
+    for edge in edge_counts:
+      vertex1_data, vertex2_data = edge
+      vertex1 = None
+      vertex2 = None
+      if self.is_representation_list:
         for vertex in self.graph.keys():
           if vertex.data == vertex1_data:
             vertex1 = vertex
           if vertex.data == vertex2_data:
             vertex2 = vertex
+      else:
+        for vertex in self.graph:
+          if vertex.data == vertex1_data:
+            vertex1 = vertex
+          if vertex.data == vertex2_data:
+            vertex2 = vertex
 
-        if vertex1 and vertex2:
-          x1, y1 = self.positions[vertex1.index - 1]
-          x2, y2 = self.positions[vertex2.index - 1]
+      if vertex1 and vertex2:
+        x1, y1 = self.positions[vertex1.index - 1]
+        x2, y2 = self.positions[vertex2.index - 1]
 
-          if x1 == x2 and y1 == y2:
-            # Desenhar um loop
-            self.canvas.create_arc(x1-15, y1 - 38, x1 + 15, y1 - 10, start=330, extent=250,
-                                  style=tk.ARC, outline="red", tags="arestas")
+        if x1 == x2 and y1 == y2:
+          # Desenhar um loop
+          self.canvas.create_arc(x1-15, y1 - 38, x1 + 15, y1 - 10, start=330, extent=250,
+                                style=tk.ARC, outline="red", tags="arestas")
+        else:
+          edge_count = edge_counts[edge]
+          if edge_count > 1:
+            # Desenhar um arco para arestas paralelas
+
+            for i in range(edge_count):
+              if i % 2 != 0:
+                self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
+                continue
+              center_x = int((x1 + x2) / 2) + 50
+              center_y = int((y1 + y2) / 2) + 50
+              self.canvas.create_line(x1, y1, center_x, center_y, x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
           else:
-            edge_count = edge_counts[edge]
-            if edge_count > 1:
-              # Desenhar um arco para arestas paralelas
-
-              for i in range(edge_count):
-                if i % 2 != 0:
-                  self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
-                  continue
-                center_x = int((x1 + x2) / 2) + 50
-                center_y = int((y1 + y2) / 2) + 50
-                self.canvas.create_line(x1, y1, center_x, center_y, x2, y2, smooth=True, splinesteps=20, width=2, fill="red", tags="arestas")
-            else:
-              self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
+            self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
 
 
-grafo_gui = GrafoGUI(graph.adjacency_list, graph.get_edges())
+grafo_gui = GrafoGUI(graph.adjacency_list, graph.get_edges(), "list")
+grafo_gui = GrafoGUI(graph2.vertices_matrix, graph2.get_edges(), "matrix")
