@@ -393,28 +393,28 @@ graph.add_edge(vertex_d, vertex_e)
 
 graph2 = Graph("matrix")
 
-vertex_1 = Vertex("A", 1)
-vertex_2 = Vertex("B", 2)
-vertex_3 = Vertex("C", 3)
-vertex_4 = Vertex("D", 4)
-vertex_5 = Vertex("E", 5) 
+vertex1 = Vertex("A", 1)
+vertex2 = Vertex("B", 2)
+vertex3 = Vertex("C", 3)
+vertex4 = Vertex("D", 4)
+vertex5 = Vertex("E", 5) 
 
-graph2.add_vertex(vertex_1)
-graph2.add_vertex(vertex_2)
-graph2.add_vertex(vertex_3)
-graph2.add_vertex(vertex_4)
-graph2.add_vertex(vertex_5)
+graph2.add_vertex(vertex1)
+graph2.add_vertex(vertex2)
+graph2.add_vertex(vertex3)
+graph2.add_vertex(vertex4)
+graph2.add_vertex(vertex5)
 
-graph2.add_edge(vertex_1, vertex_2)
-graph2.add_edge(vertex_1, vertex_3)
-graph2.add_edge(vertex_1, vertex_4)
-graph2.add_edge(vertex_1, vertex_5)
-graph2.add_edge(vertex_2, vertex_3)
-graph2.add_edge(vertex_2, vertex_4)
-graph2.add_edge(vertex_2, vertex_5)
-graph2.add_edge(vertex_3, vertex_4)
-graph2.add_edge(vertex_3, vertex_5)
-graph2.add_edge(vertex_4, vertex_5)
+graph2.add_edge(vertex1, vertex2)
+graph2.add_edge(vertex1, vertex3)
+graph2.add_edge(vertex1, vertex4)
+graph2.add_edge(vertex1, vertex5)
+graph2.add_edge(vertex2, vertex3)
+graph2.add_edge(vertex2, vertex4)
+graph2.add_edge(vertex2, vertex5)
+graph2.add_edge(vertex3, vertex4)
+graph2.add_edge(vertex3, vertex5)
+graph2.add_edge(vertex4, vertex5)
 
 
 class GrafoGUI:
@@ -436,24 +436,16 @@ class GrafoGUI:
   def onclick(self, event):
     if self.is_representation_list:
       vertex = list(self.graph.keys())[self.actual_count]
-      x, y = event.x, event.y
-      self.positions.append((x, y))
-      self.desenhar_vertice(x, y, vertex.index)
-      self.actual_count += 1
-
-      if self.actual_count == len(self.graph.keys()):
-        self.desenhar_arestas()
-        return
     else: 
       vertex = list(self.graph)[self.actual_count]
-      x, y = event.x, event.y
-      self.positions.append((x, y))
-      self.desenhar_vertice(x, y, vertex.index)
-      self.actual_count += 1
+    x, y = event.x, event.y
+    self.positions.append((x, y))
+    self.desenhar_vertice(x, y, vertex.index)
+    self.actual_count += 1
 
-      if self.actual_count == len(self.graph):
-        self.desenhar_arestas()
-        return
+    if self.actual_count == len(self.graph):
+      self.desenhar_arestas()
+      return
         
 
   def desenhar_vertice(self, x, y, vertice):
