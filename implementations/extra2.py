@@ -392,6 +392,9 @@ graph.add_edge(vertex_b, vertex_e)
 # graph.add_edge(vertex_b, vertex_e)
 # graph.add_edge(vertex_b, vertex_e)
 graph.add_edge(vertex_c, vertex_c)
+# teste com mais de um laço
+# graph.add_edge(vertex_c, vertex_c)
+# graph.add_edge(vertex_c, vertex_c)
 graph.add_edge(vertex_c, vertex_d)
 graph.add_edge(vertex_d, vertex_e)
 
@@ -467,7 +470,6 @@ class GrafoGUI:
         continue
       if edge in edge_counts:
         edge_counts[edge] += 1
-        
       else:
         edge_counts[edge] = 1
 
@@ -492,30 +494,33 @@ class GrafoGUI:
         x1, y1 = self.positions[vertex1.index - 1]
         x2, y2 = self.positions[vertex2.index - 1]
 
-        if x1 == x2 and y1 == y2:
-          # Desenhar um loop
-          self.canvas.create_arc(x1-15, y1 - 38, x1 + 15, y1 - 10, start=330, extent=250,
-                                style=tk.ARC, outline="red", tags="arestas")
+        edge_count = edge_counts[edge]
+        if edge_count > 1:
+          if x1 == x2 and y1 == y2:
+            self.canvas.create_text(x1, y1 - 50, text=str(edge_count) + " laços", fill="black")
+            self.canvas.create_arc(x1-15, y1 - 38, x1 + 15, y1 - 10, start=330, extent=250,
+                              style=tk.ARC, outline="red", tags="arestas")
+            continue
+          
+          # Desenhar um arco para arestas paralelas
+          for i in range(edge_count):
+            if i == 0:
+              self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
+              continue
+            center_x = int((x1 + x2) / 2) - 30
+            center_y = int((y1 + y2) / 2) - 30
+            if i % 2 != 0:
+              center_x = int((x1 + x2) / 2) + 30
+              center_y = int((y1 + y2) / 2) + 30
+              self.canvas.create_line(x1, y1, center_x + (i * 10) , center_y + (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
+              continue
+            self.canvas.create_line(x1, y1, center_x - (i * 10) , center_y - (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
         else:
-          edge_count = edge_counts[edge]
-          if edge_count > 1:
-            # Desenhar um arco para arestas paralelas
-
-            for i in range(edge_count):
-              if i == 0:
-                self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
-                continue
-              center_x = int((x1 + x2) / 2) - 20
-              center_y = int((y1 + y2) / 2) - 20
-              if i % 2 != 0:
-                center_x = int((x1 + x2) / 2) + 20
-                center_y = int((y1 + y2) / 2) + 20
-                self.canvas.create_line(x1, y1, center_x + (i * 10) , center_y + (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
-                continue
-              self.canvas.create_line(x1, y1, center_x - (i * 10) , center_y - (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
-          else:
-            self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
-
+          if x1 == x2 and y1 == y2:
+            self.canvas.create_arc(x1-15, y1 - 38, x1 + 15, y1 - 10, start=330, extent=250,
+                              style=tk.ARC, outline="red", tags="arestas")
+            continue
+          self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
 
 grafo_gui = GrafoGUI(graph.adjacency_list, graph.get_edges(), "list") 
