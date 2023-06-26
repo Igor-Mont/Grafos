@@ -387,6 +387,10 @@ graph.add_edge(vertex_b, vertex_c)
 graph.add_edge(vertex_b, vertex_d)
 graph.add_edge(vertex_b, vertex_e)
 graph.add_edge(vertex_b, vertex_e)
+# teste com mais de uma aresta paralela
+# graph.add_edge(vertex_b, vertex_e)
+# graph.add_edge(vertex_b, vertex_e)
+# graph.add_edge(vertex_b, vertex_e)
 graph.add_edge(vertex_c, vertex_c)
 graph.add_edge(vertex_c, vertex_d)
 graph.add_edge(vertex_d, vertex_e)
@@ -498,16 +502,20 @@ class GrafoGUI:
             # Desenhar um arco para arestas paralelas
 
             for i in range(edge_count):
-              if i % 2 != 0:
+              if i == 0:
                 self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
                 continue
-              center_x = int((x1 + x2) / 2) + 50
-              center_y = int((y1 + y2) / 2) + 50
-              self.canvas.create_line(x1, y1, center_x, center_y, x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
+              center_x = int((x1 + x2) / 2) - 20
+              center_y = int((y1 + y2) / 2) - 20
+              if i % 2 != 0:
+                center_x = int((x1 + x2) / 2) + 20
+                center_y = int((y1 + y2) / 2) + 20
+                self.canvas.create_line(x1, y1, center_x + (i * 10) , center_y + (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
+                continue
+              self.canvas.create_line(x1, y1, center_x - (i * 10) , center_y - (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
           else:
             self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
 
 
-grafo_gui = GrafoGUI(graph.adjacency_list, graph.get_edges(), "list")
-grafo_gui = GrafoGUI(graph2.vertices_matrix, graph2.get_edges(), "matrix")
+grafo_gui = GrafoGUI(graph.adjacency_list, graph.get_edges(), "list") 
