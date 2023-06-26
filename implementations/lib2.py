@@ -1,5 +1,4 @@
-import math
-import tkinter as tk
+import random
 
 class Node:
   def __init__(self, data):
@@ -368,158 +367,184 @@ class Graph:
         print(self.matrix[i][j], end=" ")
       print()
 
-graph = Graph("list") 
+def exemplo1():
+  graph = Graph("list") 
 
-vertex_a = Vertex("A", 1)
-vertex_b = Vertex("B", 2)
-vertex_c = Vertex("C", 3)
-vertex_d = Vertex("D", 4)
-vertex_e = Vertex("E", 5) 
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
 
-graph.add_vertex(vertex_a)
-graph.add_vertex(vertex_b)
-graph.add_vertex(vertex_c)
-graph.add_vertex(vertex_d)
-graph.add_vertex(vertex_e)
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
 
-graph.add_edge(vertex_a, vertex_b)
-graph.add_edge(vertex_b, vertex_c)
-graph.add_edge(vertex_b, vertex_d)
-graph.add_edge(vertex_b, vertex_e)
-graph.add_edge(vertex_b, vertex_e)
-# teste com mais de uma aresta paralela
-# graph.add_edge(vertex_b, vertex_e)
-# graph.add_edge(vertex_b, vertex_e)
-# graph.add_edge(vertex_b, vertex_e)
-graph.add_edge(vertex_c, vertex_c)
-# teste com mais de um laço
-# graph.add_edge(vertex_c, vertex_c)
-# graph.add_edge(vertex_c, vertex_c)
-graph.add_edge(vertex_c, vertex_d)
-graph.add_edge(vertex_d, vertex_e)
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_c)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_d, vertex_e)
 
-graph2 = Graph("matrix")
+  print("Estrutura de adjacência")
+  graph.print_graph()
 
-vertex1 = Vertex("A", 1)
-vertex2 = Vertex("B", 2)
-vertex3 = Vertex("C", 3)
-vertex4 = Vertex("D", 4)
-vertex5 = Vertex("E", 5) 
+  graph = Graph("matrix") 
 
-graph2.add_vertex(vertex1)
-graph2.add_vertex(vertex2)
-graph2.add_vertex(vertex3)
-graph2.add_vertex(vertex4)
-graph2.add_vertex(vertex5)
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
 
-graph2.add_edge(vertex1, vertex2)
-graph2.add_edge(vertex1, vertex3)
-graph2.add_edge(vertex1, vertex4)
-graph2.add_edge(vertex1, vertex5)
-graph2.add_edge(vertex2, vertex3)
-graph2.add_edge(vertex2, vertex4)
-graph2.add_edge(vertex2, vertex5)
-graph2.add_edge(vertex3, vertex4)
-graph2.add_edge(vertex3, vertex5)
-graph2.add_edge(vertex4, vertex5)
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
+
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_c)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_d, vertex_e)
+
+  graph.remove_edge(vertex_a, vertex_b)
+  graph.remove_edge(vertex_b, vertex_c)
+  graph.remove_edge(vertex_b, vertex_d)
+  graph.remove_edge(vertex_b, vertex_e)
+  graph.remove_edge(vertex_b, vertex_e)
+  graph.remove_edge(vertex_c, vertex_c)
+  graph.remove_edge(vertex_c, vertex_d)
+  graph.remove_edge(vertex_d, vertex_e)
+
+  print("\nMatriz de adjacência")
+  graph.print_graph()
+  
+def exemplo2():
+  graph = Graph("list")
+
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
+
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
+
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_a, vertex_c)
+  graph.add_edge(vertex_a, vertex_d)
+  graph.add_edge(vertex_a, vertex_e)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_c, vertex_e)
+  graph.add_edge(vertex_d, vertex_e)
+
+  print("Estrutura de adjacência")
+  graph.print_graph()
+  graph = Graph("matrix")
+
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
+
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
+
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_a, vertex_c)
+  graph.add_edge(vertex_a, vertex_d)
+  graph.add_edge(vertex_a, vertex_e)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_c, vertex_e)
+  graph.add_edge(vertex_d, vertex_e)
+
+  print("\nMatriz de adjacência")
+  graph.print_graph()
+
+def create_graph_kn(n_vertices):
+  graph = Graph("list")
+  vertices = list()
+  for i in range(1, n_vertices+1):
+    vertex = Vertex(i, i)
+    graph.add_vertex(vertex)
+    vertices.append(vertex)
+
+  for vertex1 in vertices:
+    for vertex2 in vertices:
+      if not vertex1.index == vertex2.index and not graph.has_edge(vertex1, vertex2):
+        graph.add_edge(vertex1, vertex2)
+  
+  return graph
+
+graph = create_graph_kn(5)
+# graph.print_graph()
+
+def is_odd(n):
+  return n % 2 != 0
+
+def all_vertices_with_k_degree(k, vertices):
+  return all([vertex.degree == k for vertex in vertices])
+
+#  o n de vertivces de grau impar é sempre par
+def create_graph_kregular(n_vertices, k):
+  if is_odd(n_vertices) and is_odd(k):
+    raise ValueError("By the corollary: In a graph, the number of vertices of degree odd is always even.")
+
+  graph = Graph("list")
+  vertices = list()
+  for i in range(1, n_vertices+1):
+    vertex = Vertex(i, i)
+    graph.add_vertex(vertex)
+    vertices.append(vertex)
+    
+  length = len(vertices)
+  for index, vertex in enumerate(vertices):
+    while not vertex.degree == k:
+        rand_vertex = vertices[index]
+        print(rand_vertex.data)
+        if(vertex.degree < k and rand_vertex.degree < k):
+            graph.add_edge(vertex, rand_vertex)
+        index += 1
+
+  return graph
+
+graph = create_graph_kregular(4, 3)
+graph.print_graph()
 
 
-class GrafoGUI:
-  def __init__(self, graph, edges, type):
-    self.is_representation_list = type == "list"
-    self.graph = graph
-    self.edges = edges
-    self.type = type
-    self.positions = list()
-    self.actual_count = 0
-    self.radius = 20
-    self.janela = tk.Tk()
-    self.janela.title("Representação Gráfica de Grafo")
-    self.canvas = tk.Canvas(self.janela, width=500, height=500)
-    self.canvas.pack()
-    self.canvas.bind("<Button-1>", self.onclick)
-    self.janela.mainloop()
 
-  def onclick(self, event):
-    if self.is_representation_list:
-      vertex = list(self.graph.keys())[self.actual_count]
-    else: 
-      vertex = list(self.graph)[self.actual_count]
-    x, y = event.x, event.y
-    self.positions.append((x, y))
-    self.desenhar_vertice(x, y, vertex.index)
-    self.actual_count += 1
+  
 
-    if self.actual_count == len(self.graph):
-      self.desenhar_arestas()
-      return
-        
 
-  def desenhar_vertice(self, x, y, vertice):
-      self.canvas.create_oval(x - self.radius, y - self.radius, x + self.radius, y + self.radius, fill="lightblue")
-      self.canvas.create_text(x, y, text=str(vertice), fill="black")
+# def main():
+#   print("EXEMPLO 1:\n")
+#   exemplo1()
+#   print("\nEXEMPLO 2:\n")
+#   exemplo2()
 
-  def desenhar_arestas(self):
-    self.canvas.delete("arestas")
-
-    edge_counts = {}  # Dicionário para rastrear a contagem de ocorrências de cada aresta
-    for edge in self.edges:
-      # or tuple(reversed(edge)) in edge_counts
-      if tuple(reversed(edge)) in edge_counts:
-        edge_counts[tuple(reversed(edge))] += 1
-        continue
-      if edge in edge_counts:
-        edge_counts[edge] += 1
-      else:
-        edge_counts[edge] = 1
-
-    for edge in edge_counts:
-      vertex1_data, vertex2_data = edge
-      vertex1 = None
-      vertex2 = None
-      if self.is_representation_list:
-        for vertex in self.graph.keys():
-          if vertex.data == vertex1_data:
-            vertex1 = vertex
-          if vertex.data == vertex2_data:
-            vertex2 = vertex
-      else:
-        for vertex in self.graph:
-          if vertex.data == vertex1_data:
-            vertex1 = vertex
-          if vertex.data == vertex2_data:
-            vertex2 = vertex
-
-      if vertex1 and vertex2:
-        x1, y1 = self.positions[vertex1.index - 1]
-        x2, y2 = self.positions[vertex2.index - 1]
-
-        edge_count = edge_counts[edge]
-        if edge_count > 1:
-          if x1 == x2 and y1 == y2:
-            self.canvas.create_text(x1, y1 - 50, text=str(edge_count) + " laços", fill="black")
-            self.canvas.create_arc(x1-15, y1 - 38, x1 + 15, y1 - 10, start=330, extent=250,
-                              style=tk.ARC, outline="red", tags="arestas")
-            continue
-          
-          # Desenhar um arco para arestas paralelas
-          for i in range(edge_count):
-            if i == 0:
-              self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
-              continue
-            center_x = int((x1 + x2) / 2) - 30
-            center_y = int((y1 + y2) / 2) - 30
-            if i % 2 != 0:
-              center_x = int((x1 + x2) / 2) + 30
-              center_y = int((y1 + y2) / 2) + 30
-              self.canvas.create_line(x1, y1, center_x + (i * 10) , center_y + (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
-              continue
-            self.canvas.create_line(x1, y1, center_x - (i * 10) , center_y - (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
-        else:
-          if x1 == x2 and y1 == y2:
-            self.canvas.create_arc(x1-15, y1 - 38, x1 + 15, y1 - 10, start=330, extent=250,
-                              style=tk.ARC, outline="red", tags="arestas")
-            continue
-          self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
-
-grafo_gui = GrafoGUI(graph.adjacency_list, graph.get_edges(), "list") 
+# if __name__ == "__main__":
+#   main()

@@ -456,11 +456,28 @@ def exemplo2():
   print("\nMatriz de adjacência")
   graph.print_graph()
 
-def main():
-  print("EXEMPLO 1:\n")
-  exemplo1()
-  print("\nEXEMPLO 2:\n")
-  exemplo2()
+def create_graph_kn(n_vertices):
+  graph = Graph("list")
+  vertices = list()
+  for i in range(1, n_vertices+1):
+    vertex = Vertex(i, i)
+    graph.add_vertex(vertex)
+    vertices.append(vertex)
 
-if __name__ == "__main__":
-  main()
+  for vertex1 in vertices:
+    for vertex2 in vertices:
+      if not vertex1.index == vertex2.index:
+        graph.add_edge(vertex1, vertex2)
+  
+  print(graph.get_edges())
+
+create_graph_kn(5)
+
+# def main():
+#   print("EXEMPLO 1:\n")
+#   exemplo1()
+#   print("\nEXEMPLO 2:\n")
+#   exemplo2()
+
+# if __name__ == "__main__":
+#   main()
