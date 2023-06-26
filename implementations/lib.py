@@ -200,18 +200,22 @@ class Graph:
     index2 = self.vertices_matrix.index(vertex2)
     return index1, index2
 
-  def get_vertices(self):
+  def get_vertices(self, only_data=True):
     if self.is_representation_list:
-      return self._get_vertices_list()
+      return self._get_vertices_list(only_data)
     else:
-      return self._get_vertices_matrix()
+      return self._get_vertices_matrix(only_data)
   
-  def _get_vertices_list(self):
-    return [vertex.data for vertex in self.adjacency_list.keys()]
-  
-  def _get_vertices_matrix(self):
-    return [vertex.data for vertex in self.vertices_matrix]
-      
+  def _get_vertices_list(self, only_data):
+    if only_data:
+      return [vertex.data for vertex in self.adjacency_list.keys()]
+    return [vertex for vertex in self.adjacency_list.keys()]
+
+  def _get_vertices_matrix(self, only_data):
+    if only_data:
+      return [vertex.data for vertex in self.vertices_matrix]
+    return [vertex for vertex in self.vertices_matrix]
+
   def get_edges(self, filtered=False):
     if self.is_representation_list:
       return self._get_edges_list(filtered)
@@ -339,7 +343,8 @@ class Graph:
       self._print_list()
     else:
       self._print_matrix()
-
+# Apresentar somatório do grau dos vértices
+# APresentar o n de vertices de grau impar e o n de vertices de grau par
   def _print_list(self):
     print("Quantidade de vértices:", len(self.get_vertices()))
     print("Quantidade de arestas:", self.get_edge_count())
@@ -347,6 +352,10 @@ class Graph:
     for vertex in self.adjacency_list:
       neighbors_data = [neighbor.data for neighbor in self.adjacency_list[vertex]]
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
+    print("Somatório do grau dos vértices:", sum([vertex.degree for vertex in self.get_vertices(False)]))
+    print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
+    print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
+    
   
   def _print_matrix(self):
     print("Quantidade de vertices:", len(self.get_vertices()))
@@ -364,6 +373,12 @@ class Graph:
       for j in range(len(self.vertices_matrix)):
         print(self.matrix[i][j], end=" ")
       print()
+    print()
+    print("Somatório do grau dos vértices:", sum([vertex.degree for vertex in self.get_vertices(False)]))
+    print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
+    print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
+
+    
 
 def exemplo1():
   graph = Graph("list") 
