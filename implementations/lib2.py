@@ -340,6 +340,28 @@ class Graph:
     else:
       raise ValueError("One or both vertices do not exist in the graph.")
 
+  def is_set_disconnected(self, vertices_set):
+    for vertex1 in vertices_set:
+      for vertex2 in vertices_set:
+        if self.has_edge(vertex1, vertex2):
+          return False
+    return True
+
+  def is_bipartite_graph(self, set_1, set_2):
+    intersection_empty = len(list(set(set_1).intersection(set_2))) == 0
+    if not intersection_empty:
+      return False
+
+    if not self.is_set_disconnected(set_1) or not self.is_set_disconnected(set_2):
+      return False
+
+    for vertex1 in set_1:
+      for vertex2 in set_2:
+        if not self.has_edge(vertex1, vertex2):
+          return False
+    
+    return True
+    
   def print_graph(self):
     if self.is_representation_list:
       self._print_list()
@@ -357,7 +379,6 @@ class Graph:
     print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
     print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
     
-  
   def _print_matrix(self):
     print("Quantidade de vertices:", len(self.get_vertices()))
     print("Quantidade de arestas:", self.get_edge_count())
@@ -394,109 +415,19 @@ def exemplo1():
   graph.add_vertex(vertex_d)
   graph.add_vertex(vertex_e)
 
-  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_a, vertex_c)
+  graph.add_edge(vertex_a, vertex_d)
+  graph.add_edge(vertex_a, vertex_e)
   graph.add_edge(vertex_b, vertex_c)
   graph.add_edge(vertex_b, vertex_d)
   graph.add_edge(vertex_b, vertex_e)
-  graph.add_edge(vertex_b, vertex_e)
-  graph.add_edge(vertex_c, vertex_c)
-  graph.add_edge(vertex_c, vertex_d)
-  graph.add_edge(vertex_d, vertex_e)
 
   print("Estrutura de adjacência")
   graph.print_graph()
-
-  graph = Graph("matrix") 
-
-  vertex_a = Vertex("A", 1)
-  vertex_b = Vertex("B", 2)
-  vertex_c = Vertex("C", 3)
-  vertex_d = Vertex("D", 4)
-  vertex_e = Vertex("E", 5) 
-
-  graph.add_vertex(vertex_a)
-  graph.add_vertex(vertex_b)
-  graph.add_vertex(vertex_c)
-  graph.add_vertex(vertex_d)
-  graph.add_vertex(vertex_e)
-
-  graph.add_edge(vertex_a, vertex_b)
-  graph.add_edge(vertex_b, vertex_c)
-  graph.add_edge(vertex_b, vertex_d)
-  graph.add_edge(vertex_b, vertex_e)
-  graph.add_edge(vertex_b, vertex_e)
-  graph.add_edge(vertex_c, vertex_c)
-  graph.add_edge(vertex_c, vertex_d)
-  graph.add_edge(vertex_d, vertex_e)
-
-  graph.remove_edge(vertex_a, vertex_b)
-  graph.remove_edge(vertex_b, vertex_c)
-  graph.remove_edge(vertex_b, vertex_d)
-  graph.remove_edge(vertex_b, vertex_e)
-  graph.remove_edge(vertex_b, vertex_e)
-  graph.remove_edge(vertex_c, vertex_c)
-  graph.remove_edge(vertex_c, vertex_d)
-  graph.remove_edge(vertex_d, vertex_e)
-
-  print("\nMatriz de adjacência")
-  graph.print_graph()
+  set_1 = {vertex_a, vertex_b}
+  set_2 = {vertex_c, vertex_d, vertex_e}
+  print(graph.is_bipartite_graph(set_1, set_2))
   
-def exemplo2():
-  graph = Graph("list")
-
-  vertex_a = Vertex("A", 1)
-  vertex_b = Vertex("B", 2)
-  vertex_c = Vertex("C", 3)
-  vertex_d = Vertex("D", 4)
-  vertex_e = Vertex("E", 5) 
-
-  graph.add_vertex(vertex_a)
-  graph.add_vertex(vertex_b)
-  graph.add_vertex(vertex_c)
-  graph.add_vertex(vertex_d)
-  graph.add_vertex(vertex_e)
-
-  graph.add_edge(vertex_a, vertex_b)
-  graph.add_edge(vertex_a, vertex_c)
-  graph.add_edge(vertex_a, vertex_d)
-  graph.add_edge(vertex_a, vertex_e)
-  graph.add_edge(vertex_b, vertex_c)
-  graph.add_edge(vertex_b, vertex_d)
-  graph.add_edge(vertex_b, vertex_e)
-  graph.add_edge(vertex_c, vertex_d)
-  graph.add_edge(vertex_c, vertex_e)
-  graph.add_edge(vertex_d, vertex_e)
-
-  print("Estrutura de adjacência")
-  graph.print_graph()
-  graph = Graph("matrix")
-
-  vertex_a = Vertex("A", 1)
-  vertex_b = Vertex("B", 2)
-  vertex_c = Vertex("C", 3)
-  vertex_d = Vertex("D", 4)
-  vertex_e = Vertex("E", 5) 
-
-  graph.add_vertex(vertex_a)
-  graph.add_vertex(vertex_b)
-  graph.add_vertex(vertex_c)
-  graph.add_vertex(vertex_d)
-  graph.add_vertex(vertex_e)
-
-  graph.add_edge(vertex_a, vertex_b)
-  graph.add_edge(vertex_a, vertex_c)
-  graph.add_edge(vertex_a, vertex_d)
-  graph.add_edge(vertex_a, vertex_e)
-  graph.add_edge(vertex_b, vertex_c)
-  graph.add_edge(vertex_b, vertex_d)
-  graph.add_edge(vertex_b, vertex_e)
-  graph.add_edge(vertex_c, vertex_d)
-  graph.add_edge(vertex_c, vertex_e)
-  graph.add_edge(vertex_d, vertex_e)
-
-  print("\nMatriz de adjacência")
-  graph.print_graph()
-
 def create_graph_kn(n_vertices):
   graph = Graph("list")
   vertices = list()
@@ -542,13 +473,13 @@ def create_graph_kregular(n_vertices, k):
   return graph
 
 graph = create_graph_kregular(1, 2)
-graph.print_graph()
+# graph.print_graph()
 
-# def main():
-#   print("EXEMPLO 1:\n")
-#   exemplo1()
+def main():
+  print("EXEMPLO 1:\n")
+  exemplo1()
 #   print("\nEXEMPLO 2:\n")
 #   exemplo2()
 
-# if __name__ == "__main__":
-#   main()
+if __name__ == "__main__":
+  main()
