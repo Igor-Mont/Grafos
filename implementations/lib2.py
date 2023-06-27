@@ -202,18 +202,22 @@ class Graph:
     index2 = self.vertices_matrix.index(vertex2)
     return index1, index2
 
-  def get_vertices(self):
+  def get_vertices(self, only_data=True):
     if self.is_representation_list:
-      return self._get_vertices_list()
+      return self._get_vertices_list(only_data)
     else:
-      return self._get_vertices_matrix()
+      return self._get_vertices_matrix(only_data)
   
-  def _get_vertices_list(self):
-    return [vertex.data for vertex in self.adjacency_list.keys()]
-  
-  def _get_vertices_matrix(self):
-    return [vertex.data for vertex in self.vertices_matrix]
-      
+  def _get_vertices_list(self, only_data):
+    if only_data:
+      return [vertex.data for vertex in self.adjacency_list.keys()]
+    return [vertex for vertex in self.adjacency_list.keys()]
+
+  def _get_vertices_matrix(self, only_data):
+    if only_data:
+      return [vertex.data for vertex in self.vertices_matrix]
+    return [vertex for vertex in self.vertices_matrix]
+
   def get_edges(self, filtered=False):
     if self.is_representation_list:
       return self._get_edges_list(filtered)
@@ -349,6 +353,10 @@ class Graph:
     for vertex in self.adjacency_list:
       neighbors_data = [neighbor.data for neighbor in self.adjacency_list[vertex]]
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
+    print("Somatório do grau dos vértices:", sum([vertex.degree for vertex in self.get_vertices(False)]))
+    print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
+    print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
+    
   
   def _print_matrix(self):
     print("Quantidade de vertices:", len(self.get_vertices()))
@@ -366,6 +374,10 @@ class Graph:
       for j in range(len(self.vertices_matrix)):
         print(self.matrix[i][j], end=" ")
       print()
+    print()
+    print("Somatório do grau dos vértices:", sum([vertex.degree for vertex in self.get_vertices(False)]))
+    print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
+    print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
 
 def exemplo1():
   graph = Graph("list") 
@@ -506,39 +518,31 @@ graph = create_graph_kn(5)
 def is_odd(n):
   return n % 2 != 0
 
-def all_vertices_with_k_degree(k, vertices):
-  return all([vertex.degree == k for vertex in vertices])
-
 #  o n de vertivces de grau impar é sempre par
 def create_graph_kregular(n_vertices, k):
   if is_odd(n_vertices) and is_odd(k):
     raise ValueError("By the corollary: In a graph, the number of vertices of degree odd is always even.")
 
   graph = Graph("list")
-  vertices = list()
   for i in range(1, n_vertices+1):
     vertex = Vertex(i, i)
     graph.add_vertex(vertex)
-    vertices.append(vertex)
     
+  vertices = graph.get_vertices(only_data=False)
   length = len(vertices)
-  for index, vertex in enumerate(vertices):
+  
+  for i, vertex in enumerate(vertices):
+    index = (i + 1) % length
     while not vertex.degree == k:
-        rand_vertex = vertices[index]
-        print(rand_vertex.data)
-        if(vertex.degree < k and rand_vertex.degree < k):
-            graph.add_edge(vertex, rand_vertex)
-        index += 1
+      next_vertex = vertices[index]
+      if(vertex.degree < k and next_vertex.degree < k):
+        graph.add_edge(vertex, next_vertex)
+      index = (index + 1) % length
 
   return graph
 
-graph = create_graph_kregular(4, 3)
+graph = create_graph_kregular(1, 2)
 graph.print_graph()
-
-
-
-  
-
 
 # def main():
 #   print("EXEMPLO 1:\n")
