@@ -200,17 +200,26 @@ class Graph:
     index2 = self.vertices_matrix.index(vertex2)
     return index1, index2
 
-  def get_vertices(self):
-    if self.is_representation_list:
-      return self._get_vertices_list()
-    else:
-      return self._get_vertices_matrix()
-  
-  def _get_vertices_list(self):
-    return [vertex.data for vertex in self.adjacency_list.keys()]
+  def _get_vertices_matrix_index(self, vertex1, vertex2):
+    index1 = self.vertices_matrix.index(vertex1)
+    index2 = self.vertices_matrix.index(vertex2)
+    return index1, index2
 
-  def _get_vertices_matrix(self):
-    return [vertex.data for vertex in self.vertices_matrix]
+  def get_vertices(self, only_data=True):
+    if self.is_representation_list:
+      return self._get_vertices_list(only_data)
+    else:
+      return self._get_vertices_matrix(only_data)
+  
+  def _get_vertices_list(self, only_data):
+    if only_data:
+      return [vertex.data for vertex in self.adjacency_list.keys()]
+    return [vertex for vertex in self.adjacency_list.keys()]
+
+  def _get_vertices_matrix(self, only_data):
+    if only_data:
+      return [vertex.data for vertex in self.vertices_matrix]
+    return [vertex for vertex in self.vertices_matrix]
 
   def get_edges(self, filtered=False):
     if self.is_representation_list:
