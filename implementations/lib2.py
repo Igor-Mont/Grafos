@@ -354,11 +354,6 @@ class Graph:
 
     if not self.is_set_disconnected(set_1) or not self.is_set_disconnected(set_2):
       return False
-
-    for vertex1 in set_1:
-      for vertex2 in set_2:
-        if not self.has_edge(vertex1, vertex2):
-          return False
     
     return True
     
@@ -430,12 +425,11 @@ def exemplo1():
   
 def create_graph_kn(n_vertices):
   graph = Graph("list")
-  vertices = list()
   for i in range(1, n_vertices+1):
     vertex = Vertex(i, i)
     graph.add_vertex(vertex)
-    vertices.append(vertex)
 
+  vertices = graph.get_vertices(False)
   for vertex1 in vertices:
     for vertex2 in vertices:
       if not vertex1.index == vertex2.index and not graph.has_edge(vertex1, vertex2):
