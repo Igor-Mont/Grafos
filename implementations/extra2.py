@@ -533,3 +533,4 @@ class GrafoGUI:
             self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
 grafo_gui = GrafoGUI(graph) 
+grafo_gui2 = GrafoGUI(graph2) 

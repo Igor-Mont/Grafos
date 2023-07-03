@@ -413,33 +413,6 @@ class Graph:
     print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
     print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
 
-def exemplo1():
-  graph = Graph("list") 
-
-  vertex_a = Vertex("A", 1)
-  vertex_b = Vertex("B", 2)
-  vertex_c = Vertex("C", 3)
-  vertex_d = Vertex("D", 4)
-  vertex_e = Vertex("E", 5) 
-
-  graph.add_vertex(vertex_a)
-  graph.add_vertex(vertex_b)
-  graph.add_vertex(vertex_c)
-  graph.add_vertex(vertex_d)
-  graph.add_vertex(vertex_e)
-
-  graph.add_edge(vertex_a, vertex_c)
-  graph.add_edge(vertex_a, vertex_d)
-  graph.add_edge(vertex_a, vertex_e)
-  graph.add_edge(vertex_b, vertex_c)
-  graph.add_edge(vertex_b, vertex_d)
-  graph.add_edge(vertex_b, vertex_e)
-
-  print("Estrutura de adjacência")
-  graph.print_graph()
-  set_1 = {vertex_a, vertex_b}
-  set_2 = {vertex_c, vertex_d, vertex_e}
-  print(graph.is_bipartite_graph(set_1, set_2))
   
 def create_graph_kn(n_vertices):
   graph = Graph("list")
@@ -455,7 +428,6 @@ def create_graph_kn(n_vertices):
   
   return graph
 
-graph = create_graph_kn(5)
 # graph.print_graph()
 
 def is_odd(n):
@@ -484,14 +456,66 @@ def create_graph_kregular(n_vertices, k):
 
   return graph
 
-graph = create_graph_kregular(1, 2)
+
 # graph.print_graph()
+
+def exemplo1():
+  graph = create_graph_kn(5)
+
+  print("Estrutura de adjacência")
+  graph.print_graph()
+  
+def exemplo2():
+  graph = create_graph_kregular(6, 3);
+
+  print("Estrutura de adjacência")
+  graph.print_graph()
+
+def exemplo3():
+  graph2 = Graph("list")
+
+  vertex1 = Vertex("A", 1)
+  vertex2 = Vertex("B", 2)
+  vertex3 = Vertex("C", 3)
+  vertex4 = Vertex("D", 4)
+  vertex5 = Vertex("E", 5) 
+  vertex6 = Vertex("F", 6) 
+
+  graph2.add_vertex(vertex1)
+  graph2.add_vertex(vertex2)
+  graph2.add_vertex(vertex3)
+  
+  graph2.add_vertex(vertex4)
+  graph2.add_vertex(vertex5)
+  graph2.add_vertex(vertex6)
+
+  graph2.add_edge(vertex1, vertex4)
+  graph2.add_edge(vertex1, vertex5)
+  graph2.add_edge(vertex1, vertex6)
+  
+  graph2.add_edge(vertex2, vertex4)
+  graph2.add_edge(vertex2, vertex5)
+  graph2.add_edge(vertex2, vertex6)
+  
+  graph2.add_edge(vertex3, vertex4)
+  graph2.add_edge(vertex3, vertex5)
+  graph2.add_edge(vertex3, vertex6)
+  
+  X = {vertex1, vertex2, vertex3}
+  Y = {vertex4, vertex5, vertex6}
+  
+  print("Estrutura de adjacência")
+  graph2.print_graph()
+  print("O grafo é bipartido:",graph2.is_bipartite_graph(X, Y))
+  
 
 def main():
   print("EXEMPLO 1:\n")
   exemplo1()
-#   print("\nEXEMPLO 2:\n")
-#   exemplo2()
+  print("\nEXEMPLO 2:\n")
+  exemplo2()
+  print("\nEXEMPLO 3:\n")
+  exemplo3()
 
 if __name__ == "__main__":
   main()
