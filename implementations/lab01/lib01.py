@@ -1,5 +1,3 @@
-import random
-
 class Node:
   def __init__(self, data):
     self.data = data
@@ -202,6 +200,11 @@ class Graph:
     index2 = self.vertices_matrix.index(vertex2)
     return index1, index2
 
+  def _get_vertices_matrix_index(self, vertex1, vertex2):
+    index1 = self.vertices_matrix.index(vertex1)
+    index2 = self.vertices_matrix.index(vertex2)
+    return index1, index2
+
   def get_vertices(self, only_data=True):
     if self.is_representation_list:
       return self._get_vertices_list(only_data)
@@ -291,6 +294,12 @@ class Graph:
       return self._vertex_degree_list(index)
     else:
       return self._vertex_degree_matrix(index)
+    
+  def _vertex_degree_list(self, index):
+    for vertex in self.adjacency_list:
+      if vertex.index == index:
+        return vertex.degree
+    raise IndexError("list index out of range")
   
   def get_vertex_by_data(self, data):
     if self.is_representation_list:
@@ -309,12 +318,6 @@ class Graph:
       if vertex.data == data:
         return vertex
     return None
-    
-  def _vertex_degree_list(self, index):
-    for vertex in self.adjacency_list:
-      if vertex.index == index:
-        return vertex.degree
-    raise IndexError("list index out of range")
   
   def _vertex_degree_matrix(self, index):
     for vertex in self.vertices_matrix:
@@ -358,23 +361,6 @@ class Graph:
     else:
       raise ValueError("One or both vertices do not exist in the graph.")
 
-  def is_set_disconnected(self, vertices_set):
-    for vertex1 in vertices_set:
-      for vertex2 in vertices_set:
-        if self.has_edge(vertex1, vertex2):
-          return False
-    return True
-
-  def is_bipartite_graph(self, set_1, set_2):
-    intersection_empty = len(list(set(set_1).intersection(set_2))) == 0
-    if not intersection_empty:
-      return False
-
-    if not self.is_set_disconnected(set_1) or not self.is_set_disconnected(set_2):
-      return False
-    
-    return True
-    
   def print_graph(self):
     if self.is_representation_list:
       self._print_list()
@@ -389,10 +375,8 @@ class Graph:
     for vertex in self.adjacency_list:
       neighbors_data = [neighbor.data for neighbor in self.adjacency_list[vertex]]
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
-    print("Somatório do grau dos vértices:", sum([vertex.degree for vertex in self.get_vertices(False)]))
-    print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
-    print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
     
+  
   def _print_matrix(self):
     print("Matriz de adjacência")
     print("Quantidade de vertices:", len(self.get_vertices()))
@@ -411,99 +395,118 @@ class Graph:
         print(self.matrix[i][j], end=" ")
       print()
     print()
-    print("Somatório do grau dos vértices:", sum([vertex.degree for vertex in self.get_vertices(False)]))
-    print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
-    print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
-
-def create_graph_kn(n_vertices):
-  graph = Graph("list")
-  for i in range(1, n_vertices+1):
-    vertex = Vertex(i, i)
-    graph.add_vertex(vertex)
-
-  vertices = graph.get_vertices(False)
-  for vertex1 in vertices:
-    for vertex2 in vertices:
-      if not vertex1.index == vertex2.index and not graph.has_edge(vertex1, vertex2):
-        graph.add_edge(vertex1, vertex2)
-  
-  return graph
-
-def is_odd(n):
-  return n % 2 != 0
-
-def create_graph_kregular(n_vertices, k):
-  if is_odd(n_vertices) and is_odd(k):
-    raise ValueError("By the corollary: In a graph, the number of vertices of degree odd is always even.")
-
-  graph = Graph("list")
-  for i in range(1, n_vertices+1):
-    vertex = Vertex(i, i)
-    graph.add_vertex(vertex)
-    
-  vertices = graph.get_vertices(only_data=False)
-  length = len(vertices)
-  
-  for i, vertex in enumerate(vertices):
-    index = (i + 1) % length
-    while not vertex.degree == k:
-      next_vertex = vertices[index]
-      if(vertex.degree < k and next_vertex.degree < k):
-        graph.add_edge(vertex, next_vertex)
-      index = (index + 1) % length
-
-  return graph
 
 def exemplo1():
-  graph = create_graph_kn(5)
+  graph = Graph("list") 
+
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
+
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
+
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_c)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_d, vertex_e)
+
+  graph.print_graph()
+
+  graph = Graph("matrix") 
+
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
+
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
+
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_c)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_d, vertex_e)
 
   graph.print_graph()
   
 def exemplo2():
-  graph = create_graph_kregular(6, 3);
+  graph = Graph("list")
+
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
+
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
+
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_a, vertex_c)
+  graph.add_edge(vertex_a, vertex_d)
+  graph.add_edge(vertex_a, vertex_e)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_c, vertex_e)
+  graph.add_edge(vertex_d, vertex_e)
 
   graph.print_graph()
 
-def exemplo3():
-  graph2 = Graph("list")
+  graph = Graph("matrix")
 
-  vertex1 = Vertex("A", 1)
-  vertex2 = Vertex("B", 2)
-  vertex3 = Vertex("C", 3)
-  vertex4 = Vertex("D", 4)
-  vertex5 = Vertex("E", 5) 
-  vertex6 = Vertex("F", 6) 
+  vertex_a = Vertex("A", 1)
+  vertex_b = Vertex("B", 2)
+  vertex_c = Vertex("C", 3)
+  vertex_d = Vertex("D", 4)
+  vertex_e = Vertex("E", 5) 
 
-  graph2.add_vertex(vertex1)
-  graph2.add_vertex(vertex2)
-  graph2.add_vertex(vertex3)
-  
-  graph2.add_vertex(vertex4)
-  graph2.add_vertex(vertex5)
-  graph2.add_vertex(vertex6)
+  graph.add_vertex(vertex_a)
+  graph.add_vertex(vertex_b)
+  graph.add_vertex(vertex_c)
+  graph.add_vertex(vertex_d)
+  graph.add_vertex(vertex_e)
 
-  graph2.add_edge(vertex1, vertex4)
-  graph2.add_edge(vertex1, vertex5)
-  graph2.add_edge(vertex1, vertex6)
-  
-  graph2.add_edge(vertex2, vertex4)
-  graph2.add_edge(vertex2, vertex6)
-  
-  graph2.add_edge(vertex3, vertex4)
-  
-  X = {vertex1, vertex2, vertex3}
-  Y = {vertex4, vertex5, vertex6}
-  
-  graph2.print_graph()
-  print("O grafo {} bipartido".format("é" if graph2.is_bipartite_graph(X, Y) else "não é"))
-  
+  graph.add_edge(vertex_a, vertex_b)
+  graph.add_edge(vertex_a, vertex_c)
+  graph.add_edge(vertex_a, vertex_d)
+  graph.add_edge(vertex_a, vertex_e)
+  graph.add_edge(vertex_b, vertex_c)
+  graph.add_edge(vertex_b, vertex_d)
+  graph.add_edge(vertex_b, vertex_e)
+  graph.add_edge(vertex_c, vertex_d)
+  graph.add_edge(vertex_c, vertex_e)
+  graph.add_edge(vertex_d, vertex_e)
+
+  graph.print_graph()
+
 def main():
   print("EXEMPLO 1:\n")
   exemplo1()
-  print("\nEXEMPLO 2:\n")
+  print("EXEMPLO 2:\n")
   exemplo2()
-  print("\nEXEMPLO 3:\n")
-  exemplo3()
 
 if __name__ == "__main__":
   main()

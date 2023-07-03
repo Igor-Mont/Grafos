@@ -1,4 +1,5 @@
-import random
+import math
+import tkinter as tk
 
 class Node:
   def __init__(self, data):
@@ -202,22 +203,18 @@ class Graph:
     index2 = self.vertices_matrix.index(vertex2)
     return index1, index2
 
-  def get_vertices(self, only_data=True):
+  def get_vertices(self):
     if self.is_representation_list:
-      return self._get_vertices_list(only_data)
+      return self._get_vertices_list()
     else:
-      return self._get_vertices_matrix(only_data)
+      return self._get_vertices_matrix()
   
-  def _get_vertices_list(self, only_data):
-    if only_data:
-      return [vertex.data for vertex in self.adjacency_list.keys()]
-    return [vertex for vertex in self.adjacency_list.keys()]
-
-  def _get_vertices_matrix(self, only_data):
-    if only_data:
-      return [vertex.data for vertex in self.vertices_matrix]
-    return [vertex for vertex in self.vertices_matrix]
-
+  def _get_vertices_list(self):
+    return [vertex.data for vertex in self.adjacency_list.keys()]
+  
+  def _get_vertices_matrix(self):
+    return [vertex.data for vertex in self.vertices_matrix]
+      
   def get_edges(self, filtered=False):
     if self.is_representation_list:
       return self._get_edges_list(filtered)
@@ -291,7 +288,19 @@ class Graph:
       return self._vertex_degree_list(index)
     else:
       return self._vertex_degree_matrix(index)
+    
+  def _vertex_degree_list(self, index):
+    for vertex in self.adjacency_list:
+      if vertex.index == index:
+        return vertex.degree
+    raise IndexError("list index out of range")
   
+  def _vertex_degree_matrix(self, index):
+    for vertex in self.vertices_matrix:
+      if vertex.index == index:
+        return vertex.degree
+    raise IndexError("list index out of range")
+
   def get_vertex_by_data(self, data):
     if self.is_representation_list:
       return self._get_vertex_by_data_list(data)
@@ -309,18 +318,6 @@ class Graph:
       if vertex.data == data:
         return vertex
     return None
-    
-  def _vertex_degree_list(self, index):
-    for vertex in self.adjacency_list:
-      if vertex.index == index:
-        return vertex.degree
-    raise IndexError("list index out of range")
-  
-  def _vertex_degree_matrix(self, index):
-    for vertex in self.vertices_matrix:
-      if vertex.index == index:
-        return vertex.degree
-    raise IndexError("list index out of range")
 
   def remove_edge(self, vertex1, vertex2):
     if self.is_representation_list:
@@ -358,23 +355,6 @@ class Graph:
     else:
       raise ValueError("One or both vertices do not exist in the graph.")
 
-  def is_set_disconnected(self, vertices_set):
-    for vertex1 in vertices_set:
-      for vertex2 in vertices_set:
-        if self.has_edge(vertex1, vertex2):
-          return False
-    return True
-
-  def is_bipartite_graph(self, set_1, set_2):
-    intersection_empty = len(list(set(set_1).intersection(set_2))) == 0
-    if not intersection_empty:
-      return False
-
-    if not self.is_set_disconnected(set_1) or not self.is_set_disconnected(set_2):
-      return False
-    
-    return True
-    
   def print_graph(self):
     if self.is_representation_list:
       self._print_list()
@@ -389,10 +369,7 @@ class Graph:
     for vertex in self.adjacency_list:
       neighbors_data = [neighbor.data for neighbor in self.adjacency_list[vertex]]
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
-    print("Somatório do grau dos vértices:", sum([vertex.degree for vertex in self.get_vertices(False)]))
-    print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
-    print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
-    
+  
   def _print_matrix(self):
     print("Matriz de adjacência")
     print("Quantidade de vertices:", len(self.get_vertices()))
@@ -410,100 +387,151 @@ class Graph:
       for j in range(len(self.vertices_matrix)):
         print(self.matrix[i][j], end=" ")
       print()
-    print()
-    print("Somatório do grau dos vértices:", sum([vertex.degree for vertex in self.get_vertices(False)]))
-    print("Nº de vértices de grau par:", sum([1 if vertex.degree % 2 == 0 else 0 for vertex in self.get_vertices(False)]))
-    print("Nº de vértices de grau ímpar:", sum([1 if vertex.degree % 2 != 0 else 0 for vertex in self.get_vertices(False)]))
 
-def create_graph_kn(n_vertices):
-  graph = Graph("list")
-  for i in range(1, n_vertices+1):
-    vertex = Vertex(i, i)
-    graph.add_vertex(vertex)
+class GrafoGUI:
+  def __init__(self, graph):
+    self.graph = graph
+    self.strucuture = graph.adjacency_list if graph.is_representation_list else graph.matrix
+    self.edges = graph.get_edges()
+    self.positions = list()
+    self.actual_count = 0
+    self.radius = 20
+    self.janela = tk.Tk()
+    self.janela.title("Representação Gráfica de Grafo")
+    self.canvas = tk.Canvas(self.janela, width=500, height=500)
+    self.canvas.pack()
+    self.canvas.bind("<Button-1>", self.onclick)
+    self.janela.mainloop()
 
-  vertices = graph.get_vertices(False)
-  for vertex1 in vertices:
-    for vertex2 in vertices:
-      if not vertex1.index == vertex2.index and not graph.has_edge(vertex1, vertex2):
-        graph.add_edge(vertex1, vertex2)
+  def onclick(self, event):
+    if self.graph.is_representation_list:
+      vertex = list(self.strucuture.keys())[self.actual_count]
+    else: 
+      vertex = list(self.graph.vertices_matrix)[self.actual_count]
+    x, y = event.x, event.y
+    self.positions.append((x, y))
+    self.desenhar_vertice(x, y, vertex.index)
+    self.actual_count += 1
+
+    if self.actual_count == len(self.strucuture):
+      self.desenhar_arestas()
+      return
+        
+  def desenhar_vertice(self, x, y, vertice):
+      self.canvas.create_oval(x - self.radius, y - self.radius, x + self.radius, y + self.radius, fill="lightblue")
+      self.canvas.create_text(x, y, text=str(vertice), fill="black")
+
+  def contar_arestas(self):
+    edge_counts = {}
+    for edge in self.edges:
+        if tuple(reversed(edge)) in edge_counts:
+            edge_counts[tuple(reversed(edge))] += 1
+            continue
+        if edge in edge_counts:
+            edge_counts[edge] += 1
+        else:
+            edge_counts[edge] = 1
+    return edge_counts
   
-  return graph
+  def desenhar_lacos(self, x, y, edge_count):
+    if edge_count > 1:
+      self.canvas.create_text(x, y - 50, text=str(edge_count) + " laços", fill="black")
+    self.canvas.create_arc(x - 15, y - 38, x + 15, y - 10, start=330, extent=250,
+                           style=tk.ARC, outline="red", tags="arestas")
 
-def is_odd(n):
-  return n % 2 != 0
+  def desenhar_arestas_paralelas(self, x1, y1, x2, y2, edge_count):
+     for i in range(edge_count):
+        if i == 0:
+          self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
+          continue
+        if i % 2 != 0:
+          center_x = int((x1 + x2) / 2) + 30
+          center_y = int((y1 + y2) / 2) + 30
+          self.canvas.create_line(x1, y1, center_x + (i * 10) , center_y + (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
+          continue
+        center_x = int((x1 + x2) / 2) - 30
+        center_y = int((y1 + y2) / 2) - 30
+        self.canvas.create_line(x1, y1, center_x - (i * 10) , center_y - (i * 10), x2, y2, smooth=True, splinesteps=20, fill="red", tags="arestas")
 
-def create_graph_kregular(n_vertices, k):
-  if is_odd(n_vertices) and is_odd(k):
-    raise ValueError("By the corollary: In a graph, the number of vertices of degree odd is always even.")
+  def desenhar_arestas(self):
+    self.canvas.delete("arestas")
+    edge_counts = self.contar_arestas()
 
-  graph = Graph("list")
-  for i in range(1, n_vertices+1):
-    vertex = Vertex(i, i)
-    graph.add_vertex(vertex)
-    
-  vertices = graph.get_vertices(only_data=False)
-  length = len(vertices)
-  
-  for i, vertex in enumerate(vertices):
-    index = (i + 1) % length
-    while not vertex.degree == k:
-      next_vertex = vertices[index]
-      if(vertex.degree < k and next_vertex.degree < k):
-        graph.add_edge(vertex, next_vertex)
-      index = (index + 1) % length
+    for edge in edge_counts:
+      vertex1_data, vertex2_data = edge
+      vertex1 = self.graph.get_vertex_by_data(vertex1_data)
+      vertex2 = self.graph.get_vertex_by_data(vertex2_data)
 
-  return graph
+      if vertex1 and vertex2:
+        x1, y1 = self.positions[vertex1.index - 1]
+        x2, y2 = self.positions[vertex2.index - 1]
 
-def exemplo1():
-  graph = create_graph_kn(5)
+        edge_count = edge_counts[edge]
+        if edge_count > 1:
+          if x1 == x2 and y1 == y2:
+            self.desenhar_lacos(x1, y1, edge_count)
+          else:
+            self.desenhar_arestas_paralelas(x1, y1, x2, y2, edge_count)
+        else:
+          if x1 == x2 and y1 == y2:
+            self.desenhar_lacos(x1, y1, edge_count)
+          else:
+            self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
-  graph.print_graph()
-  
-def exemplo2():
-  graph = create_graph_kregular(6, 3);
+graph = Graph("list") 
 
-  graph.print_graph()
+vertex_a = Vertex("A", 1)
+vertex_b = Vertex("B", 2)
+vertex_c = Vertex("C", 3)
+vertex_d = Vertex("D", 4)
+vertex_e = Vertex("E", 5) 
 
-def exemplo3():
-  graph2 = Graph("list")
+graph.add_vertex(vertex_a)
+graph.add_vertex(vertex_b)
+graph.add_vertex(vertex_c)
+graph.add_vertex(vertex_d)
+graph.add_vertex(vertex_e)
 
-  vertex1 = Vertex("A", 1)
-  vertex2 = Vertex("B", 2)
-  vertex3 = Vertex("C", 3)
-  vertex4 = Vertex("D", 4)
-  vertex5 = Vertex("E", 5) 
-  vertex6 = Vertex("F", 6) 
+graph.add_edge(vertex_a, vertex_b)
+graph.add_edge(vertex_b, vertex_c)
+graph.add_edge(vertex_b, vertex_d)
+graph.add_edge(vertex_b, vertex_e)
+graph.add_edge(vertex_b, vertex_e)
+# Teste com mais de uma aresta paralelas
+# graph.add_edge(vertex_b, vertex_e)
+# graph.add_edge(vertex_b, vertex_e)
+# graph.add_edge(vertex_b, vertex_e)
+graph.add_edge(vertex_c, vertex_c)
+# Teste com mais de um laço
+# graph.add_edge(vertex_c, vertex_c)
+# graph.add_edge(vertex_c, vertex_c)
+graph.add_edge(vertex_c, vertex_d)
+graph.add_edge(vertex_d, vertex_e)
 
-  graph2.add_vertex(vertex1)
-  graph2.add_vertex(vertex2)
-  graph2.add_vertex(vertex3)
-  
-  graph2.add_vertex(vertex4)
-  graph2.add_vertex(vertex5)
-  graph2.add_vertex(vertex6)
+graph2 = Graph("matrix")
 
-  graph2.add_edge(vertex1, vertex4)
-  graph2.add_edge(vertex1, vertex5)
-  graph2.add_edge(vertex1, vertex6)
-  
-  graph2.add_edge(vertex2, vertex4)
-  graph2.add_edge(vertex2, vertex6)
-  
-  graph2.add_edge(vertex3, vertex4)
-  
-  X = {vertex1, vertex2, vertex3}
-  Y = {vertex4, vertex5, vertex6}
-  
-  graph2.print_graph()
-  print("O grafo {} bipartido".format("é" if graph2.is_bipartite_graph(X, Y) else "não é"))
-  
-def main():
-  print("EXEMPLO 1:\n")
-  exemplo1()
-  print("\nEXEMPLO 2:\n")
-  exemplo2()
-  print("\nEXEMPLO 3:\n")
-  exemplo3()
+vertex1 = Vertex("A", 1)
+vertex2 = Vertex("B", 2)
+vertex3 = Vertex("C", 3)
+vertex4 = Vertex("D", 4)
+vertex5 = Vertex("E", 5) 
 
-if __name__ == "__main__":
-  main()
+graph2.add_vertex(vertex1)
+graph2.add_vertex(vertex2)
+graph2.add_vertex(vertex3)
+graph2.add_vertex(vertex4)
+graph2.add_vertex(vertex5)
+
+graph2.add_edge(vertex1, vertex2)
+graph2.add_edge(vertex1, vertex3)
+graph2.add_edge(vertex1, vertex4)
+graph2.add_edge(vertex1, vertex5)
+graph2.add_edge(vertex2, vertex3)
+graph2.add_edge(vertex2, vertex4)
+graph2.add_edge(vertex2, vertex5)
+graph2.add_edge(vertex3, vertex4)
+graph2.add_edge(vertex3, vertex5)
+graph2.add_edge(vertex4, vertex5)
+
+grafo_gui = GrafoGUI(graph) 
+grafo_gui2 = GrafoGUI(graph2) 
