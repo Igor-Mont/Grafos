@@ -441,7 +441,6 @@ graph2.add_edge(vertex3, vertex4)
 graph2.add_edge(vertex3, vertex5)
 graph2.add_edge(vertex4, vertex5)
 
-
 class GrafoGUI:
   def __init__(self, graph):
     self.graph = graph
@@ -533,3 +532,4 @@ class GrafoGUI:
             self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
 grafo_gui = GrafoGUI(graph) 
+grafo_gui = GrafoGUI(graph2) 
