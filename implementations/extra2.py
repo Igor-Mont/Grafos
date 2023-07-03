@@ -362,6 +362,7 @@ class Graph:
       self._print_matrix()
 
   def _print_list(self):
+    print("Estrutura de adjacência")
     print("Quantidade de vértices:", len(self.get_vertices()))
     print("Quantidade de arestas:", self.get_edge_count())
     print("Arestas:", self.get_edges())
@@ -370,6 +371,7 @@ class Graph:
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
   
   def _print_matrix(self):
+    print("Matriz de adjacência")
     print("Quantidade de vertices:", len(self.get_vertices()))
     print("Quantidade de arestas:", self.get_edge_count())
     print("Arestas:", self.get_edges())
@@ -385,61 +387,6 @@ class Graph:
       for j in range(len(self.vertices_matrix)):
         print(self.matrix[i][j], end=" ")
       print()
-
-graph = Graph("list") 
-
-vertex_a = Vertex("A", 1)
-vertex_b = Vertex("B", 2)
-vertex_c = Vertex("C", 3)
-vertex_d = Vertex("D", 4)
-vertex_e = Vertex("E", 5) 
-
-graph.add_vertex(vertex_a)
-graph.add_vertex(vertex_b)
-graph.add_vertex(vertex_c)
-graph.add_vertex(vertex_d)
-graph.add_vertex(vertex_e)
-
-graph.add_edge(vertex_a, vertex_b)
-graph.add_edge(vertex_b, vertex_c)
-graph.add_edge(vertex_b, vertex_d)
-graph.add_edge(vertex_b, vertex_e)
-graph.add_edge(vertex_b, vertex_e)
-# teste com mais de uma aresta paralela
-# graph.add_edge(vertex_b, vertex_e)
-# graph.add_edge(vertex_b, vertex_e)
-# graph.add_edge(vertex_b, vertex_e)
-graph.add_edge(vertex_c, vertex_c)
-# teste com mais de um laço
-# graph.add_edge(vertex_c, vertex_c)
-# graph.add_edge(vertex_c, vertex_c)
-graph.add_edge(vertex_c, vertex_d)
-graph.add_edge(vertex_d, vertex_e)
-
-graph2 = Graph("matrix")
-
-vertex1 = Vertex("A", 1)
-vertex2 = Vertex("B", 2)
-vertex3 = Vertex("C", 3)
-vertex4 = Vertex("D", 4)
-vertex5 = Vertex("E", 5) 
-
-graph2.add_vertex(vertex1)
-graph2.add_vertex(vertex2)
-graph2.add_vertex(vertex3)
-graph2.add_vertex(vertex4)
-graph2.add_vertex(vertex5)
-
-graph2.add_edge(vertex1, vertex2)
-graph2.add_edge(vertex1, vertex3)
-graph2.add_edge(vertex1, vertex4)
-graph2.add_edge(vertex1, vertex5)
-graph2.add_edge(vertex2, vertex3)
-graph2.add_edge(vertex2, vertex4)
-graph2.add_edge(vertex2, vertex5)
-graph2.add_edge(vertex3, vertex4)
-graph2.add_edge(vertex3, vertex5)
-graph2.add_edge(vertex4, vertex5)
 
 class GrafoGUI:
   def __init__(self, graph):
@@ -531,5 +478,60 @@ class GrafoGUI:
           else:
             self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
+graph = Graph("list") 
+
+vertex_a = Vertex("A", 1)
+vertex_b = Vertex("B", 2)
+vertex_c = Vertex("C", 3)
+vertex_d = Vertex("D", 4)
+vertex_e = Vertex("E", 5) 
+
+graph.add_vertex(vertex_a)
+graph.add_vertex(vertex_b)
+graph.add_vertex(vertex_c)
+graph.add_vertex(vertex_d)
+graph.add_vertex(vertex_e)
+
+graph.add_edge(vertex_a, vertex_b)
+graph.add_edge(vertex_b, vertex_c)
+graph.add_edge(vertex_b, vertex_d)
+graph.add_edge(vertex_b, vertex_e)
+graph.add_edge(vertex_b, vertex_e)
+# Teste com mais de uma aresta paralelas
+# graph.add_edge(vertex_b, vertex_e)
+# graph.add_edge(vertex_b, vertex_e)
+# graph.add_edge(vertex_b, vertex_e)
+graph.add_edge(vertex_c, vertex_c)
+# Teste com mais de um laço
+# graph.add_edge(vertex_c, vertex_c)
+# graph.add_edge(vertex_c, vertex_c)
+graph.add_edge(vertex_c, vertex_d)
+graph.add_edge(vertex_d, vertex_e)
+
+graph2 = Graph("matrix")
+
+vertex1 = Vertex("A", 1)
+vertex2 = Vertex("B", 2)
+vertex3 = Vertex("C", 3)
+vertex4 = Vertex("D", 4)
+vertex5 = Vertex("E", 5) 
+
+graph2.add_vertex(vertex1)
+graph2.add_vertex(vertex2)
+graph2.add_vertex(vertex3)
+graph2.add_vertex(vertex4)
+graph2.add_vertex(vertex5)
+
+graph2.add_edge(vertex1, vertex2)
+graph2.add_edge(vertex1, vertex3)
+graph2.add_edge(vertex1, vertex4)
+graph2.add_edge(vertex1, vertex5)
+graph2.add_edge(vertex2, vertex3)
+graph2.add_edge(vertex2, vertex4)
+graph2.add_edge(vertex2, vertex5)
+graph2.add_edge(vertex3, vertex4)
+graph2.add_edge(vertex3, vertex5)
+graph2.add_edge(vertex4, vertex5)
+
 grafo_gui = GrafoGUI(graph) 
-grafo_gui = GrafoGUI(graph2) 
+grafo_gui2 = GrafoGUI(graph2) 
