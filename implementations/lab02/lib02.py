@@ -448,6 +448,10 @@ def create_graph_kregular(n_vertices, k):
     index = (i + 1) % length
     while not vertex.degree == k:
       next_vertex = vertices[index]
+      if vertex.index == next_vertex.index:
+        if (vertex.degree + 2 > k):
+          index = (index + 1) % length
+          continue
       if(vertex.degree < k and next_vertex.degree < k):
         graph.add_edge(vertex, next_vertex)
       index = (index + 1) % length
@@ -457,10 +461,10 @@ def create_graph_kregular(n_vertices, k):
 def exemplo1():
   graph = create_graph_kn(5)
 
-  graph.print_graph()
+  # graph.print_graph()
   
 def exemplo2():
-  graph = create_graph_kregular(6, 3);
+  graph = create_graph_kregular(4, 4)
 
   graph.print_graph()
 
@@ -494,8 +498,8 @@ def exemplo3():
   X = {vertex1, vertex2, vertex3}
   Y = {vertex4, vertex5, vertex6}
   
-  graph2.print_graph()
-  print("O grafo {} bipartido".format("é" if graph2.is_bipartite_graph(X, Y) else "não é"))
+  # graph2.print_graph()
+  # print("O grafo {} bipartido".format("é" if graph2.is_bipartite_graph(X, Y) else "não é"))
   
 def main():
   print("EXEMPLO 1:\n")
