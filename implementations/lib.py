@@ -301,6 +301,24 @@ class Graph:
         return vertex.degree
     raise IndexError("list index out of range")
   
+  def get_vertex_by_data(self, data):
+    if self.is_representation_list:
+      return self._get_vertex_by_data_list(data)
+    else:
+      return self._get_vertex_by_data_matrix(data)
+    
+  def _get_vertex_by_data_list(self, data):
+    for vertex in self.adjacency_list:
+      if vertex.data == data:
+        return vertex
+    return None
+  
+  def _get_vertex_by_data_matrix(self, data):
+    for vertex in self.vertices_matrix:
+      if vertex.data == data:
+        return vertex
+    return None
+  
   def _vertex_degree_matrix(self, index):
     for vertex in self.vertices_matrix:
       if vertex.index == index:
