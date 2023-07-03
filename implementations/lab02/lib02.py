@@ -461,10 +461,10 @@ def create_graph_kregular(n_vertices, k):
 def exemplo1():
   graph = create_graph_kn(5)
 
-  # graph.print_graph()
+  graph.print_graph()
   
 def exemplo2():
-  graph = create_graph_kregular(4, 4)
+  graph = create_graph_kregular(10, 3)
 
   graph.print_graph()
 
@@ -498,8 +498,8 @@ def exemplo3():
   X = {vertex1, vertex2, vertex3}
   Y = {vertex4, vertex5, vertex6}
   
-  # graph2.print_graph()
-  # print("O grafo {} bipartido".format("é" if graph2.is_bipartite_graph(X, Y) else "não é"))
+  graph2.print_graph()
+  print("O grafo {} bipartido".format("é" if graph2.is_bipartite_graph(X, Y) else "não é"))
   
 def main():
   print("EXEMPLO 1:\n")
