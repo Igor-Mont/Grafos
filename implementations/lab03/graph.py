@@ -11,6 +11,7 @@ class Graph:
     self.representation_type = representation_type
     self._edge_count = 0
     self.is_representation_list = representation_type == "list"
+    self.marked_vertices = dict()
     if not self.is_representation_list:
       self.matrix = list()
       self.edges_matrix = list()
@@ -27,6 +28,13 @@ class Graph:
       self._add_vertex_list(vertex)
     else:
       self._add_vertex_matrix(vertex)
+    self.marked_vertices[vertex] = False
+
+  def set_vertex_marked(self, vertex, marked=True):
+    self.marked_vertices[vertex] = marked
+
+  def is_vertex_marked(self, vertex):
+    return self.marked_vertices[vertex]
     
   def _add_vertex_list(self, vertex):
     if vertex not in self.adjacency_list:
@@ -286,24 +294,19 @@ class Graph:
       print()
     print()
 
-def dfs(graph, first_vertex):
-  vertices = graph.get_vertices(only_data=False)
-  adapted_vertices = list()
+def dfs(graph, start_vertex):
+  graph.set_vertex_marked(start_vertex, True)
+  print("Visitando vértice:", start_vertex.data)
 
-  for vertex in vertices:
-    if vertex.data == first_vertex.data:
-      first_vertex = vertex
-    adapted_vertex = Vertex(vertex.data, vertex.index)
-    adapted_vertex.marked = False
-    adapted_vertices.append(adapted_vertex)
+  for next_vertex in graph.adjacency_list[start_vertex]:
+    if not graph.is_vertex_marked(next_vertex):
+      dfs(graph, next_vertex)
 
-  first_vertex.marked = True
+def depth_first_search(graph, start_vertex):
+  dfs(graph, start_vertex)
 
-  for vertex in graph.adjacency_list[first_vertex]:
-    if not vertex.marked:
-      dfs(graph, prox_vertex)
-
-  print([vertex.marked for vertex in graph.get_vertices(only_data=False)])
+  for vertex in graph.adjacency_list:
+    graph.set_vertex_marked(vertex, False)
 
 graph = Graph("list")
 
@@ -341,5 +344,6 @@ graph.add_edge(vertex_g, vertex_h)
 graph.add_edge(vertex_g, vertex_f)
 
 graph.add_edge(vertex_f, vertex_h)
+graph.print_graph()
 
-dfs(graph, vertex_a)
+depth_first_search(graph, vertex_a)
