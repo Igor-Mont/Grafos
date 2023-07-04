@@ -35,6 +35,10 @@ class Graph:
 
   def is_vertex_marked(self, vertex):
     return self.marked_vertices[vertex]
+  
+  def reset_marked_vertices(self):
+    for vertex in self.adjacency_list:
+      self.set_vertex_marked(vertex, False)
     
   def _add_vertex_list(self, vertex):
     if vertex not in self.adjacency_list:
@@ -294,19 +298,28 @@ class Graph:
       print()
     print()
 
-def dfs(graph, start_vertex):
+def dfs(graph, start_vertex, tree_edges, return_edges):
   graph.set_vertex_marked(start_vertex, True)
   print("Visitando vértice:", start_vertex.data)
 
   for next_vertex in graph.adjacency_list[start_vertex]:
+    edge = (start_vertex.data, next_vertex.data)
     if not graph.is_vertex_marked(next_vertex):
-      dfs(graph, next_vertex)
+      tree_edges.append(edge)
+      dfs(graph, next_vertex, tree_edges, return_edges)
+    elif not edge in tree_edges and not tuple(reversed(edge)) in tree_edges:
+      if not edge in return_edges and not tuple(reversed(edge)) in return_edges:
+        return_edges.append(edge)
 
 def depth_first_search(graph, start_vertex):
-  dfs(graph, start_vertex)
+  tree_edges = list()
+  return_edges = list()
+  dfs(graph, start_vertex, tree_edges, return_edges)
 
-  for vertex in graph.adjacency_list:
-    graph.set_vertex_marked(vertex, False)
+  graph.reset_marked_vertices()
+
+  print("Arestas da Árvore:", tree_edges)
+  print("Arestas de Retorno:", return_edges)
 
 graph = Graph("list")
 
