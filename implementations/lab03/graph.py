@@ -298,9 +298,16 @@ class Graph:
       print()
     print()
 
+entry_depth = 0
+exit_depth = 0
+
 def dfs(graph, start_vertex, tree_edges, return_edges):
+  global entry_depth
+  global exit_depth
+  entry_depth += 1
   graph.set_vertex_marked(start_vertex, True)
-  print("Visitando vértice:", start_vertex.data)
+  # print("Visitando vértice:", start_vertex.data)
+  print("Visitando vértice:", start_vertex.data, "Profundidade de entrada:", entry_depth)
 
   for next_vertex in graph.adjacency_list[start_vertex]:
     edge = (start_vertex.data, next_vertex.data)
@@ -313,6 +320,9 @@ def dfs(graph, start_vertex, tree_edges, return_edges):
     elif not edge in tree_edges and not reversed_edge in tree_edges:
       if not is_returned_edge:
         return_edges.append(edge)
+        
+  exit_depth += 1
+  print("Saindo do vértice:", start_vertex.data, "Profundidade de saída:", exit_depth)
 
 def depth_first_search(graph, start_vertex):
   tree_edges = list()
@@ -345,21 +355,22 @@ graph.add_vertex(vertex_g)
 graph.add_vertex(vertex_h)
 
 graph.add_edge(vertex_a, vertex_b)
-graph.add_edge(vertex_a, vertex_e)
 graph.add_edge(vertex_a, vertex_c)
+graph.add_edge(vertex_a, vertex_e)
 graph.add_edge(vertex_a, vertex_f)
 
 graph.add_edge(vertex_b, vertex_d)
 graph.add_edge(vertex_b, vertex_e)
 
 graph.add_edge(vertex_c, vertex_f)
-graph.add_edge(vertex_c, vertex_h)
 graph.add_edge(vertex_c, vertex_g)
+graph.add_edge(vertex_c, vertex_h)
+
+graph.add_edge(vertex_g, vertex_f)
+graph.add_edge(vertex_f, vertex_h)
 
 graph.add_edge(vertex_g, vertex_h)
-graph.add_edge(vertex_g, vertex_f)
 
-graph.add_edge(vertex_f, vertex_h)
 graph.print_graph()
 
 depth_first_search(graph, vertex_a)
