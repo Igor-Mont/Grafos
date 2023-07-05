@@ -8,13 +8,19 @@ class Vertex:
     self._marked = False
     self._entry_depth = 0
     self._exit_depth = 0
+  
+  def get_entry_depth(self):
+    return self._entry_depth
+
+  def get_exit_depth(self):
+    return self._exit_depth
 
 class Graph:
   def __init__(self, representation_type):
     self.representation_type = representation_type
     self._edge_count = 0
-    self._entry_depth = 0
-    self._exit_depth = 0
+    self._dfs_entry_depth = 0
+    self._dfs_exit_depth = 0
     self.is_representation_list = representation_type == "list"
     if not self.is_representation_list:
       self.matrix = list()
@@ -36,17 +42,11 @@ class Graph:
   def set_vertex_marked(self, vertex, marked=True):
     vertex._marked = marked
   
-  def get_entry_depth_vertex(self, vertex):
-    return vertex._entry_depth
-
-  def get_exit_depth_vertex(self, vertex):
-    return vertex._exit_depth
-  
   def get_entry_depth(self):
-    return self._entry_depth
+    return self._dfs_entry_depth
 
   def get_exit_depth(self):
-    return self._exit_depth
+    return self._dfs_exit_depth
   
   def set_entry_depth_vertex(self, vertex, depth):
     vertex._entry_depth = depth
@@ -55,10 +55,10 @@ class Graph:
     vertex._exit_depth = depth
   
   def increment_entry_depth(self):
-    self._entry_depth += 1
+    self._dfs_entry_depth += 1
   
   def increment_exit_depth(self):
-    self._exit_depth += 1
+    self._dfs_exit_depth += 1
 
   def is_vertex_marked(self, vertex):
     return vertex._marked
@@ -368,11 +368,11 @@ def depth_first_search(graph, start_vertex):
   print()
   print("PE(v) |", end=" ")
   for vertex in graph.adjacency_list:
-    print("{} | ".format(graph.get_entry_depth_vertex(vertex)), end="")
+    print("{} | ".format(vertex.get_entry_depth()), end="")
   print()
   print("PS(v) |", end=" ")
   for vertex in graph.adjacency_list:
-    print("{} | ".format(graph.get_exit_depth_vertex(vertex)), end="")
+    print("{} | ".format(vertex.get_exit_depth()), end="")
   print()
 
 graph = Graph("list")
