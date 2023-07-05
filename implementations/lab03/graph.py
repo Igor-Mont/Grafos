@@ -5,6 +5,9 @@ class Vertex:
     self.data = data
     self.index = index
     self.degree = 0
+    self._marked = False
+    self._entry_depth = 0
+    self._exit_depth = 0
 
 class Graph:
   def __init__(self, representation_type):
@@ -31,10 +34,23 @@ class Graph:
     self.marked_vertices[vertex] = False
 
   def set_vertex_marked(self, vertex, marked=True):
+    vertex._marked = marked
     self.marked_vertices[vertex] = marked
+  
+  def get_entry_depth_vertex(self, vertex):
+    return vertex._entry_depth
+
+  def get_exit_depth_vertex(self, vertex):
+    return vertex._exit_depth
+  
+  def set_entry_depth_vertex(self, vertex, depth):
+    vertex._entry_depth = depth
+  
+  def set_exit_depth_vertex(self, vertex, depth):
+    vertex._exit_depth = depth
 
   def is_vertex_marked(self, vertex):
-    return self.marked_vertices[vertex]
+    return self.marked_vertices[vertex] or vertex._marked
   
   def reset_marked_vertices(self):
     for vertex in self.adjacency_list:
@@ -278,6 +294,19 @@ class Graph:
     for vertex in self.adjacency_list:
       neighbors_data = [neighbor.data for neighbor in self.adjacency_list[vertex]]
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
+
+    print(" " * 8, end="")
+    for vertex in self.adjacency_list:
+      print("{} | ".format(vertex.data), end="")
+    print()
+    print("PE(v) |", end=" ")
+    for vertex in self.adjacency_list:
+      print("{} | ".format(self.get_entry_depth_vertex(vertex)), end="")
+    print()
+    print("PS(v) |", end=" ")
+    for vertex in self.adjacency_list:
+      print("{} | ".format(self.get_exit_depth_vertex(vertex)), end="")
+    print()
      
   def _print_matrix(self):
     print("Matriz de adjacência")
@@ -298,18 +327,33 @@ class Graph:
       print()
     print()
 
+entry_depth = 0
+exit_depth = 0
+
+# FALTA REMOVER A ANTIGA ABORDAGEM NOS METODOS, EU APENAS INCREMENTEI
+# ADICIONAR UMA FUNÇÃO DE PRINTAR APENAS A DFS
+# MOVER AS FUNCOES DE DFS PARA DENTRO DO GRAFO MESMO
 def dfs(graph, start_vertex, tree_edges, return_edges):
+  global entry_depth
+  global exit_depth
+  entry_depth += 1
   graph.set_vertex_marked(start_vertex, True)
-  print("Visitando vértice:", start_vertex.data)
+  graph.set_entry_depth_vertex(start_vertex, entry_depth)
 
   for next_vertex in graph.adjacency_list[start_vertex]:
     edge = (start_vertex.data, next_vertex.data)
+    reversed_edge = tuple(reversed(edge))
+    is_returned_edge = edge in return_edges or reversed_edge in return_edges
+
     if not graph.is_vertex_marked(next_vertex):
       tree_edges.append(edge)
       dfs(graph, next_vertex, tree_edges, return_edges)
-    elif not edge in tree_edges and not tuple(reversed(edge)) in tree_edges:
-      if not edge in return_edges and not tuple(reversed(edge)) in return_edges:
+    elif not edge in tree_edges and not reversed_edge in tree_edges:
+      if not is_returned_edge:
         return_edges.append(edge)
+        
+  exit_depth += 1
+  graph.set_exit_depth_vertex(start_vertex, exit_depth)
 
 def depth_first_search(graph, start_vertex):
   tree_edges = list()
@@ -342,21 +386,22 @@ graph.add_vertex(vertex_g)
 graph.add_vertex(vertex_h)
 
 graph.add_edge(vertex_a, vertex_b)
-graph.add_edge(vertex_a, vertex_e)
 graph.add_edge(vertex_a, vertex_c)
+graph.add_edge(vertex_a, vertex_e)
 graph.add_edge(vertex_a, vertex_f)
 
 graph.add_edge(vertex_b, vertex_d)
 graph.add_edge(vertex_b, vertex_e)
 
 graph.add_edge(vertex_c, vertex_f)
-graph.add_edge(vertex_c, vertex_h)
 graph.add_edge(vertex_c, vertex_g)
+graph.add_edge(vertex_c, vertex_h)
+
+graph.add_edge(vertex_g, vertex_f)
+graph.add_edge(vertex_f, vertex_h)
 
 graph.add_edge(vertex_g, vertex_h)
-graph.add_edge(vertex_g, vertex_f)
 
-graph.add_edge(vertex_f, vertex_h)
-graph.print_graph()
 
 depth_first_search(graph, vertex_a)
+graph.print_graph()
