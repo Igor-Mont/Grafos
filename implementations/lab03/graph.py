@@ -8,7 +8,19 @@ class Vertex:
     self._marked = False
     self._entry_depth = 0
     self._exit_depth = 0
+
+  def is_marked(self):
+    return self._marked
+
+  def set_marked(self, marked=True):
+    self._marked = marked
   
+  def set_entry_depth(self, depth):
+    self._entry_depth = depth
+  
+  def set_exit_depth(self, depth):
+    self._exit_depth = depth
+
   def get_entry_depth(self):
     return self._entry_depth
 
@@ -38,9 +50,6 @@ class Graph:
       self._add_vertex_list(vertex)
     else:
       self._add_vertex_matrix(vertex)
-
-  def set_vertex_marked(self, vertex, marked=True):
-    vertex._marked = marked
   
   def get_entry_depth(self):
     return self._dfs_entry_depth
@@ -48,24 +57,15 @@ class Graph:
   def get_exit_depth(self):
     return self._dfs_exit_depth
   
-  def set_entry_depth_vertex(self, vertex, depth):
-    vertex._entry_depth = depth
-  
-  def set_exit_depth_vertex(self, vertex, depth):
-    vertex._exit_depth = depth
-  
   def increment_entry_depth(self):
     self._dfs_entry_depth += 1
   
   def increment_exit_depth(self):
     self._dfs_exit_depth += 1
-
-  def is_vertex_marked(self, vertex):
-    return vertex._marked
   
   def reset_marked_vertices(self):
     for vertex in self.adjacency_list:
-      self.set_vertex_marked(vertex, False)
+      vertex.set_marked(False)
   
   def reset_depths(self):
     self._entry_depth = 0
@@ -330,87 +330,3 @@ class Graph:
     print()
 
 # FALTA REMOVER A ANTIGA ABORDAGEM NOS METODOS, EU APENAS INCREMENTEI - ACHO QUE FEITO
-# ADICIONAR UMA FUNÇÃO DE PRINTAR APENAS A DFS
-def dfs(graph, start_vertex, tree_edges, return_edges):
-  graph.increment_entry_depth()
-  graph.set_vertex_marked(start_vertex)
-  graph.set_entry_depth_vertex(start_vertex, graph.get_entry_depth())
-
-  for next_vertex in graph.adjacency_list[start_vertex]:
-    edge = (start_vertex.data, next_vertex.data)
-    reversed_edge = tuple(reversed(edge))
-    is_returned_edge = edge in return_edges or reversed_edge in return_edges
-
-    if not graph.is_vertex_marked(next_vertex):
-      tree_edges.append(edge)
-      dfs(graph, next_vertex, tree_edges, return_edges)
-    elif not edge in tree_edges and not reversed_edge in tree_edges:
-      if not is_returned_edge:
-        return_edges.append(edge)
-
-  graph.increment_exit_depth()        
-  graph.set_exit_depth_vertex(start_vertex, graph.get_exit_depth())
-
-def depth_first_search(graph, start_vertex):
-  tree_edges = list()
-  return_edges = list()
-  dfs(graph, start_vertex, tree_edges, return_edges)
-
-  graph.reset_marked_vertices()
-  graph.reset_depths()
-
-  print("Arestas da Árvore:", tree_edges)
-  print("Arestas de Retorno:", return_edges)
-
-  print(" " * 8, end="")
-  for vertex in graph.adjacency_list:
-    print("{} | ".format(vertex.data), end="")
-  print()
-  print("PE(v) |", end=" ")
-  for vertex in graph.adjacency_list:
-    print("{} | ".format(vertex.get_entry_depth()), end="")
-  print()
-  print("PS(v) |", end=" ")
-  for vertex in graph.adjacency_list:
-    print("{} | ".format(vertex.get_exit_depth()), end="")
-  print()
-
-graph = Graph("list")
-
-vertex_a = Vertex("A", 1)
-vertex_b = Vertex("B", 2)
-vertex_c = Vertex("C", 3)
-vertex_d = Vertex("D", 4)
-vertex_e = Vertex("E", 5)
-vertex_f = Vertex("F", 6)
-vertex_g = Vertex("G", 7)
-vertex_h = Vertex("H", 8)
-
-graph.add_vertex(vertex_a)
-graph.add_vertex(vertex_b)
-graph.add_vertex(vertex_c)
-graph.add_vertex(vertex_d)
-graph.add_vertex(vertex_e)
-graph.add_vertex(vertex_f)
-graph.add_vertex(vertex_g)
-graph.add_vertex(vertex_h)
-
-graph.add_edge(vertex_a, vertex_b)
-graph.add_edge(vertex_a, vertex_c)
-graph.add_edge(vertex_a, vertex_e)
-graph.add_edge(vertex_a, vertex_f)
-
-graph.add_edge(vertex_b, vertex_d)
-graph.add_edge(vertex_b, vertex_e)
-
-graph.add_edge(vertex_c, vertex_f)
-graph.add_edge(vertex_c, vertex_g)
-graph.add_edge(vertex_c, vertex_h)
-
-graph.add_edge(vertex_g, vertex_f)
-graph.add_edge(vertex_f, vertex_h)
-
-graph.add_edge(vertex_g, vertex_h)
-
-depth_first_search(graph, vertex_a)
-# graph.print_graph()
