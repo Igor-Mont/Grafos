@@ -1,10 +1,10 @@
 from graph import Graph
 from graph import Vertex
-from graph_utils import create_graph_kn
+from graph_utils import create_complete_graph_kn
 from graph_utils import create_graph_kregular
 
 def exemplo1():
-  graph = create_graph_kn(5)
+  graph = create_complete_graph_kn(5)
 
   graph.print_graph()
   
