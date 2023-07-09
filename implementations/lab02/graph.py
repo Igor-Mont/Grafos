@@ -358,7 +358,7 @@ class Graph:
     else:
       raise ValueError("One or both vertices do not exist in the graph.")
 
-  def is_set_disconnected(self, vertices_set):
+  def _is_set_disconnected(self, vertices_set):
     for vertex1 in vertices_set:
       for vertex2 in vertices_set:
         if self.has_edge(vertex1, vertex2):
@@ -366,11 +366,18 @@ class Graph:
     return True
 
   def is_bipartite_graph(self, set_1, set_2):
+    union_list = list(set(set_1).union(set_2))
+    union = sorted([vertex.data for vertex in union_list])
+    vertices = sorted(self.get_vertices())
+
+    if union != vertices:
+      return False
+      
     intersection_empty = len(list(set(set_1).intersection(set_2))) == 0
     if not intersection_empty:
       return False
 
-    if not self.is_set_disconnected(set_1) or not self.is_set_disconnected(set_2):
+    if not self._is_set_disconnected(set_1) or not self._is_set_disconnected(set_2):
       return False
     
     return True
