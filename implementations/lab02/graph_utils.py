@@ -1,7 +1,7 @@
 from graph import Graph
 from graph import Vertex
 
-def create_graph_kn(n_vertices):
+def create_complete_graph_kn(n_vertices):
   graph = Graph("list")
   for i in range(1, n_vertices+1):
     vertex = Vertex(i, i)
