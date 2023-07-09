@@ -81,6 +81,37 @@ def exemplo4():
   
   graph.print_graph()
   print("O grafo {} bipartido".format("é" if graph.is_bipartite_graph(X, Y) else "não é"))
+
+def exemplo5():
+  graph = Graph("list")
+
+  vertex1 = Vertex("A", 1)
+
+  graph.add_vertex(vertex1)
+  
+  X = {vertex1}
+  Y = { }
+  
+  graph.print_graph()
+  print("O grafo {} bipartido".format("é" if graph.is_bipartite_graph(X, Y) else "não é"))
+  
+def exemplo6():
+  graph = Graph("list")
+  
+  X = { }
+  Y = { }
+  
+  graph.print_graph()
+  print("O grafo {} bipartido".format("é" if graph.is_bipartite_graph(X, Y) else "não é"))
+  
+def exemplo6():
+  graph = Graph("list")
+  
+  X = { }
+  Y = { }
+  
+  graph.print_graph()
+  print("O grafo {} bipartido".format("é" if graph.is_bipartite_graph(X, Y) else "não é"))
   
 def main():
   print("EXEMPLO 1:\n")
@@ -91,6 +122,10 @@ def main():
   exemplo3()
   print("\nEXEMPLO 4:\n")
   exemplo4()
+  print("\nEXEMPLO 5:\n")
+  exemplo5()
+  print("\nEXEMPLO 6:\n")
+  exemplo6()
 
 if __name__ == "__main__":
   main()
