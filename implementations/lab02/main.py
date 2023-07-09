@@ -104,15 +104,6 @@ def exemplo6():
   graph.print_graph()
   print("O grafo {} bipartido".format("é" if graph.is_bipartite_graph(X, Y) else "não é"))
   
-def exemplo6():
-  graph = Graph("list")
-  
-  X = { }
-  Y = { }
-  
-  graph.print_graph()
-  print("O grafo {} bipartido".format("é" if graph.is_bipartite_graph(X, Y) else "não é"))
-  
 def main():
   print("EXEMPLO 1:\n")
   exemplo1()
