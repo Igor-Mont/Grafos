@@ -209,6 +209,12 @@ class Graph:
       if vertex.data == data:
         return vertex
     return None
+
+  def get_vertex_by_data(self, data):
+    if self.is_representation_list:
+      return self._get_vertex_by_data_list(data)
+    else:
+      return self._get_vertex_by_data_matrix(data)
   
   def _vertex_degree_matrix(self, index):
     for vertex in self.vertices_matrix:
@@ -251,6 +257,51 @@ class Graph:
         raise ValueError("Edge does not exist in the graph.")
     else:
       raise ValueError("One or both vertices do not exist in the graph.")
+  
+  def generate_subgraph(self, vertices, edges):
+    subgraph = Graph("list")
+    new_vertices = [Vertex(vertex.data, vertex.index) for vertex in vertices]
+
+    for vertex in new_vertices:
+      subgraph.add_vertex(vertex)
+    
+    new_edges = [(subgraph.get_vertex_by_data(vertex1.data), subgraph.get_vertex_by_data(vertex2.data)) for vertex1, vertex2 in edges]
+    for vertex1, vertex2 in new_edges:
+      v1 = self.get_vertex_by_data(vertex1.data)
+      v2 = self.get_vertex_by_data(vertex2.data)
+      if(self.has_edge(v1, v2)):
+        subgraph.add_edge(vertex1, vertex2)
+    
+    return subgraph
+
+  def induced_graph(self, vertices):
+    subgraph = Graph("list")
+    new_vertices = [Vertex(vertex.data, vertex.index) for vertex in vertices]
+
+    for vertex in new_vertices:
+      subgraph.add_vertex(vertex)
+    
+    for vertex_data_1, vertex_data_2 in self.get_edges():
+      v1 = self.get_vertex_by_data(vertex_data_1)
+      v2 = self.get_vertex_by_data(vertex_data_2)
+      vertices_subgraph = subgraph.get_vertices(only_data=False)
+      print("vertices", [vertex.data for vertex in vertices_subgraph])
+      vertex1 = subgraph.get_vertex_by_data(v1.data)
+      vertex2 = subgraph.get_vertex_by_data(v2.data)
+      if vertex1 in vertices_subgraph and vertex2 in vertices_subgraph:
+          if self.has_edge(v1, v2):
+            print("possui")
+            print(vertex1.data, vertex2.data)
+            subgraph.add_edge(vertex1, vertex2)
+    
+    return subgraph
+
+  # def vertex_subtraction(self, vertices):
+  #   subgraph = Graph("list")
+  #   new_vertices = [Vertex(vertex.data, vertex.index) for vertex in vertices]
+
+  #   for vertex in new_vertices:
+  #     subgraph.add_vertex(vertex)
 
   def print_graph(self):
     if self.is_representation_list:
@@ -285,3 +336,29 @@ class Graph:
         print(self.matrix[i][j], end=" ")
       print()
     print()
+  
+graph = Graph("list")
+
+vertex_a = Vertex("A", 1)
+vertex_b = Vertex("B", 2)
+vertex_c = Vertex("C", 3)
+vertex_d = Vertex("D", 4)
+
+graph.add_vertex(vertex_a)
+graph.add_vertex(vertex_b)
+graph.add_vertex(vertex_c)
+graph.add_vertex(vertex_d)
+
+graph.add_edge(vertex_a, vertex_b)
+graph.add_edge(vertex_a, vertex_c)
+graph.add_edge(vertex_a, vertex_d)
+graph.add_edge(vertex_b, vertex_c)
+graph.add_edge(vertex_b, vertex_d)
+graph.add_edge(vertex_c, vertex_d)
+
+vertices = [vertex_a, vertex_b, vertex_c]
+edges = [(vertex_a, vertex_b), (vertex_a, vertex_c), (vertex_b, vertex_c)]
+
+# subgraph = graph.generate_subgraph(vertices, edges)
+subgraph = graph.induced_graph(vertices)
+subgraph.print_graph()
