@@ -313,6 +313,33 @@ class Graph:
 
     return subgraph
 
+  def edge_subtraction(self, edges):
+    subgraph = Graph("list")
+    current_edges = [(vertex1.data, vertex2.data) for vertex1, vertex2 in edges]
+    
+    for edge in self.get_edges():
+      if not edge in current_edges:
+        vertex1_data, vertex2_data = edge
+        v1 = self.get_vertex_by_data(vertex1_data)
+        v2 = self.get_vertex_by_data(vertex2_data)
+        if not vertex1_data in subgraph.get_vertices():
+          new_vertex1 = Vertex(v1.data, v1.index)
+          subgraph.add_vertex(new_vertex1)
+        if not vertex2_data in subgraph.get_vertices():
+          new_vertex2 = Vertex(v2.data, v2.index)
+          subgraph.add_vertex(new_vertex2)
+
+    for vertex_data_1, vertex_data_2 in self.get_edges():
+      v1 = self.get_vertex_by_data(vertex_data_1)
+      v2 = self.get_vertex_by_data(vertex_data_2)
+      vertices_subgraph = subgraph.get_vertices(only_data=False)
+      vertex1 = subgraph.get_vertex_by_data(v1.data)
+      vertex2 = subgraph.get_vertex_by_data(v2.data)
+      if vertex1 in vertices_subgraph and vertex2 in vertices_subgraph:
+        subgraph.add_edge(vertex1, vertex2)
+
+    return subgraph
+
   def vertex_subtraction(self, vertices):
     subgraph = Graph("list")
     vertices_data = [vertex.data for vertex in vertices]
@@ -332,7 +359,6 @@ class Graph:
             subgraph.add_edge(vertex1, vertex2)
 
     return subgraph
-
 
   def print_graph(self):
     if self.is_representation_list:
@@ -393,5 +419,7 @@ edges = [(vertex_a, vertex_b), (vertex_b, vertex_c)]
 # subgraph = graph.generate_subgraph(vertices, edges)
 # subgraph = graph.induced_graph(vertices)
 # subgraph = graph.vertex_subtraction(vertices)
-subgraph = graph.edge_induced_graph(edges)
+# subgraph = graph.edge_induced_graph(edges)
+subgraph = graph.edge_subtraction(edges)
+graph.print_graph()
 subgraph.print_graph()
