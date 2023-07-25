@@ -393,33 +393,3 @@ class Graph:
         print(self.matrix[i][j], end=" ")
       print()
     print()
-  
-graph = Graph("list")
-
-vertex_a = Vertex("A", 1)
-vertex_b = Vertex("B", 2)
-vertex_c = Vertex("C", 3)
-vertex_d = Vertex("D", 4)
-vertex_e = Vertex("E", 5)
-
-graph.add_vertex(vertex_a)
-graph.add_vertex(vertex_b)
-graph.add_vertex(vertex_c)
-graph.add_vertex(vertex_d)
-graph.add_vertex(vertex_e)
-
-graph.add_edge(vertex_a, vertex_b)
-graph.add_edge(vertex_b, vertex_c)
-graph.add_edge(vertex_b, vertex_d)
-graph.add_edge(vertex_d, vertex_e)
-
-vertices = [vertex_b]
-edges = [(vertex_a, vertex_b), (vertex_b, vertex_c)]
-
-# subgraph = graph.generate_subgraph(vertices, edges)
-# subgraph = graph.induced_graph(vertices)
-# subgraph = graph.vertex_subtraction(vertices)
-# subgraph = graph.edge_induced_graph(edges)
-subgraph = graph.edge_subtraction(edges)
-graph.print_graph()
-subgraph.print_graph()
