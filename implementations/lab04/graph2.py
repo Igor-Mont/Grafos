@@ -6,7 +6,7 @@ class Vertex:
     self.index = index
     self.degree = 0
 
-class Graph:
+class Graph2:
   def __init__(self, representation_type):
     self.representation_type = representation_type
     self._edge_count = 0
@@ -259,7 +259,7 @@ class Graph:
       raise ValueError("One or both vertices do not exist in the graph.")
   
   def generate_subgraph(self, vertices, edges):
-    subgraph = Graph("list")
+    subgraph = Graph2("list")
     new_vertices = [Vertex(vertex.data, vertex.index) for vertex in vertices]
 
     for vertex in new_vertices:
@@ -275,7 +275,7 @@ class Graph:
     return subgraph
 
   def induced_graph(self, vertices):
-    subgraph = Graph("list")
+    subgraph = Graph2("list")
     new_vertices = [Vertex(vertex.data, vertex.index) for vertex in vertices]
 
     for vertex in new_vertices:
@@ -294,7 +294,7 @@ class Graph:
     return subgraph
 
   def edge_induced_graph(self, edges):
-    subgraph = Graph("list")
+    subgraph = Graph2("list")
     current_edges = [(vertex1.data, vertex2.data) for vertex1, vertex2 in edges]
     for edge in current_edges:
       data1, data2 = edge
@@ -313,7 +313,7 @@ class Graph:
     return subgraph
 
   def edge_subtraction(self, edges):
-    subgraph = Graph("list")
+    subgraph = Graph2("list")
     current_edges = [(vertex1.data, vertex2.data) for vertex1, vertex2 in edges]
     
     for edge in self.get_edges():
@@ -346,7 +346,7 @@ class Graph:
     return subgraph
   
   def vertex_subtraction(self, vertices):
-    subgraph = Graph("list")
+    subgraph = Graph2("list")
     vertices_data = [vertex.data for vertex in vertices]
     for vertex in self.get_vertices(only_data=False):
       if not vertex.data in vertices_data:
@@ -399,7 +399,7 @@ class Graph:
       print()
     print()
     
-graph = Graph("list")
+graph = Graph2("list")
 
 vertexX = Vertex("X", 1)
 vertexW = Vertex("W", 2)
@@ -428,8 +428,8 @@ graph.add_edge(vertexV, vertexU)
 # graph.print_graph();
 
 
-print("\nExemplo F\n")
+# print("\nExemplo F\n")
   
 E2 = [(vertexV, vertexU), (vertexW, vertexV), (vertexY, vertexV), (vertexY, vertexV)]
 subgraphInducedE2 = graph.edge_subtraction(E2)
-subgraphInducedE2.print_graph()
+# subgraphInducedE2.print_graph()

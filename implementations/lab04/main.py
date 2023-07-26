@@ -1,8 +1,8 @@
-from graph import Graph
+from graph2 import Graph2
 from graph import Vertex
 
 def main():
-  graph = Graph("list")
+  graph = Graph2("list")
 
   vertexX = Vertex("X", 1)
   vertexW = Vertex("W", 2)
@@ -28,53 +28,53 @@ def main():
   graph.add_edge(vertexY, vertexU)
    
   graph.add_edge(vertexV, vertexU) 
-  # print("\nGrafo Principal\n")
+  print("\nGrafo Principal\n")
 
-  # graph.print_graph();
+  graph.print_graph();
   
-  # # A)
-  # print("\nExemplo A\n")
+  # A)
+  print("\nExemplo A\n")
   
-  # Hx = [vertexX, vertexU, vertexY]
-  # He = [(vertexX, vertexY), (vertexY, vertexU)]
+  Hx = [vertexX, vertexU, vertexY, vertexW]
+  He = [(vertexX, vertexY), (vertexY, vertexU)]
   
-  # subgraphOwn = graph.generate_subgraph(Hx, He)
-  # subgraphOwn.print_graph()
+  subgraphOwn = graph.generate_subgraph(Hx, He)
+  subgraphOwn.print_graph()
     
-  # # B)
-  # print("\nExemplo B\n")
+  # B)
+  print("\nExemplo B\n")
   
-  # x = [vertexX, vertexU, vertexY, vertexV]
-  # subgraphInducedX = graph.induced_graph(x)
-  # subgraphInducedX.print_graph()
+  x = [vertexX, vertexU, vertexY, vertexV]
+  subgraphInducedX = graph.induced_graph(x)
+  subgraphInducedX.print_graph()
   
-  # # C)
-  # print("\nExemplo C\n")
+  # C)
+  print("\nExemplo C\n")
   
-  # x1 = [vertexY, vertexV, vertexX, vertexU]
-  # subgraphInducedX1 = graph.induced_graph(x1)
-  # subgraphInducedX1.print_graph()
+  x1 = [vertexY, vertexV, vertexX, vertexU]
+  subgraphInducedX1 = graph.induced_graph(x1)
+  subgraphInducedX1.print_graph()
   
-  # # D)
-  # print("\nExemplo D\n")
+  # D)
+  print("\nExemplo D\n")
   
-  # x2 = [vertexU, vertexW]
-  # subgraphInducedX2 = graph.vertex_subtraction(x2)
-  # subgraphInducedX2.print_graph()
+  x2 = [vertexU, vertexW]
+  subgraphInducedX2 = graph.vertex_subtraction(x2)
+  subgraphInducedX2.print_graph()
   
-  # # E)
+  # E)
   print("\nExemplo E\n")
   
-  E1 = [(vertexV, vertexU), (vertexX, vertexW), (vertexY, vertexU), (vertexY, vertexV), (vertexY, vertexV)]
+  E1 = [(vertexV, vertexU), (vertexX, vertexW), (vertexY, vertexU), (vertexY, vertexV)]
   subgraphInducedE1 = graph.edge_induced_graph(E1)
   subgraphInducedE1.print_graph();
   
-  # # F)
-  # print("\nExemplo F\n")
+  # F)
+  print("\nExemplo F\n")
   
-  # E2 = [(vertexV, vertexU), (vertexW, vertexV), (vertexY, vertexV)]
-  # subgraphInducedE2 = graph.edge_subtraction(E2)
-  # subgraphInducedE2.print_graph();
+  E2 = [(vertexV, vertexU), (vertexW, vertexV), (vertexY, vertexV)]
+  subgraphInducedE2 = graph.edge_subtraction(E2)
+  subgraphInducedE2.print_graph();
    
 
 if __name__ == "__main__":
