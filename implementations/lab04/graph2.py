@@ -297,6 +297,8 @@ class Graph2:
     subgraph = Graph2("list")
     current_edges = [(vertex1.data, vertex2.data) for vertex1, vertex2 in edges]
     for edge in current_edges:
+      if edge not in self.get_edges():
+        raise ValueError("Invalid Edge, one or more edges do not exist")
       data1, data2 = edge
       vertex1 = self.get_vertex_by_data(data1)
       vertex2 = self.get_vertex_by_data(data2)
