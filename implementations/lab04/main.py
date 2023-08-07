@@ -1,8 +1,8 @@
-from graph2 import Graph2
+from graph import Graph
 from graph import Vertex
 
 def main():
-  graph = Graph2("list")
+  graph = Graph("list")
 
   vertexX = Vertex("X", 1)
   vertexW = Vertex("W", 2)
@@ -44,7 +44,7 @@ def main():
   # B)
   print("\nExemplo B\n")
   
-  x = [vertexX, vertexU, vertexY, vertexV]
+  x = [vertexX, vertexY, vertexV]
   subgraphInducedX = graph.induced_graph(x)
   subgraphInducedX.print_graph()
   

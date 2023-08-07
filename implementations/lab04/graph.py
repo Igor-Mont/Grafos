@@ -296,20 +296,21 @@ class Graph:
   def edge_induced_graph(self, edges):
     subgraph = Graph("list")
     current_edges = [(vertex1.data, vertex2.data) for vertex1, vertex2 in edges]
-    for edge in self.get_edges():
-        if edge in current_edges:
-          data1, data2 = edge
-          vertex1 = self.get_vertex_by_data(data1)
-          vertex2 = self.get_vertex_by_data(data2)
-          v1 = subgraph.get_vertex_by_data(vertex1.data)
-          if not vertex1.data in subgraph.get_vertices():
-            v1 = Vertex(vertex1.data, vertex1.index)
-          v2 = subgraph.get_vertex_by_data(vertex2.data)
-          if not vertex2.data in subgraph.get_vertices():
-            v2 = Vertex(vertex2.data, vertex2.index)
-          subgraph.add_vertex(v1)
-          subgraph.add_vertex(v2)
-          subgraph.add_edge(v1, v2)
+    for edge in current_edges:
+      if edge not in self.get_edges():
+        raise ValueError("Invalid Edge, one or more edges do not exist")
+      data1, data2 = edge
+      vertex1 = self.get_vertex_by_data(data1)
+      vertex2 = self.get_vertex_by_data(data2)
+      v1 = subgraph.get_vertex_by_data(vertex1.data)
+      if not vertex1.data in subgraph.get_vertices():
+        v1 = Vertex(vertex1.data, vertex1.index)
+      v2 = subgraph.get_vertex_by_data(vertex2.data)
+      if not vertex2.data in subgraph.get_vertices():
+        v2 = Vertex(vertex2.data, vertex2.index)
+      subgraph.add_vertex(v1)
+      subgraph.add_vertex(v2)
+      subgraph.add_edge(v1, v2)
 
     return subgraph
 
@@ -318,28 +319,34 @@ class Graph:
     current_edges = [(vertex1.data, vertex2.data) for vertex1, vertex2 in edges]
     
     for edge in self.get_edges():
-      if not edge in current_edges:
-        vertex1_data, vertex2_data = edge
-        v1 = self.get_vertex_by_data(vertex1_data)
-        v2 = self.get_vertex_by_data(vertex2_data)
-        if not vertex1_data in subgraph.get_vertices():
-          new_vertex1 = Vertex(v1.data, v1.index)
-          subgraph.add_vertex(new_vertex1)
-        if not vertex2_data in subgraph.get_vertices():
-          new_vertex2 = Vertex(v2.data, v2.index)
-          subgraph.add_vertex(new_vertex2)
-
-    for vertex_data_1, vertex_data_2 in self.get_edges():
-      v1 = self.get_vertex_by_data(vertex_data_1)
-      v2 = self.get_vertex_by_data(vertex_data_2)
-      vertices_subgraph = subgraph.get_vertices(only_data=False)
-      vertex1 = subgraph.get_vertex_by_data(v1.data)
-      vertex2 = subgraph.get_vertex_by_data(v2.data)
-      if vertex1 in vertices_subgraph and vertex2 in vertices_subgraph:
-        subgraph.add_edge(vertex1, vertex2)
-
+      data1, data2 = edge
+      vertex1 = self.get_vertex_by_data(data1)
+      vertex2 = self.get_vertex_by_data(data2)
+      v1 = subgraph.get_vertex_by_data(vertex1.data)
+      if not vertex1.data in subgraph.get_vertices():
+        v1 = Vertex(vertex1.data, vertex1.index)
+      v2 = subgraph.get_vertex_by_data(vertex2.data)
+      if not vertex2.data in subgraph.get_vertices():
+        v2 = Vertex(vertex2.data, vertex2.index)
+      subgraph.add_vertex(v1)
+      subgraph.add_vertex(v2)
+      subgraph.add_edge(v1, v2)
+    
+    for edge in current_edges:
+      data1, data2 = edge
+      vertex1 = self.get_vertex_by_data(data1)
+      vertex2 = self.get_vertex_by_data(data2)
+      v1 = subgraph.get_vertex_by_data(vertex1.data)
+      v2 = subgraph.get_vertex_by_data(vertex2.data)
+      subgraph.remove_edge(v1, v2);  
+      
+    for vertex in subgraph.get_vertices():
+      v1 = subgraph.get_vertex_by_data(vertex)
+      if v1.degree == 0:
+        subgraph.adjacency_list.pop(v1)
+    
     return subgraph
-
+  
   def vertex_subtraction(self, vertices):
     subgraph = Graph("list")
     vertices_data = [vertex.data for vertex in vertices]
