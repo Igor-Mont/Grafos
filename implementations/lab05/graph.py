@@ -5,11 +5,34 @@ class Vertex:
     self.data = data
     self.index = index
     self.degree = 0
+    self._marked = False
+    self._entry_depth = 0
+    self._exit_depth = 0
+
+  def is_marked(self):
+    return self._marked
+
+  def set_marked(self, marked=True):
+    self._marked = marked
+  
+  def set_entry_depth(self, depth):
+    self._entry_depth = depth
+  
+  def set_exit_depth(self, depth):
+    self._exit_depth = depth
+
+  def get_entry_depth(self):
+    return self._entry_depth
+
+  def get_exit_depth(self):
+    return self._exit_depth
 
 class Graph:
   def __init__(self, representation_type):
     self.representation_type = representation_type
     self._edge_count = 0
+    self._dfs_entry_depth = 0
+    self._dfs_exit_depth = 0
     self.is_representation_list = representation_type == "list"
     if not self.is_representation_list:
       self.matrix = list()
@@ -27,6 +50,26 @@ class Graph:
       self._add_vertex_list(vertex)
     else:
       self._add_vertex_matrix(vertex)
+  
+  def get_entry_depth(self):
+    return self._dfs_entry_depth
+
+  def get_exit_depth(self):
+    return self._dfs_exit_depth
+  
+  def increment_entry_depth(self):
+    self._dfs_entry_depth += 1
+  
+  def increment_exit_depth(self):
+    self._dfs_exit_depth += 1
+  
+  def reset_marked_vertices(self):
+    for vertex in self.adjacency_list:
+      vertex.set_marked(False)
+  
+  def reset_depths(self):
+    self._entry_depth = 0
+    self._exit_depth = 0
     
   def _add_vertex_list(self, vertex):
     if vertex not in self.adjacency_list:
@@ -209,12 +252,6 @@ class Graph:
       if vertex.data == data:
         return vertex
     return None
-
-  def get_vertex_by_data(self, data):
-    if self.is_representation_list:
-      return self._get_vertex_by_data_list(data)
-    else:
-      return self._get_vertex_by_data_matrix(data)
   
   def _vertex_degree_matrix(self, index):
     for vertex in self.vertices_matrix:
@@ -257,7 +294,7 @@ class Graph:
         raise ValueError("Edge does not exist in the graph.")
     else:
       raise ValueError("One or both vertices do not exist in the graph.")
-  
+
   def print_graph(self):
     if self.is_representation_list:
       self._print_list()
@@ -272,7 +309,7 @@ class Graph:
     for vertex in self.adjacency_list:
       neighbors_data = [neighbor.data for neighbor in self.adjacency_list[vertex]]
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
-  
+     
   def _print_matrix(self):
     print("Matriz de adjacência")
     print("Quantidade de vertices:", len(self.get_vertices()))
@@ -292,6 +329,7 @@ class Graph:
       print()
     print()
 
+
 class Passeio:
   def __init__(self):
     self.k = 0
@@ -305,7 +343,7 @@ class Passeio:
       self._sequence.append(component)
       self.k += 1
     else:      
-      raise Exception("This component is neither a vertex nor an edge.")
+      raise Exception("This component is not a vertex.")
   
 def print_passeio(passeio):
   first = True
@@ -327,43 +365,86 @@ def section_passeio(passeio, i, j):
   section = sequence[i:j+1]
   if j + 1 > len(sequence):
     raise IndexError("List index out of range")
-  print([vertex.data for vertex in section])
   return section
+
+def check_edge_in_list(edge, list_edges):
+  reversed_edge = tuple(reversed(edge))
+  return edge in list_edges or reversed_edge in list_edges
+
+find = False
+def dfs(graph, start_vertex, end_vertex, passeio):
+  start_vertex.set_marked()
+  global find
+
+  for next_vertex in graph.adjacency_list[start_vertex]:
+    edge = (start_vertex.data, next_vertex.data)
+    if find:
+      return 
+
+    if not next_vertex.is_marked():
+      in_sequence_passeio = end_vertex.data in [vertex.data for vertex in passeio.get_sequence()]
+      print(end_vertex.data, end_vertex.data in edge, not in_sequence_passeio, [vertex.data for vertex in passeio.get_sequence()])
+      if end_vertex.data in edge and not in_sequence_passeio:
+        passeio.add_component(graph.get_vertex_by_data(edge[0]))
+        passeio.add_component(graph.get_vertex_by_data(edge[1]))
+        print(end_vertex.data, "in", edge)
+        find = True
+        return
+
+      print("Adicionando: ", edge, end_vertex.data in edge, not in_sequence_passeio)
+      passeio.add_component(graph.get_vertex_by_data(edge[0]))
+      passeio.add_component(graph.get_vertex_by_data(edge[1]))
+      dfs(graph, next_vertex, end_vertex, passeio)
+
+def depth_first_search(graph, start_vertex, end_vertex):
+  passeio = Passeio()
+  
+  dfs(graph, start_vertex, end_vertex, passeio)
+
+  graph.reset_marked_vertices()
+  print_passeio(passeio)
+
+def passeio_using_dfs(graph, v, x):
+  depth_first_search(graph, v, x)
 
 # passeio 
 graph = Graph("list")
 
-vertexX = Vertex("X", 1)
-vertexW = Vertex("W", 2)
-vertexV = Vertex("V", 3)
-vertexY = Vertex("Y", 4)
-vertexU = Vertex("U", 5)
+vertexA = Vertex("A", 1)
+vertexB = Vertex("B", 2)
+vertexC = Vertex("C", 3)
+vertexD = Vertex("D", 4)
+vertexE = Vertex("E", 5)
 
-graph.add_vertex(vertexX)
-graph.add_vertex(vertexW)
-graph.add_vertex(vertexV)
-graph.add_vertex(vertexY)
-graph.add_vertex(vertexU)
+graph.add_vertex(vertexA)
+graph.add_vertex(vertexB)
+graph.add_vertex(vertexC)
+graph.add_vertex(vertexD)
+graph.add_vertex(vertexE)
 
-graph.add_edge(vertexX, vertexY)
-graph.add_edge(vertexX, vertexW)
+graph.add_edge(vertexA, vertexB)
+graph.add_edge(vertexA, vertexD)
 
-graph.add_edge(vertexW, vertexY)  
-graph.add_edge(vertexW, vertexV)
+graph.add_edge(vertexB, vertexC)
+graph.add_edge(vertexB, vertexD)  
   
-graph.add_edge(vertexY, vertexV) 
-graph.add_edge(vertexY, vertexV) 
-graph.add_edge(vertexY, vertexU)
+graph.add_edge(vertexD, vertexC) 
+graph.add_edge(vertexD, vertexC) 
+graph.add_edge(vertexD, vertexE)
   
-graph.add_edge(vertexV, vertexU) 
+graph.add_edge(vertexC, vertexE) 
 
 passeio = Passeio()
-passeio.add_component(vertexX)
-passeio.add_component(vertexY)
-passeio.add_component(vertexW)
-passeio.add_component(vertexV)
+passeio.add_component(vertexA)
+passeio.add_component(vertexD)
+passeio.add_component(vertexB)
+passeio.add_component(vertexC)
 print_passeio(passeio)
 print_reversed_passeio(passeio)
-section_passeio(passeio, 0, 4)
+section = section_passeio(passeio, 0, 3)
+print([vertex.data for vertex in section])
+
+passeio_using_dfs(graph, vertexA, vertexE)
+
 
 
