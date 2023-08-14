@@ -371,42 +371,75 @@ def check_edge_in_list(edge, list_edges):
   reversed_edge = tuple(reversed(edge))
   return edge in list_edges or reversed_edge in list_edges
 
-find = False
-def dfs(graph, start_vertex, end_vertex, passeio):
+# find = False
+# def dfs(graph, start_vertex, end_vertex, passeio):
+#   start_vertex.set_marked()
+#   global find
+
+#   for next_vertex in graph.adjacency_list[start_vertex]:
+#     edge = (start_vertex.data, next_vertex.data)
+#     if find:
+#       return 
+
+#     if not next_vertex.is_marked():
+#       in_sequence_passeio = end_vertex.data in [vertex.data for vertex in passeio.get_sequence()]
+#       print(end_vertex.data, end_vertex.data in edge, not in_sequence_passeio, [vertex.data for vertex in passeio.get_sequence()])
+#       if end_vertex.data in edge and not in_sequence_passeio:
+#         passeio.add_component(graph.get_vertex_by_data(edge[0]))
+#         passeio.add_component(graph.get_vertex_by_data(edge[1]))
+#         print(end_vertex.data, "in", edge)
+#         find = True
+#         return
+
+#       print("Adicionando: ", edge, end_vertex.data in edge, not in_sequence_passeio)
+#       passeio.add_component(graph.get_vertex_by_data(edge[0]))
+#       passeio.add_component(graph.get_vertex_by_data(edge[1]))
+#       dfs(graph, next_vertex, end_vertex, passeio)
+
+# def depth_first_search(graph, start_vertex, end_vertex):
+#   passeio = Passeio()
+  
+#   dfs(graph, start_vertex, end_vertex, passeio)
+
+#   graph.reset_marked_vertices()
+#   print_passeio(passeio)
+
+# def passeio_using_dfs(graph, v, x):
+#   depth_first_search(graph, v, x)
+
+def check_edge_in_list(edge, list_edges):
+  reversed_edge = tuple(reversed(edge))
+  return edge in list_edges or reversed_edge in list_edges
+
+def dfs(graph, start_vertex, tree_edges):
   start_vertex.set_marked()
-  global find
 
   for next_vertex in graph.adjacency_list[start_vertex]:
     edge = (start_vertex.data, next_vertex.data)
-    if find:
-      return 
 
     if not next_vertex.is_marked():
-      in_sequence_passeio = end_vertex.data in [vertex.data for vertex in passeio.get_sequence()]
-      print(end_vertex.data, end_vertex.data in edge, not in_sequence_passeio, [vertex.data for vertex in passeio.get_sequence()])
-      if end_vertex.data in edge and not in_sequence_passeio:
-        passeio.add_component(graph.get_vertex_by_data(edge[0]))
-        passeio.add_component(graph.get_vertex_by_data(edge[1]))
-        print(end_vertex.data, "in", edge)
-        find = True
-        return
+      tree_edges.append(edge)
+      dfs(graph, next_vertex, tree_edges)
+# 5.6
+def caminho_using_dfs(graph, start_vertex, end_vertex):
+  tree_edges = list()
+  dfs(graph, start_vertex, tree_edges)
+  caminho = list()
 
-      print("Adicionando: ", edge, end_vertex.data in edge, not in_sequence_passeio)
-      passeio.add_component(graph.get_vertex_by_data(edge[0]))
-      passeio.add_component(graph.get_vertex_by_data(edge[1]))
-      dfs(graph, next_vertex, end_vertex, passeio)
+  if start_vertex.data == end_vertex.data:
+    return [start_vertex.data]
 
-def depth_first_search(graph, start_vertex, end_vertex):
-  passeio = Passeio()
-  
-  dfs(graph, start_vertex, end_vertex, passeio)
+  for i, edge in enumerate(tree_edges):
+    if edge[1] == end_vertex.data:
+      caminho = tree_edges[:i+1]
 
   graph.reset_marked_vertices()
-  print_passeio(passeio)
 
-def passeio_using_dfs(graph, v, x):
-  depth_first_search(graph, v, x)
+  return [v for v, _ in caminho]
 
+
+# def extra2(passeio, start_vertex, end_vertex):
+  
 # passeio 
 graph = Graph("list")
 
@@ -422,15 +455,15 @@ graph.add_vertex(vertexC)
 graph.add_vertex(vertexD)
 graph.add_vertex(vertexE)
 
-graph.add_edge(vertexA, vertexB)
 graph.add_edge(vertexA, vertexD)
+graph.add_edge(vertexA, vertexB)
 
-graph.add_edge(vertexB, vertexC)
 graph.add_edge(vertexB, vertexD)  
+graph.add_edge(vertexB, vertexC)
   
 graph.add_edge(vertexD, vertexC) 
-graph.add_edge(vertexD, vertexC) 
 graph.add_edge(vertexD, vertexE)
+graph.add_edge(vertexD, vertexC) 
   
 graph.add_edge(vertexC, vertexE) 
 
@@ -444,7 +477,8 @@ print_reversed_passeio(passeio)
 section = section_passeio(passeio, 0, 3)
 print([vertex.data for vertex in section])
 
-passeio_using_dfs(graph, vertexA, vertexE)
+# passeio_using_dfs(graph, vertexA, vertexE)
+print(caminho_using_dfs(graph, vertexA, vertexA))
 
 
 
