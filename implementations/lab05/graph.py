@@ -372,30 +372,38 @@ def check_edge_in_list(edge, list_edges):
   return edge in list_edges or reversed_edge in list_edges
 
 def dfs_passeio(graph, start_vertex, passeio, end_vertex):
-  passeio.add_component(start_vertex)
   start_vertex.set_marked()
 
   for next_vertex in graph.adjacency_list[start_vertex]:
-    passeio.add_component(next_vertex)
     if not next_vertex.is_marked():
+      passeio.add_component(start_vertex)
       dfs_passeio(graph, next_vertex, passeio, end_vertex)
-    passeio.add_component(next_vertex)
-  # passeio.add_component(start_vertex)
+  passeio.add_component(start_vertex)
   
 def passeio_using_dfs(graph, start_vertex, end_vertex):
   passeio = Passeio()
   
   dfs_passeio(graph, start_vertex, passeio, end_vertex)
+  passeio_to_end_vertex = Passeio()
+  sequence_passeio = passeio.get_sequence()
+  to_i = 0
+  for i in range(passeio.k - 1, -1, -1):
+    if sequence_passeio[i].data == end_vertex.data:
+      to_i = i
+      break
+  
+  for i in range(to_i + 1):
+    passeio_to_end_vertex.add_component(sequence_passeio[i])
 
   graph.reset_marked_vertices()
-  print_passeio(passeio)
+  return passeio_to_end_vertex
 
 # marcou adicionou e adiciona na iteração 
 def check_edge_in_list(edge, list_edges):
   reversed_edge = tuple(reversed(edge))
   return edge in list_edges or reversed_edge in list_edges
 
-def dfs(graph, start_vertex, tree_edges):
+def dfs_caminho(graph, start_vertex, tree_edges):
   start_vertex.set_marked()
 
   for next_vertex in graph.adjacency_list[start_vertex]:
@@ -403,11 +411,11 @@ def dfs(graph, start_vertex, tree_edges):
 
     if not next_vertex.is_marked():
       tree_edges.append(edge)
-      dfs(graph, next_vertex, tree_edges)
+      dfs_caminho(graph, next_vertex, tree_edges)
 
 def caminho_using_dfs(graph, start_vertex, end_vertex):
   tree_edges = list()
-  dfs(graph, start_vertex, tree_edges)
+  dfs_caminho(graph, start_vertex, tree_edges)
   caminho = list()
 
   if start_vertex.data == end_vertex.data:
@@ -421,7 +429,31 @@ def caminho_using_dfs(graph, start_vertex, end_vertex):
   graph.reset_marked_vertices()
   return [v for v, _ in caminho] + [end_vertex.data]
 
+def dfs_cycle(graph, start_vertex, recursion_stack):
+  start_vertex.set_marked()
+  recursion_stack[start_vertex.index] = True
+
+  for next_vertex in graph.adjacency_list[start_vertex]:
+    if not next_vertex.is_marked():
+      if dfs_cycle(graph, next_vertex, recursion_stack):
+        return True
+    elif recursion_stack[start_vertex.index]:
+      return True
   
+  recursion_stack[start_vertex.index] = False
+  return False
+
+def has_cycle(graph):
+  len_graph = len(graph.adjacency_list)
+  recursion_stack = [False] * len_graph
+
+  for i in range(len_graph):
+    if not list(graph.adjacency_list.keys())[i].is_marked():
+      if dfs_cycle(graph, list(graph.adjacency_list.keys())[i], recursion_stack):
+        return True
+  
+  return False
+
 graph = Graph("list")
 
 vertexA = Vertex("A", 1)
@@ -458,8 +490,8 @@ passeio.add_component(vertexC)
 section = section_passeio(passeio, 0, 3)
 # print([vertex.data for vertex in section])
 
-passeio_using_dfs(graph, vertexA, vertexE)
-# print(caminho_using_dfs(graph, vertexA, vertexE))
-
+print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
+print(caminho_using_dfs(graph, vertexA, vertexE))
+print(has_cycle(graph))
 
 
