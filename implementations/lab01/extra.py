@@ -25,7 +25,7 @@ class GrafoGUI:
       vertex = list(self.graph.vertices_matrix)[self.actual_count]
     x, y = event.x, event.y
     self.positions.append((x, y))
-    self.desenhar_vertice(x, y, vertex.index)
+    self.desenhar_vertice(x, y, vertex.data)
     self.actual_count += 1
 
     if self.actual_count == len(self.strucuture):
@@ -93,60 +93,20 @@ class GrafoGUI:
           else:
             self.canvas.create_line(x1, y1, x2, y2, fill="black", tags="arestas")
 
-graph = Graph("list") 
+graph = Graph("list")
 
-vertex_a = Vertex("A", 1)
-vertex_b = Vertex("B", 2)
-vertex_c = Vertex("C", 3)
-vertex_d = Vertex("D", 4)
-vertex_e = Vertex("E", 5) 
+vertexA = Vertex("A", 1)
+vertexB = Vertex("B", 2)
+vertexC = Vertex("C", 3)
+vertexE = Vertex("E", 4)
 
-graph.add_vertex(vertex_a)
-graph.add_vertex(vertex_b)
-graph.add_vertex(vertex_c)
-graph.add_vertex(vertex_d)
-graph.add_vertex(vertex_e)
+graph.add_vertex(vertexA)
+graph.add_vertex(vertexB)
+graph.add_vertex(vertexC)
+graph.add_vertex(vertexE)
 
-graph.add_edge(vertex_a, vertex_b)
-graph.add_edge(vertex_b, vertex_c)
-graph.add_edge(vertex_b, vertex_d)
-graph.add_edge(vertex_b, vertex_e)
-graph.add_edge(vertex_b, vertex_e)
-# Teste com mais de uma aresta paralelas
-# graph.add_edge(vertex_b, vertex_e)
-# graph.add_edge(vertex_b, vertex_e)
-# graph.add_edge(vertex_b, vertex_e)
-graph.add_edge(vertex_c, vertex_c)
-# Teste com mais de um laço
-# graph.add_edge(vertex_c, vertex_c)
-# graph.add_edge(vertex_c, vertex_c)
-graph.add_edge(vertex_c, vertex_d)
-graph.add_edge(vertex_d, vertex_e)
-
-graph2 = Graph("matrix")
-
-vertex1 = Vertex("A", 1)
-vertex2 = Vertex("B", 2)
-vertex3 = Vertex("C", 3)
-vertex4 = Vertex("D", 4)
-vertex5 = Vertex("E", 5) 
-
-graph2.add_vertex(vertex1)
-graph2.add_vertex(vertex2)
-graph2.add_vertex(vertex3)
-graph2.add_vertex(vertex4)
-graph2.add_vertex(vertex5)
-
-graph2.add_edge(vertex1, vertex2)
-graph2.add_edge(vertex1, vertex3)
-graph2.add_edge(vertex1, vertex4)
-graph2.add_edge(vertex1, vertex5)
-graph2.add_edge(vertex2, vertex3)
-graph2.add_edge(vertex2, vertex4)
-graph2.add_edge(vertex2, vertex5)
-graph2.add_edge(vertex3, vertex4)
-graph2.add_edge(vertex3, vertex5)
-graph2.add_edge(vertex4, vertex5)
+graph.add_edge(vertexA, vertexB)
+graph.add_edge(vertexB, vertexC)
+graph.add_edge(vertexC, vertexE) 
 
 grafo_gui = GrafoGUI(graph) 
-grafo_gui2 = GrafoGUI(graph2) 

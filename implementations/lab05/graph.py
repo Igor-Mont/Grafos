@@ -429,31 +429,52 @@ def caminho_using_dfs(graph, start_vertex, end_vertex):
   graph.reset_marked_vertices()
   return [v for v, _ in caminho] + [end_vertex.data]
 
-def dfs_cycle(graph, start_vertex, recursion_stack):
+def check_edge_in_list(edge, list_edges):
+  reversed_edge = tuple(reversed(edge))
+  return edge in list_edges or reversed_edge in list_edges
+
+def dfs(graph, start_vertex, tree_edges, return_edges): #5.7
   start_vertex.set_marked()
-  recursion_stack[start_vertex.index] = True
+  print(start_vertex.index)
+
+  for next_vertex in graph.adjacency_list[start_vertex]:
+    edge = (start_vertex.data, next_vertex.data)
+    is_returned_edge = check_edge_in_list(edge, return_edges)
+
+    if not next_vertex.is_marked():
+      tree_edges.append(edge)
+      dfs(graph, next_vertex, tree_edges, return_edges)
+    elif not check_edge_in_list(edge, tree_edges) and not is_returned_edge:
+      return_edges.append(edge)
+
+def dfs_cycle(graph, start_vertex): #5.7
+  tree_edges = list()
+  return_edges = list()
+  dfs(graph, start_vertex, tree_edges, return_edges)
+  
+  if return_edges:
+     print("O grafo contem ciclos")
+  else:
+      print("O grafo nao contem ciclos")
+      
+def dfs_connected(graph, start_vertex, visited): #5.12
+  start_vertex.set_marked()
+  visited[start_vertex.index-1] = True
 
   for next_vertex in graph.adjacency_list[start_vertex]:
     if not next_vertex.is_marked():
-      if dfs_cycle(graph, next_vertex, recursion_stack):
-        return True
-    elif recursion_stack[start_vertex.index]:
-      return True
+      dfs_connected(graph, next_vertex, visited)
+      
+def is_connected(graph, start_vertex): #5.12
+  visited = [False] * len(graph.adjacency_list)
+  dfs_connected(graph, start_vertex, visited)
+  print(visited)
+ 
+  if all(visited):
+     print("O grafo e conexo")
+  else:
+      print("O grafo nao e conexo")
   
-  recursion_stack[start_vertex.index] = False
-  return False
-
-def has_cycle(graph):
-  len_graph = len(graph.adjacency_list)
-  recursion_stack = [False] * len_graph
-
-  for i in range(len_graph):
-    if not list(graph.adjacency_list.keys())[i].is_marked():
-      if dfs_cycle(graph, list(graph.adjacency_list.keys())[i], recursion_stack):
-        return True
-  
-  return False
-
 graph = Graph("list")
 
 vertexA = Vertex("A", 1)
@@ -461,12 +482,16 @@ vertexB = Vertex("B", 2)
 vertexC = Vertex("C", 3)
 vertexD = Vertex("D", 4)
 vertexE = Vertex("E", 5)
+vertexF = Vertex("F", 6)
+vertexG = Vertex("G", 7)
 
 graph.add_vertex(vertexA)
 graph.add_vertex(vertexB)
 graph.add_vertex(vertexC)
 graph.add_vertex(vertexD)
 graph.add_vertex(vertexE)
+graph.add_vertex(vertexF)
+graph.add_vertex(vertexG)
 
 graph.add_edge(vertexA, vertexD)
 graph.add_edge(vertexA, vertexB)
@@ -478,20 +503,28 @@ graph.add_edge(vertexD, vertexC)
 graph.add_edge(vertexD, vertexE)
 graph.add_edge(vertexD, vertexC) 
   
-graph.add_edge(vertexC, vertexE) 
+graph.add_edge(vertexC, vertexE)
+# graph.add_edge(vertexE, vertexG)
+graph.add_edge(vertexF, vertexG)
 
 passeio = Passeio()
 passeio.add_component(vertexA)
-passeio.add_component(vertexD)
+# passeio.add_component(vertexD)
 passeio.add_component(vertexB)
 passeio.add_component(vertexC)
 # print_passeio(passeio)
 # print_reversed_passeio(passeio)
-section = section_passeio(passeio, 0, 3)
+section = section_passeio(passeio, 0, 2)
 # print([vertex.data for vertex in section])
 
 print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
 print(caminho_using_dfs(graph, vertexA, vertexE))
-print(has_cycle(graph))
+# dfs_cycle(graph, vertexC)
+# is_connected(graph, vertexA)
+
+is_connected(graph, vertexA)
+#     print("O grafo e conexo.")
+# else:
+#     print("O grafo nao e conexo.")
 
 
