@@ -433,27 +433,28 @@ def check_edge_in_list(edge, list_edges):
   reversed_edge = tuple(reversed(edge))
   return edge in list_edges or reversed_edge in list_edges
 
-def dfs(graph, start_vertex, tree_edges, return_edges): #5.7
+def dfs(graph, start_vertex, cycle_edges, cycle_found, parent_vertex): #5.7
   start_vertex.set_marked()
-  print(start_vertex.index)
 
   for next_vertex in graph.adjacency_list[start_vertex]:
     edge = (start_vertex.data, next_vertex.data)
-    is_returned_edge = check_edge_in_list(edge, return_edges)
-
-    if not next_vertex.is_marked():
-      tree_edges.append(edge)
-      dfs(graph, next_vertex, tree_edges, return_edges)
-    elif not check_edge_in_list(edge, tree_edges) and not is_returned_edge:
-      return_edges.append(edge)
+    if not cycle_found:
+            edge = (start_vertex.data, next_vertex.data)
+            if not next_vertex.is_marked():
+                dfs(graph, next_vertex, cycle_edges, cycle_found, start_vertex)
+            elif next_vertex != parent_vertex:
+                cycle_found = True
+                cycle_edges.append(edge)
 
 def dfs_cycle(graph, start_vertex): #5.7
-  tree_edges = list()
-  return_edges = list()
-  dfs(graph, start_vertex, tree_edges, return_edges)
+  cycle_edges = list()
+  dfs(graph, start_vertex, cycle_edges, False, None)
   
-  if return_edges:
-     print("O grafo contem ciclos")
+  graph.reset_marked_vertices()
+  if cycle_edges:
+      cycle_str = " -> ".join(f"{edge[0]}-{edge[1]}" for edge in cycle_edges)
+      print("O grafo contem ciclo:")
+      print(cycle_str)
   else:
       print("O grafo nao contem ciclos")
       
@@ -468,8 +469,8 @@ def dfs_connected(graph, start_vertex, visited): #5.12
 def is_connected(graph, start_vertex): #5.12
   visited = [False] * len(graph.adjacency_list)
   dfs_connected(graph, start_vertex, visited)
-  print(visited)
- 
+  # print(visited)
+  graph.reset_marked_vertices()
   if all(visited):
      print("O grafo e conexo")
   else:
@@ -504,7 +505,7 @@ graph.add_edge(vertexD, vertexE)
 graph.add_edge(vertexD, vertexC) 
   
 graph.add_edge(vertexC, vertexE)
-# graph.add_edge(vertexE, vertexG)
+graph.add_edge(vertexE, vertexG)
 graph.add_edge(vertexF, vertexG)
 
 passeio = Passeio()
@@ -519,7 +520,7 @@ section = section_passeio(passeio, 0, 2)
 
 print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
 print(caminho_using_dfs(graph, vertexA, vertexE))
-# dfs_cycle(graph, vertexC)
+dfs_cycle(graph, vertexA)
 # is_connected(graph, vertexA)
 
 is_connected(graph, vertexA)
