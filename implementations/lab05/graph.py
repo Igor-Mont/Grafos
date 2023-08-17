@@ -473,7 +473,78 @@ def is_connected(graph, start_vertex): #5.12
      print("O grafo e conexo")
   else:
       print("O grafo nao e conexo")
+
+def imprimir_dicionario(dicionario):
+  for chave, valor in dicionario.items():
+    print(f'{chave.data}: {valor}')
+
+def all_values_are_one(controller):
+  return all(value == 1 for value in controller.values())
+
+def find_last_index(body, current_key):
+  try:
+    last_index = len(body) - 1 - list(reversed(body)).index(current_key)
+    return last_index
+  except ValueError:
+    return None
+
+
+def extra2(u, v, passeio):
+  vertices_passeio = passeio.get_sequence()
+  if u not in vertices_passeio or v not in vertices_passeio:
+    return None
   
+  index_u = vertices_passeio.index(u)
+  index_v = vertices_passeio.index(v)
+
+  caminho = vertices_passeio[index_u:index_v+1]
+  all_vertices_diff = len(set(caminho)) == len(caminho)
+
+  if all_vertices_diff:
+    return caminho
+  
+  head = caminho[0]
+  tail = caminho[-1]
+  body = caminho[1:len(caminho) - 1]
+
+  controller = dict()
+
+  for vertex in body:
+    if vertex in list(controller.keys()):
+      controller[vertex] += 1
+    else:
+      controller[vertex] = 1
+
+  while(not all_values_are_one(controller)):
+    current_key = None
+    for key, value in controller.items():
+      if value > 1:
+        current_key = key
+        break
+    imprimir_dicionario(controller)
+    # print("CHAVE ATUAL", current_key.data)
+    # print("body atual:", [vertex.data for vertex in body])
+    if current_key not in body:
+      break
+
+    first_index = body.index(current_key)
+    last_index = find_last_index(body, current_key)
+    body = body[0:first_index + 1] + body[last_index + 1:]
+    # print("First index:", first_index, "Last index:", last_index, "body:", [vertex.data for vertex in body])
+    controller[current_key] -= 1
+
+  body.insert(0, head)  
+  body.append(tail)
+  print("Passeio: ", end="")  
+  print_passeio(passeio)
+  print("Passeio entre u e v: ", end="") 
+  print([vertex.data for vertex in caminho])
+  print("Caminho entre u e v: ", end="") 
+  caminho = body
+  print([vertex.data for vertex in caminho])
+
+  return caminho
+
 graph = Graph("list")
 
 vertexA = Vertex("A", 1)
@@ -511,17 +582,38 @@ passeio.add_component(vertexA)
 # passeio.add_component(vertexD)
 passeio.add_component(vertexB)
 passeio.add_component(vertexC)
+
+
+passeio_extra = Passeio()
+passeio_extra.add_component(vertexA)
+passeio_extra.add_component(vertexB)
+passeio_extra.add_component(vertexD)
+passeio_extra.add_component(vertexB)
+passeio_extra.add_component(vertexD)
+passeio_extra.add_component(vertexB)
+passeio_extra.add_component(vertexA)
+passeio_extra.add_component(vertexC)
+passeio_extra.add_component(vertexD)
+passeio_extra.add_component(vertexE)
+passeio_extra.add_component(vertexD)
+passeio_extra.add_component(vertexE)
+passeio_extra.add_component(vertexC)
+passeio_extra.add_component(vertexB)
+passeio_extra.add_component(vertexA)
+
+extra2(vertexA, vertexC, passeio_extra)
+
 # print_passeio(passeio)
 # print_reversed_passeio(passeio)
-section = section_passeio(passeio, 0, 2)
+# section = section_passeio(passeio, 0, 2)
 # print([vertex.data for vertex in section])
 
-print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
-print(caminho_using_dfs(graph, vertexA, vertexE))
-dfs_cycle(graph, vertexC)
+# print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
+# print(caminho_using_dfs(graph, vertexA, vertexE))
+# dfs_cycle(graph, vertexC)
 # is_connected(graph, vertexA)
 
-is_connected(graph, vertexA)
+# is_connected(graph, vertexA)
 #     print("O grafo e conexo.")
 # else:
 #     print("O grafo nao e conexo.")
