@@ -437,15 +437,22 @@ def dfs(graph, start_vertex, return_edges, cycle): #5.7
 
   for next_vertex in graph.adjacency_list[start_vertex]:
     edge = (start_vertex.data, next_vertex.data)
-    # print(edge)
     if not next_vertex.is_marked() and not cycle["cycle_found"]:
       cycle["cycle"].append(edge)
       dfs(graph, next_vertex, return_edges, cycle)
     elif not check_edge_in_list(edge, cycle["cycle"]):
+      if cycle["cycle_found"]:
+        return  
       cycle["cycle_found"] = True
       cycle["cycle"].append(edge)
-      return
-      
+
+def find_last_index(body, current_key):
+  try:
+    last_index = len(body) - 1 - list(reversed(body)).index(current_key)
+    return last_index
+  except ValueError:
+    return None
+
 def dfs_cycle(graph, start_vertex): #5.7
   return_edges = list()
   cycle_info = {"cycle": list(), "cycle_found": False}
@@ -454,10 +461,19 @@ def dfs_cycle(graph, start_vertex): #5.7
   graph.reset_marked_vertices()
   
   if cycle_info["cycle_found"]:
-     print("O grafo contem ciclos")
-     print(cycle_info["cycle"])
+    edges = list(cycle_info["cycle"])
+    for i, start_edge in enumerate(edges):
+      for _, end_edge in enumerate(edges[i + 1:]):
+        print(start_edge, end_edge)
+        if start_edge[0] == end_edge[1]:
+          start = edges.index(start_edge)
+          cycle_info["cycle"] = edges[start:]
+          break
+
+    print("O grafo contem ciclos")
+    print(cycle_info["cycle"])
   else:
-      print("O grafo nao contem ciclos")
+    print("O grafo nao contem ciclos")
       
 def dfs_connected(graph, start_vertex, visited): #5.12
   start_vertex.set_marked()
@@ -483,13 +499,6 @@ def imprimir_dicionario(dicionario):
 
 def all_values_are_one(controller):
   return all(value == 1 for value in controller.values())
-
-def find_last_index(body, current_key):
-  try:
-    last_index = len(body) - 1 - list(reversed(body)).index(current_key)
-    return last_index
-  except ValueError:
-    return None
 
 def extra2(u, v, passeio):
   vertices_passeio = passeio.get_sequence()
@@ -602,16 +611,16 @@ passeio_extra.add_component(vertexC)
 passeio_extra.add_component(vertexB)
 passeio_extra.add_component(vertexA)
 
-extra2(vertexA, vertexC, passeio_extra)
+# extra2(vertexA, vertexC, passeio_extra)
 
 # print_passeio(passeio)
 # print_reversed_passeio(passeio)
 # section = section_passeio(passeio, 0, 2)
 # print([vertex.data for vertex in section])
 
-print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
-print(caminho_using_dfs(graph, vertexA, vertexE))
-dfs_cycle(graph, vertexA)
+# print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
+# print(caminho_using_dfs(graph, vertexA, vertexE))
+dfs_cycle(graph, vertexF)
 # is_connected(graph, vertexA)
 
 # is_connected(graph, vertexA)
