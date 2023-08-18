@@ -434,11 +434,18 @@ def check_edge_in_list(edge, list_edges):
 
 def dfs(graph, start_vertex, cycle): #5.7
   start_vertex.set_marked()
-
+  first_iteration = True
   for next_vertex in graph.adjacency_list[start_vertex]:
     edge = (start_vertex.data, next_vertex.data)
     if not next_vertex.is_marked() and not cycle["cycle_found"]:
-      cycle["cycle"].append(edge)
+      if first_iteration:
+        first_iteration = False
+        cycle["cycle"].append(edge)
+      else:
+        while edge[0] != cycle["cycle"][-1][1]:
+          cycle["cycle"].pop()
+        cycle["cycle"].append(edge)
+          
       dfs(graph, next_vertex, cycle)
     elif not check_edge_in_list(edge, cycle["cycle"]):
       if cycle["cycle_found"]:
@@ -560,6 +567,8 @@ vertexE = Vertex("E", 5)
 vertexF = Vertex("F", 6)
 vertexG = Vertex("G", 7)
 vertexH = Vertex("H", 8)
+vertexI = Vertex("I", 9)
+vertexJ = Vertex("J", 10)
 
 graph.add_vertex(vertexA)
 graph.add_vertex(vertexB)
@@ -569,6 +578,8 @@ graph.add_vertex(vertexE)
 graph.add_vertex(vertexF)
 graph.add_vertex(vertexG)
 graph.add_vertex(vertexH)
+graph.add_vertex(vertexI)
+graph.add_vertex(vertexJ)
 
 graph.add_edge(vertexA, vertexB)
 graph.add_edge(vertexA, vertexC)
@@ -576,6 +587,7 @@ graph.add_edge(vertexA, vertexE)
 graph.add_edge(vertexA, vertexF)
 
 graph.add_edge(vertexB, vertexD)
+graph.add_edge(vertexD, vertexI)
 graph.add_edge(vertexB, vertexE)
 
 graph.add_edge(vertexC, vertexF)
@@ -586,6 +598,7 @@ graph.add_edge(vertexG, vertexF)
 graph.add_edge(vertexF, vertexH)
 
 graph.add_edge(vertexG, vertexH)
+graph.add_edge(vertexB, vertexJ)
 # graph.add_edge(vertexD, vertexE)
   
 # graph.add_edge(vertexC, vertexE)
