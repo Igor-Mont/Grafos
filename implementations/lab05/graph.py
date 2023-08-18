@@ -398,7 +398,6 @@ def passeio_using_dfs(graph, start_vertex, end_vertex):
   graph.reset_marked_vertices()
   return passeio_to_end_vertex
 
-# marcou adicionou e adiciona na iteração 
 def check_edge_in_list(edge, list_edges):
   reversed_edge = tuple(reversed(edge))
   return edge in list_edges or reversed_edge in list_edges
@@ -492,16 +491,15 @@ def find_last_index(body, current_key):
   except ValueError:
     return None
 
-
 def extra2(u, v, passeio):
   vertices_passeio = passeio.get_sequence()
   if u not in vertices_passeio or v not in vertices_passeio:
     return None
-  
-  index_u =  find_last_index(vertices_passeio, u)
-  index_v = vertices_passeio.index(v)
 
-  caminho = vertices_passeio[index_u:index_v+1]
+  index_v = vertices_passeio.index(v)
+  caminho = vertices_passeio[:index_v + 1]
+  index_u = find_last_index(caminho, u)
+  caminho = caminho[index_u:]
   all_vertices_diff = len(set(caminho)) == len(caminho)
 
   if all_vertices_diff:
@@ -519,22 +517,18 @@ def extra2(u, v, passeio):
     else:
       controller[vertex] = 1
 
-  while(not all_values_are_one(controller)):
+  while (not all_values_are_one(controller)):
     current_key = None
     for key, value in controller.items():
       if value > 1:
         current_key = key
         break
-    imprimir_dicionario(controller)
-    # print("CHAVE ATUAL", current_key.data)
-    # print("body atual:", [vertex.data for vertex in body])
     if current_key not in body:
       break
 
     first_index = body.index(current_key)
     last_index = find_last_index(body, current_key)
     body = body[0:first_index + 1] + body[last_index + 1:]
-    # print("First index:", first_index, "Last index:", last_index, "body:", [vertex.data for vertex in body])
     controller[current_key] -= 1
 
   body.insert(0, head)  
@@ -592,9 +586,12 @@ passeio_extra = Passeio()
 passeio_extra.add_component(vertexA)
 passeio_extra.add_component(vertexB)
 passeio_extra.add_component(vertexD)
+passeio_extra.add_component(vertexA)
 passeio_extra.add_component(vertexB)
 passeio_extra.add_component(vertexD)
 passeio_extra.add_component(vertexB)
+passeio_extra.add_component(vertexD)
+passeio_extra.add_component(vertexC)
 passeio_extra.add_component(vertexA)
 passeio_extra.add_component(vertexC)
 passeio_extra.add_component(vertexD)
