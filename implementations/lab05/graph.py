@@ -494,7 +494,7 @@ def extra2(u, v, passeio):
   if u not in vertices_passeio or v not in vertices_passeio:
     return None
   
-  index_u = vertices_passeio.index(u)
+  index_u =  find_last_index(vertices_passeio, u)
   index_v = vertices_passeio.index(v)
 
   caminho = vertices_passeio[index_u:index_v+1]
