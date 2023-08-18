@@ -559,6 +559,7 @@ vertexD = Vertex("D", 4)
 vertexE = Vertex("E", 5)
 vertexF = Vertex("F", 6)
 vertexG = Vertex("G", 7)
+vertexH = Vertex("H", 8)
 
 graph.add_vertex(vertexA)
 graph.add_vertex(vertexB)
@@ -567,20 +568,27 @@ graph.add_vertex(vertexD)
 graph.add_vertex(vertexE)
 graph.add_vertex(vertexF)
 graph.add_vertex(vertexG)
+graph.add_vertex(vertexH)
 
-graph.add_edge(vertexA, vertexD)
 graph.add_edge(vertexA, vertexB)
+graph.add_edge(vertexA, vertexC)
+graph.add_edge(vertexA, vertexE)
+graph.add_edge(vertexA, vertexF)
 
-graph.add_edge(vertexB, vertexD)  
-graph.add_edge(vertexB, vertexC)
+graph.add_edge(vertexB, vertexD)
+graph.add_edge(vertexB, vertexE)
+
+graph.add_edge(vertexC, vertexF)
+graph.add_edge(vertexC, vertexG)
+graph.add_edge(vertexC, vertexH)
+
+graph.add_edge(vertexG, vertexF)
+graph.add_edge(vertexF, vertexH)
+
+graph.add_edge(vertexG, vertexH)
+# graph.add_edge(vertexD, vertexE)
   
-graph.add_edge(vertexD, vertexC) 
-graph.add_edge(vertexD, vertexE)
-graph.add_edge(vertexD, vertexC) 
-  
-graph.add_edge(vertexC, vertexE)
-graph.add_edge(vertexE, vertexG)
-graph.add_edge(vertexF, vertexG)
+# graph.add_edge(vertexC, vertexE)
 
 passeio = Passeio()
 passeio.add_component(vertexA)
@@ -618,7 +626,7 @@ passeio_extra.add_component(vertexA)
 
 # print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
 # print(caminho_using_dfs(graph, vertexA, vertexE))
-dfs_cycle(graph, vertexF)
+dfs_cycle(graph, vertexA)
 # is_connected(graph, vertexA)
 
 # is_connected(graph, vertexA)
