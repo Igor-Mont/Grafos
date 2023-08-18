@@ -431,28 +431,32 @@ def caminho_using_dfs(graph, start_vertex, end_vertex):
 
 def check_edge_in_list(edge, list_edges):
   reversed_edge = tuple(reversed(edge))
-  return edge in list_edges or reversed_edge in list_edges
+  return edge in list_edges or reversed_edge in list_edges  
 
-def dfs(graph, start_vertex, tree_edges, return_edges): #5.7
+def dfs(graph, start_vertex, return_edges, cycle): #5.7
   start_vertex.set_marked()
 
   for next_vertex in graph.adjacency_list[start_vertex]:
     edge = (start_vertex.data, next_vertex.data)
-    is_returned_edge = check_edge_in_list(edge, return_edges)
-
-    if not next_vertex.is_marked():
-      tree_edges.append(edge)
-      dfs(graph, next_vertex, tree_edges, return_edges)
-    elif not check_edge_in_list(edge, tree_edges) and not is_returned_edge:
-      return_edges.append(edge)
-
+    # print(edge)
+    if not next_vertex.is_marked() and not cycle["cycle_found"]:
+      cycle["cycle"].append(edge)
+      dfs(graph, next_vertex, return_edges, cycle)
+    elif not check_edge_in_list(edge, cycle["cycle"]):
+      cycle["cycle_found"] = True
+      cycle["cycle"].append(edge)
+      return
+      
 def dfs_cycle(graph, start_vertex): #5.7
-  tree_edges = list()
   return_edges = list()
-  dfs(graph, start_vertex, tree_edges, return_edges)
+  cycle_info = {"cycle": list(), "cycle_found": False}
+  dfs(graph, start_vertex, return_edges, cycle_info)
+  
   graph.reset_marked_vertices()
-  if return_edges:
+  
+  if cycle_info["cycle_found"]:
      print("O grafo contem ciclos")
+     print(cycle_info["cycle"])
   else:
       print("O grafo nao contem ciclos")
       
@@ -503,7 +507,7 @@ graph.add_edge(vertexD, vertexE)
 graph.add_edge(vertexD, vertexC) 
   
 graph.add_edge(vertexC, vertexE)
-# graph.add_edge(vertexE, vertexG)
+graph.add_edge(vertexE, vertexG)
 graph.add_edge(vertexF, vertexG)
 
 passeio = Passeio()
@@ -518,7 +522,7 @@ section = section_passeio(passeio, 0, 2)
 
 print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
 print(caminho_using_dfs(graph, vertexA, vertexE))
-dfs_cycle(graph, vertexC)
+dfs_cycle(graph, vertexA)
 # is_connected(graph, vertexA)
 
 is_connected(graph, vertexA)
