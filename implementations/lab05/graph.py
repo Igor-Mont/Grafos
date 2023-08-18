@@ -432,14 +432,14 @@ def check_edge_in_list(edge, list_edges):
   reversed_edge = tuple(reversed(edge))
   return edge in list_edges or reversed_edge in list_edges  
 
-def dfs(graph, start_vertex, return_edges, cycle): #5.7
+def dfs(graph, start_vertex, cycle): #5.7
   start_vertex.set_marked()
 
   for next_vertex in graph.adjacency_list[start_vertex]:
     edge = (start_vertex.data, next_vertex.data)
     if not next_vertex.is_marked() and not cycle["cycle_found"]:
       cycle["cycle"].append(edge)
-      dfs(graph, next_vertex, return_edges, cycle)
+      dfs(graph, next_vertex, cycle)
     elif not check_edge_in_list(edge, cycle["cycle"]):
       if cycle["cycle_found"]:
         return  
@@ -454,9 +454,8 @@ def find_last_index(body, current_key):
     return None
 
 def dfs_cycle(graph, start_vertex): #5.7
-  return_edges = list()
   cycle_info = {"cycle": list(), "cycle_found": False}
-  dfs(graph, start_vertex, return_edges, cycle_info)
+  dfs(graph, start_vertex, cycle_info)
   
   graph.reset_marked_vertices()
   
@@ -464,7 +463,6 @@ def dfs_cycle(graph, start_vertex): #5.7
     edges = list(cycle_info["cycle"])
     for i, start_edge in enumerate(edges):
       for _, end_edge in enumerate(edges[i + 1:]):
-        print(start_edge, end_edge)
         if start_edge[0] == end_edge[1]:
           start = edges.index(start_edge)
           cycle_info["cycle"] = edges[start:]
