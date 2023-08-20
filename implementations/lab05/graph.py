@@ -5,6 +5,7 @@ class Vertex:
     self.data = data
     self.index = index
     self.degree = 0
+    self.n_component = 0
     self._marked = False
     self._entry_depth = 0
     self._exit_depth = 0
@@ -557,6 +558,54 @@ def extra2(u, v, passeio):
 
   return caminho
 
+def exists_unmarked_vertex(graph):
+  for vertex in graph.adjacency_list:
+    if not vertex.is_marked():
+        return vertex, True
+  return None, False
+
+n_comp = 0
+def dfs_components(graph, start_vertex, n_comp):
+  start_vertex.set_marked()
+  start_vertex.n_component = n_comp
+
+  for next_vertex in graph.adjacency_list[start_vertex]:
+    if not next_vertex.is_marked():
+      dfs_components(graph, next_vertex, n_comp)
+
+def components(graph):
+  n_comp = 0
+  vertex, exists_unmarked = exists_unmarked_vertex(graph)
+  while exists_unmarked:
+    dfs_components(graph, vertex, n_comp)
+    n_comp += 1
+    vertex, exists_unmarked = exists_unmarked_vertex(graph)
+  
+  display = ["{} | Nº Componente: {}".format(vertex.data, vertex.n_component) for vertex in list(graph.adjacency_list.keys())]
+  for s in display:
+    print(s)
+
+graph_component = Graph("list")
+
+vertexA = Vertex("A", 1)
+vertexB = Vertex("B", 2)
+vertexC = Vertex("C", 3)
+vertexD = Vertex("D", 4)
+vertexE = Vertex("E", 5)
+vertexF = Vertex("F", 6)
+
+graph_component.add_vertex(vertexA)
+graph_component.add_vertex(vertexB)
+graph_component.add_vertex(vertexC)
+graph_component.add_vertex(vertexD)
+graph_component.add_vertex(vertexE)
+graph_component.add_vertex(vertexF)
+
+graph_component.add_edge(vertexA, vertexB)
+graph_component.add_edge(vertexA, vertexC)
+graph_component.add_edge(vertexC, vertexB)
+
+components(graph_component)  
 graph = Graph("list")
 
 vertexA = Vertex("A", 1)
@@ -602,7 +651,7 @@ graph.add_edge(vertexB, vertexJ)
 # graph.add_edge(vertexD, vertexE)
   
 # graph.add_edge(vertexC, vertexE)
-
+# components(graph)
 passeio = Passeio()
 passeio.add_component(vertexA)
 # passeio.add_component(vertexD)
@@ -639,7 +688,7 @@ passeio_extra.add_component(vertexA)
 
 # print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
 # print(caminho_using_dfs(graph, vertexA, vertexE))
-dfs_cycle(graph, vertexA)
+# dfs_cycle(graph, vertexA)
 # is_connected(graph, vertexA)
 
 # is_connected(graph, vertexA)
