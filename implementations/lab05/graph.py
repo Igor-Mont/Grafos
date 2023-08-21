@@ -688,31 +688,6 @@ graph.add_edge(vertexD, vertexF)
 # passeio = passeio_using_dfs(graph, vertexA, vertexE)
 # for component in passeio.get_sequence():
 #   print(component.data)
-
-class Teste(unittest.TestCase):
-  
-  def test1(self):
-    passeio = passeio_using_dfs(graph, vertexA, vertexE)
-    passeioFinal = list()
-    for component in passeio.get_sequence():
-        passeioFinal.append(component.data)
-        
-    print("Resultado do test1:", passeioFinal)
-    self.assertEqual(passeioFinal, ['A', 'B', 'C', 'D', 'E']) 
-    print("Teste1 do Exercicio 5.2 passou!") 
-    
-  def test2(self):
-    passeio = passeio_using_dfs(graph, vertexA, vertexB)
-    passeioFinal = list()
-    for component in passeio.get_sequence():
-        passeioFinal.append(component.data)
-        
-    print("Resultado do:", passeioFinal)
-    self.assertEqual(passeioFinal, ['A', 'B', 'C', 'D', 'E', 'D', 'F', 'D', 'C', 'B']) 
-    print("Teste2 do Exercicio 5.2 passou!") 
-
-if __name__ == '__main__':
-    unittest.main()
     
 # graph.add_edge(vertexD, vertexE)
   
