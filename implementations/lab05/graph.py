@@ -556,6 +556,12 @@ def imprimir_dicionario(dicionario):
 def all_values_are_one(controller):
   return all(value == 1 for value in controller.values())
 
+# Extra 1
+# Entrada -> Grafo, trilha fechada e uma aresta
+# Objetivo -> encontrar um caminho 
+
+
+
 def extra2(u, v, passeio):
   vertices_passeio = passeio.get_sequence()
   if u not in vertices_passeio or v not in vertices_passeio:
