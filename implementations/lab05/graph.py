@@ -541,10 +541,13 @@ def is_connected(graph, start_vertex): #5.12
   dfs_connected(graph, start_vertex, visited)
   # print(visited)
   graph.reset_marked_vertices()
-  if all(visited):
-     print("O grafo e conexo")
+  connected = all(visited)
+  if connected:
+    print("O grafo e conexo")
   else:
-      print("O grafo nao e conexo")
+    print("O grafo nao e conexo")
+
+  return connected
 
 def imprimir_dicionario(dicionario):
   for chave, valor in dicionario.items():
@@ -611,7 +614,6 @@ def exists_unmarked_vertex(graph):
         return vertex, True
   return None, False
 
-n_comp = 0
 def dfs_components(graph, start_vertex, n_comp):
   start_vertex.set_marked()
   start_vertex.n_component = n_comp
@@ -631,6 +633,12 @@ def components(graph):
   display = ["{} | Nº Componente: {}".format(vertex.data, vertex.n_component) for vertex in list(graph.adjacency_list.keys())]
   for s in display:
     print(s)
+
+def does_not_have_circuit(graph):
+  vertices = list(graph.adjacency_list.keys())
+  n_vertices = len(vertices)
+  n_arestas = len(graph.get_edges())
+  return is_connected(graph, vertices[0]) and n_arestas == n_vertices - 1
 
 graph_component = Graph("list")
 
@@ -670,18 +678,16 @@ graph.add_vertex(vertexD)
 graph.add_vertex(vertexE)
 graph.add_vertex(vertexF)
 
-graph.add_edge(vertexA, vertexB)
 graph.add_edge(vertexA, vertexC)
 
-graph.add_edge(vertexB, vertexC)
 graph.add_edge(vertexB, vertexD)
 
 graph.add_edge(vertexC, vertexD)
 graph.add_edge(vertexC, vertexE)
 
-
-graph.add_edge(vertexD, vertexE)
 graph.add_edge(vertexD, vertexF)
+
+print(does_not_have_circuit(graph))
 
 # print_passeio(passeio_using_dfs(graph, vertexA, vertexD))
 
