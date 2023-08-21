@@ -1,4 +1,5 @@
 from linked_list import LinkedList
+import unittest
 
 class Vertex:
   def __init__(self, data, index):
@@ -476,7 +477,53 @@ def dfs_cycle(graph, start_vertex): #5.7
           cycle_info["cycle"] = edges[start:]
           break
 
-    print("O grafo contem ciclos")
+    print("O grafo contem ciclo:")
+    print(cycle_info["cycle"])
+  else:
+    print("O grafo nao contem ciclos")
+
+def dfs_proof(graph, start_vertex, cycle, caminho): #5.7
+  start_vertex.set_marked()
+  first_iteration = True
+  for next_vertex in graph.adjacency_list[start_vertex]:
+    edge = (start_vertex.data, next_vertex.data)
+    if not next_vertex.is_marked():
+      caminho.append(edge)
+      
+    if not next_vertex.is_marked() and not cycle["cycle_found"]:
+      if first_iteration:
+        first_iteration = False
+        cycle["cycle"].append(edge)
+      else:
+        while edge[0] != cycle["cycle"][-1][1]:
+          cycle["cycle"].pop()
+        cycle["cycle"].append(edge)
+          
+      dfs_proof(graph, next_vertex, cycle, caminho)
+    elif not check_edge_in_list(edge, cycle["cycle"]):
+      if cycle["cycle_found"]:
+        return  
+      cycle["cycle_found"] = True
+      cycle["cycle"].append(edge)
+
+def dfs_cycle_proof(graph, start_vertex): #5.7
+  cycle_info = {"cycle": list(), "cycle_found": False}
+  caminho = list()
+  dfs_proof(graph, start_vertex, cycle_info, caminho)
+  
+  graph.reset_marked_vertices()
+  
+  if cycle_info["cycle_found"]:
+    edges = list(cycle_info["cycle"])
+    for i, start_edge in enumerate(edges):
+      for _, end_edge in enumerate(edges[i + 1:]):
+        if start_edge[0] == end_edge[1]:
+          start = edges.index(start_edge)
+          cycle_info["cycle"] = edges[start:]
+          break
+
+    print("Caminho encontrado: ", caminho)
+    print("O grafo contem ciclo:")
     print(cycle_info["cycle"])
   else:
     print("O grafo nao contem ciclos")
@@ -605,7 +652,8 @@ graph_component.add_edge(vertexA, vertexB)
 graph_component.add_edge(vertexA, vertexC)
 graph_component.add_edge(vertexC, vertexB)
 
-components(graph_component)  
+# components(graph_component)  
+
 graph = Graph("list")
 
 vertexA = Vertex("A", 1)
@@ -614,10 +662,6 @@ vertexC = Vertex("C", 3)
 vertexD = Vertex("D", 4)
 vertexE = Vertex("E", 5)
 vertexF = Vertex("F", 6)
-vertexG = Vertex("G", 7)
-vertexH = Vertex("H", 8)
-vertexI = Vertex("I", 9)
-vertexJ = Vertex("J", 10)
 
 graph.add_vertex(vertexA)
 graph.add_vertex(vertexB)
@@ -625,38 +669,60 @@ graph.add_vertex(vertexC)
 graph.add_vertex(vertexD)
 graph.add_vertex(vertexE)
 graph.add_vertex(vertexF)
-graph.add_vertex(vertexG)
-graph.add_vertex(vertexH)
-graph.add_vertex(vertexI)
-graph.add_vertex(vertexJ)
 
 graph.add_edge(vertexA, vertexB)
 graph.add_edge(vertexA, vertexC)
-graph.add_edge(vertexA, vertexE)
-graph.add_edge(vertexA, vertexF)
 
+graph.add_edge(vertexB, vertexC)
 graph.add_edge(vertexB, vertexD)
-graph.add_edge(vertexD, vertexI)
-graph.add_edge(vertexB, vertexE)
 
-graph.add_edge(vertexC, vertexF)
-graph.add_edge(vertexC, vertexG)
-graph.add_edge(vertexC, vertexH)
+graph.add_edge(vertexC, vertexD)
+graph.add_edge(vertexC, vertexE)
 
-graph.add_edge(vertexG, vertexF)
-graph.add_edge(vertexF, vertexH)
 
-graph.add_edge(vertexG, vertexH)
-graph.add_edge(vertexB, vertexJ)
+graph.add_edge(vertexD, vertexE)
+graph.add_edge(vertexD, vertexF)
+
+# print_passeio(passeio_using_dfs(graph, vertexA, vertexD))
+
+# passeio = passeio_using_dfs(graph, vertexA, vertexE)
+# for component in passeio.get_sequence():
+#   print(component.data)
+
+class Teste(unittest.TestCase):
+  
+  def test1(self):
+    passeio = passeio_using_dfs(graph, vertexA, vertexE)
+    passeioFinal = list()
+    for component in passeio.get_sequence():
+        passeioFinal.append(component.data)
+        
+    print("Resultado do test1:", passeioFinal)
+    self.assertEqual(passeioFinal, ['A', 'B', 'C', 'D', 'E']) 
+    print("Teste1 do Exercicio 5.2 passou!") 
+    
+  def test2(self):
+    passeio = passeio_using_dfs(graph, vertexA, vertexB)
+    passeioFinal = list()
+    for component in passeio.get_sequence():
+        passeioFinal.append(component.data)
+        
+    print("Resultado do:", passeioFinal)
+    self.assertEqual(passeioFinal, ['A', 'B', 'C', 'D', 'E', 'D', 'F', 'D', 'C', 'B']) 
+    print("Teste2 do Exercicio 5.2 passou!") 
+
+if __name__ == '__main__':
+    unittest.main()
+    
 # graph.add_edge(vertexD, vertexE)
   
 # graph.add_edge(vertexC, vertexE)
 # components(graph)
-passeio = Passeio()
-passeio.add_component(vertexA)
-# passeio.add_component(vertexD)
-passeio.add_component(vertexB)
-passeio.add_component(vertexC)
+# passeio = Passeio()
+# passeio.add_component(vertexA)
+# # passeio.add_component(vertexD)
+# passeio.add_component(vertexB)
+# passeio.add_component(vertexC)
 
 
 passeio_extra = Passeio()
@@ -681,13 +747,12 @@ passeio_extra.add_component(vertexA)
 
 # extra2(vertexA, vertexC, passeio_extra)
 
-# print_passeio(passeio)
+# print_passeio(passeio_extra)
 # print_reversed_passeio(passeio)
 # section = section_passeio(passeio, 0, 2)
 # print([vertex.data for vertex in section])
 
 # print_passeio(passeio_using_dfs(graph, vertexA, vertexA))
-# print(caminho_using_dfs(graph, vertexA, vertexE))
 # dfs_cycle(graph, vertexA)
 # is_connected(graph, vertexA)
 

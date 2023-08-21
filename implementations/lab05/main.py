@@ -1,81 +1,69 @@
 from graph import Graph
 from graph import Vertex
-
+from graph import Passeio
+from graph import passeio_using_dfs, print_passeio, print_reversed_passeio, section_passeio, caminho_using_dfs, dfs_cycle, dfs_cycle_proof
 def main():
+  
   graph = Graph("list")
 
-  vertexX = Vertex("X", 1)
-  vertexW = Vertex("W", 2)
-  vertexV = Vertex("V", 3)
-  vertexY = Vertex("Y", 4)
-  vertexU = Vertex("U", 5)
+  vertexA = Vertex("A", 1)
+  vertexB = Vertex("B", 2)
+  vertexC = Vertex("C", 3)
+  vertexD = Vertex("D", 4)
+  vertexE = Vertex("E", 5)
+  vertexF = Vertex("F", 6)
 
-  graph.add_vertex(vertexX)
-  graph.add_vertex(vertexW)
-  graph.add_vertex(vertexV)
-  graph.add_vertex(vertexY)
-  graph.add_vertex(vertexU)
-  
+  graph.add_vertex(vertexA)
+  graph.add_vertex(vertexB)
+  graph.add_vertex(vertexC)
+  graph.add_vertex(vertexD)
+  graph.add_vertex(vertexE)
+  graph.add_vertex(vertexF)
 
-  graph.add_edge(vertexX, vertexY)
-  graph.add_edge(vertexX, vertexW)
+  graph.add_edge(vertexA, vertexB)
+  graph.add_edge(vertexA, vertexC)
+
+  graph.add_edge(vertexB, vertexC)
+  graph.add_edge(vertexB, vertexD)
+
+  graph.add_edge(vertexC, vertexD)
+  graph.add_edge(vertexC, vertexE)
+
+
+  graph.add_edge(vertexD, vertexE)
+  graph.add_edge(vertexD, vertexF)
   
-  graph.add_edge(vertexW, vertexY)  
-  graph.add_edge(vertexW, vertexV)
+  passeio = Passeio()
+  passeio.add_component(vertexA)
+  passeio.add_component(vertexB)
+  passeio.add_component(vertexC)
+  passeio.add_component(vertexD)
+  passeio.add_component(vertexE)
+  passeio.add_component(vertexF)
+  
+  print("Funcao 5.2, exemplo de passeio:")
+  print_passeio(passeio)
+  print()
+  print("Funcao 5.3, reverso do passeio:")
+  print_reversed_passeio(passeio)
+  print()
+  print("Funcao 5.4, secao do passeio, com indices 0 e 3:")
+  section = section_passeio(passeio, 0, 3)
+  print([vertex.data for vertex in section])
+  print()
+  print("Funcao 5.5, passeio no grafo dado vertex A e vertex D")
+  print_passeio(passeio_using_dfs(graph, vertexA, vertexD))
+  print()
+  print("Funcao 5.6, caminho no grafo dado vertex A e vertex D")
+  print(caminho_using_dfs(graph, vertexA, vertexD))
+  print()
+  print("Funcao 5.7, verificar ciclo no grafo")
+  dfs_cycle(graph, vertexA)
+  print()
+  print("Funcao 5.8, verificar ciclo no grafo a partir da ideia de prova")
+  dfs_cycle_proof(graph, vertexA)
+  print()
+  
    
-  graph.add_edge(vertexY, vertexV) 
-  graph.add_edge(vertexY, vertexV) 
-  graph.add_edge(vertexY, vertexU)
-   
-  graph.add_edge(vertexV, vertexU) 
-  print("\nGrafo Principal\n")
-
-  graph.print_graph();
-  
-  # A)
-  print("\nExemplo A\n")
-  
-  Hx = [vertexX, vertexU, vertexY, vertexW]
-  He = [(vertexX, vertexY), (vertexY, vertexU)]
-  
-  subgraphOwn = graph.generate_subgraph(Hx, He)
-  subgraphOwn.print_graph()
-    
-  # B)
-  print("\nExemplo B\n")
-  
-  x = [vertexX, vertexY, vertexV]
-  subgraphInducedX = graph.induced_graph(x)
-  subgraphInducedX.print_graph()
-  
-  # C)
-  print("\nExemplo C\n")
-  
-  x1 = [vertexY, vertexV, vertexX, vertexU]
-  subgraphInducedX1 = graph.induced_graph(x1)
-  subgraphInducedX1.print_graph()
-  
-  # D)
-  print("\nExemplo D\n")
-  
-  x2 = [vertexU, vertexW]
-  subgraphInducedX2 = graph.vertex_subtraction(x2)
-  subgraphInducedX2.print_graph()
-  
-  # E)
-  print("\nExemplo E\n")
-  
-  E1 = [(vertexV, vertexU), (vertexX, vertexW), (vertexY, vertexU), (vertexY, vertexV)]
-  subgraphInducedE1 = graph.edge_induced_graph(E1)
-  subgraphInducedE1.print_graph();
-  
-  # F)
-  print("\nExemplo F\n")
-  
-  E2 = [(vertexV, vertexU), (vertexW, vertexV), (vertexY, vertexV)]
-  subgraphInducedE2 = graph.edge_subtraction(E2)
-  subgraphInducedE2.print_graph();
-   
-
 if __name__ == "__main__":
   main()
