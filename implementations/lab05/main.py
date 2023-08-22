@@ -1,7 +1,7 @@
 from graph import Graph
 from graph import Vertex
 from graph import Passeio
-from graph import passeio_using_dfs, print_passeio, print_reversed_passeio, section_passeio, caminho_using_dfs, dfs_cycle, dfs_cycle_proof, components, does_not_have_circuit, is_connected
+from graph import passeio_using_dfs, print_passeio, print_reversed_passeio, section_passeio, caminho_using_dfs, dfs_cycle, dfs_cycle_proof, components, does_not_have_circuit, is_connected, extra2
 def main():
   
   graph = Graph("list")
@@ -34,10 +34,13 @@ def main():
   passeio = Passeio()
   passeio.add_component(vertexA)
   passeio.add_component(vertexB)
-  passeio.add_component(vertexC)
   passeio.add_component(vertexD)
-  passeio.add_component(vertexE)
-  passeio.add_component(vertexF)
+  passeio.add_component(vertexA)
+  passeio.add_component(vertexB)
+  passeio.add_component(vertexD)
+  passeio.add_component(vertexB)
+  passeio.add_component(vertexD)
+  passeio.add_component(vertexC)
   
   print("Funcao 5.2, exemplo de passeio:")
   print_passeio(passeio)
@@ -76,6 +79,8 @@ def main():
   else:
     print("Não é conexo")
   print()
+  print("Extra2:")
+  extra2(vertexA, vertexC, passeio)
   
 if __name__ == "__main__":
   main()

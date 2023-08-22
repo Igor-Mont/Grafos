@@ -612,33 +612,3 @@ def does_not_have_circuit(graph): #5.11
   n_vertices = len(vertices)
   n_arestas = len(graph.get_edges())
   return is_connected(graph, vertices[0]) and n_arestas == n_vertices - 1
-
-
-graph = Graph("list")
-
-vertexA = Vertex("A", 1)
-vertexB = Vertex("B", 2)
-vertexC = Vertex("C", 3)
-vertexD = Vertex("D", 4)
-vertexE = Vertex("E", 5)
-vertexF = Vertex("F", 6)
-
-graph.add_vertex(vertexA)
-graph.add_vertex(vertexB)
-graph.add_vertex(vertexC)
-graph.add_vertex(vertexD)
-graph.add_vertex(vertexE)
-graph.add_vertex(vertexF)
-
-graph.add_edge(vertexA, vertexB)
-graph.add_edge(vertexA, vertexC)
-
-graph.add_edge(vertexB, vertexD)
-
-graph.add_edge(vertexC, vertexD)
-graph.add_edge(vertexC, vertexE)
-
-graph.add_edge(vertexD, vertexE)
-graph.add_edge(vertexD, vertexF)
-
-print(does_not_have_circuit(graph))
