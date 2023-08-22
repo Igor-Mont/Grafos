@@ -1,7 +1,7 @@
 from graph import Graph
 from graph import Vertex
 from graph import Passeio
-from graph import passeio_using_dfs, print_passeio, print_reversed_passeio, section_passeio, caminho_using_dfs, dfs_cycle, dfs_cycle_proof
+from graph import passeio_using_dfs, print_passeio, print_reversed_passeio, section_passeio, caminho_using_dfs, dfs_cycle, dfs_cycle_proof, components, does_not_have_circuit, is_connected
 def main():
   
   graph = Graph("list")
@@ -23,12 +23,10 @@ def main():
   graph.add_edge(vertexA, vertexB)
   graph.add_edge(vertexA, vertexC)
 
-  graph.add_edge(vertexB, vertexC)
   graph.add_edge(vertexB, vertexD)
 
   graph.add_edge(vertexC, vertexD)
   graph.add_edge(vertexC, vertexE)
-
 
   graph.add_edge(vertexD, vertexE)
   graph.add_edge(vertexD, vertexF)
@@ -55,15 +53,29 @@ def main():
   print_passeio(passeio_using_dfs(graph, vertexA, vertexD))
   print()
   print("Funcao 5.6, caminho no grafo dado vertex A e vertex D")
-  print(caminho_using_dfs(graph, vertexA, vertexD))
+  print(caminho_using_dfs(graph, vertexA, vertexF))
   print()
   print("Funcao 5.7, verificar ciclo no grafo")
   dfs_cycle(graph, vertexA)
   print()
   print("Funcao 5.8, verificar ciclo no grafo a partir da ideia de prova")
-  dfs_cycle_proof(graph, vertexA)
+  print(dfs_cycle_proof(graph, vertexA, vertexF))
+  print()
+  print("Funcao 5.10, componentes de um grafo")
+  components(graph)
+  print()
+  print("Funcao 5.11, verificar se não existe circuitos")
+  if does_not_have_circuit(graph):
+    print("não existem circuitos, ou não respita alguma das condições")
+  else:
+    print("existem circuitos")
+  print()
+  print("Funcao 5.12, verificar se é conexo")
+  if is_connected(graph, vertexA):
+    print("É conexo")
+  else:
+    print("Não é conexo")
   print()
   
-   
 if __name__ == "__main__":
   main()
