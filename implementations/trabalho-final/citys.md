@@ -1,9 +1,9 @@
 ### Cidades com a letra A
 
-- [ ] Amparo de São Francisco
-- [ ] Aquidabã
-- [ ] Aracaju
-- [ ] Arauá
+- [ x ] Amparo de São Francisco
+- [ x ] Aquidabã
+- [ x ] Aracaju
+- [ x ] Arauá
 - [ ] Areia Branca
 
 ### Cidades com a letra B
