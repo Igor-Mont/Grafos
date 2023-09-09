@@ -4,25 +4,25 @@
 - [ x ] Aquidabã
 - [ x ] Aracaju
 - [ x ] Arauá
-- [ ] Areia Branca
+- [ x ] Areia Branca
 
 ### Cidades com a letra B
 
-- [ ] Barra dos Coqueiros
-- [ ] Boquim
-- [ ] Brejo Grande
+- [ x ] Barra dos Coqueiros
+- [ x ] Boquim
+- [ x ] Brejo Grande
 
 ### Cidades com a letra C
 
-- [ ] Campo do Brito
-- [ ] Canhoba
-- [ ] Canindé de São Francisco
-- [ ] Capela
-- [ ] Carira
-- [ ] Carmópolis
-- [ ] Cedro de São João
-- [ ] Cristinápolis
-- [ ] Cumbe
+- [ x ] Campo do Brito
+- [ x ] Canhoba
+- [ x ] Canindé de São Francisco
+- [ x ] Capxela
+- [ x ] Carira
+- [ x ] Carmópolis
+- [ x ] Cedro de São João
+- [ x ] Cristinápolis
+- [ x ] Cumbe
 
 ### Cidades com a letra D
 
