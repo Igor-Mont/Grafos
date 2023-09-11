@@ -26,28 +26,28 @@
 
 ### Cidades com a letra D
 
-- [ ] Divina Pastora
+- [ X ] Divina Pastora
 
 ### Cidades com a letra E
 
-- [ ] Estância
+- [ X ] Estância
 
 ### Cidades com a letra F
 
-- [ ] Feira Nova
-- [ ] Frei Paulo
+- [ X ] Feira Nova
+- [ X ] Frei Paulo
 
 ### Cidades com a letra G
 
-- [ ] Gararu
-- [ ] General Maynard
-- [ ] Gracho Cardoso
+- [ X ] Gararu
+- [ X ] General Maynard
+- [ X ] Gracho Cardoso
 
 ### Cidades com a letra I
 
-- [ ] Ilha das Flores
-- [ ] Indiaroba
-- [ ] Itabaiana
+- [ X ] Ilha das Flores
+- [ X ] Indiaroba
+- [ X ] Itabaiana
 - [ ] Itabaianinha
 - [ ] Itabi
 - [ ] Itaporanga d’Ajuda
