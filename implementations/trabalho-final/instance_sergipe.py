@@ -205,8 +205,11 @@ def instance():
   # Vizinhos Canindé de São Fransisco
 
   edge_caninde_sao_francisco_poco_redondo = Edge(vertex_caninde_de_sao_francisco, vertex_poco_redondo, 20.9)
+  edge_caninde_de_sao_francisco_monte_alegre_de_Sergipe = Edge(vertex_caninde_de_sao_francisco, vertex_monte_alegre_de_sergipe, 100) #passando por pelado
+  
 
   graph_citys_sergipe.add_edge(edge_caninde_sao_francisco_poco_redondo)
+  graph_citys_sergipe.add_edge(edge_caninde_de_sao_francisco_monte_alegre_de_Sergipe)
 
   # Vizinhos Capela
 
@@ -541,12 +544,10 @@ def instance():
   
   #Vizinhos Monte Alegre de Sergipe
   
-  edge_monte_alegre_de_Sergipe_nossa_s_d_gloria = Edge(vertex_monte_alegre_de_sergipe, vertex_nossa_senhora_da_gloria, )
-  edge_monte_alegre_de_Sergipe_porto_da_folha = Edge(vertex_monte_alegre_de_sergipe, vertex_porto_da_folha, )
-  edge_monte_alegre_de_Sergipe_poco_redondo = Edge(vertex_monte_alegre_de_sergipe, vertex_poco_redondo, )
-  edge_monte_alegre_de_Sergipe_caninde_de_sao_francisco = Edge(vertex_monte_alegre_de_sergipe, vertex_caninde_de_sao_francisco, ) #passando por pelado
+  edge_monte_alegre_de_Sergipe_nossa_s_d_gloria = Edge(vertex_monte_alegre_de_sergipe, vertex_nossa_senhora_da_gloria, 28.2)
+  edge_monte_alegre_de_Sergipe_porto_da_folha = Edge(vertex_monte_alegre_de_sergipe, vertex_porto_da_folha, 41.7)
+  edge_monte_alegre_de_Sergipe_poco_redondo = Edge(vertex_monte_alegre_de_sergipe, vertex_poco_redondo, 29.2)
   
   graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_poco_redondo)
   graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_nossa_s_d_gloria)
   graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_porto_da_folha)
-  graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_caninde_de_sao_francisco)

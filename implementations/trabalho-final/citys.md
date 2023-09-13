@@ -66,10 +66,10 @@
 
 - [ x ] Macambira
 - [ x ] Malhada dos Bois
-- [ ] Malhador
-- [ ] Maruim
-- [ ] Moita Bonita
-- [ ] Monte Alegre de Sergipe
+- [ X ] Malhador
+- [ X ] Maruim
+- [ X ] Moita Bonita
+- [ X ] Monte Alegre de Sergipe
 - [ ] Muribeca
 
 ### Cidades com a letra N
