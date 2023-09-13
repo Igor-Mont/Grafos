@@ -102,24 +102,24 @@
 
 ### Cidades com a letra S
 
-- [ ] Salgado
-- [ ] Santa Luzia do Itanhy
-- [ ] Santa Rosa de Lima
-- [ ] Santana do São Francisco
-- [ ] Santo Amaro das Brotas
-- [ ] Simão Dias
-- [ ] Siriri
-- [ ] São Cristóvão
-- [ ] São Domingos
-- [ ] São Francisco
-- [ ] São Miguel do Aleixo
+- [ X ] Salgado
+- [ X ] Santa Luzia do Itanhy
+- [ X ] Santa Rosa de Lima
+- [ X ] Santana do São Francisco
+- [ X ] Santo Amaro das Brotas
+- [ X ] Simão Dias
+- [ X ] Siriri
+- [ X ] São Cristóvão
+- [ X ] São Domingos
+- [ X ] São Francisco
+- [ X ] São Miguel do Aleixo
 
 ### Cidades com a letra T
 
-- [ ] Telha
-- [ ] Tobias Barreto
-- [ ] Tomar do Geru
+- [ X ] Telha
+- [ X ] Tobias Barreto
+- [ X ] Tomar do Geru
 
 ### Cidades com a letra U
 
-- [ ] Umbaúba
+- [ X ] Umbaúba
