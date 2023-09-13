@@ -48,24 +48,24 @@
 - [ X ] Ilha das Flores
 - [ X ] Indiaroba
 - [ X ] Itabaiana
-- [ ] Itabaianinha
-- [ ] Itabi
-- [ ] Itaporanga d’Ajuda
+- [ x ] Itabaianinha
+- [ x ] Itabi
+- [ x ] Itaporanga d’Ajuda
 
 ### Cidades com a letra J
 
-- [ ] Japaratuba
-- [ ] Japoatã
+- [ x ] Japaratuba
+- [ x ] Japoatã
 
 ### Cidades com a letra L
 
-- [ ] Lagarto
-- [ ] Laranjeiras
+- [ x ] Lagarto
+- [ x ] Laranjeiras
 
 ### Cidades com a letra M
 
-- [ ] Macambira
-- [ ] Malhada dos Bois
+- [ x ] Macambira
+- [ x ] Malhada dos Bois
 - [ ] Malhador
 - [ ] Maruim
 - [ ] Moita Bonita
