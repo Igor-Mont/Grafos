@@ -66,17 +66,17 @@
 
 - [ x ] Macambira
 - [ x ] Malhada dos Bois
-- [ X ] Malhador
-- [ X ] Maruim
-- [ X ] Moita Bonita
-- [ X ] Monte Alegre de Sergipe
-- [ ] Muribeca
+- [ x ] Malhador
+- [ x ] Maruim
+- [ x ] Moita Bonita
+- [ x ] Monte Alegre de Sergipe
+- [ x ] Muribeca
 
 ### Cidades com a letra N
 
-- [ ] Neópolis
-- [ ] Nossa Senhora Aparecida
-- [ ] Nossa Senhora da Glória
+- [ x ] Neópolis
+- [ x ] Nossa Senhora Aparecida
+- [ x ] Nossa Senhora da Glória
 - [ ] Nossa Senhora das Dores
 - [ ] Nossa Senhora de Lourdes
 - [ ] Nossa Senhora do Socorro
