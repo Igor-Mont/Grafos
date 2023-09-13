@@ -492,14 +492,14 @@ def instance():
   edge_macambira_ribeiropolis = Edge(vertex_macambira, vertex_ribeiropolis, 24)
   edge_macambira_carira = Edge(vertex_macambira, vertex_carira, 48)
   edge_macambira_nossa_senhora_da_gloria = Edge(vertex_macambira, vertex_nossa_senhora_da_gloria, 99.6)
-  edge_macambira_monte_alegre_de_sergipe = Edge(vertex_macambira, vertex_monte_alegre_de_sergipe, 112)
+  edge_macambira_pedra_mole = Edge(vertex_macambira, vertex_pedra_mole, 21.3)
 
   graph_citys_sergipe.add_edge(edge_macambira_pinhao)
   graph_citys_sergipe.add_edge(edge_macambira_frei_paulo)
   graph_citys_sergipe.add_edge(edge_macambira_ribeiropolis)
   graph_citys_sergipe.add_edge(edge_macambira_carira)
   graph_citys_sergipe.add_edge(edge_macambira_nossa_senhora_da_gloria)
-  graph_citys_sergipe.add_edge(edge_macambira_monte_alegre_de_sergipe)
+  graph_citys_sergipe.add_edge(edge_macambira_pedra_mole)
 
   # Vizinhos Malhada dos Bois
 
@@ -510,6 +510,43 @@ def instance():
   graph_citys_sergipe.add_edge(edge_malhada_dos_bois_sao_francisco)
   graph_citys_sergipe.add_edge(edge_malhada_dos_bois_propria)
   graph_citys_sergipe.add_edge(edge_malhada_dos_bois_rosario_do_catete)
-
-
-
+  
+  # Vizinhos Malhador
+  
+  edge_malhador_riachuelo = Edge(vertex_malhador, vertex_riachuelo, 19.5)
+  edge_malhador_moita_bonita = Edge(vertex_malhador, vertex_moita_bonita, 14.2)
+  
+  graph_citys_sergipe.add_edge(edge_malhador_riachuelo)
+  graph_citys_sergipe.add_edge(edge_malhador_moita_bonita)
+  
+  #Vizinhos Maruim
+  
+  edge_maruim_santo_amaro_das_brotas = Edge(vertex_maruim, vertex_santo_amaro_das_brotas, 7.9)
+  edge_maruim_rosario_do_catete = Edge(vertex_maruim, vertex_rosario_do_catete, 8)
+  
+  graph_citys_sergipe.add_edge(edge_maruim_santo_amaro_das_brotas)
+  graph_citys_sergipe.add_edge(edge_maruim_rosario_do_catete)
+  
+  #Vizinhos Moita Bonita
+  
+  edge_moita_bonita_ribeiropolis = Edge(vertex_moita_bonita, vertex_ribeiropolis, 12.1)
+  edge_moita_bonita_nossa_s_das_dores = Edge(vertex_moita_bonita, vertex_nossa_senhora_das_dores, 25.6)
+  edge_moita_bonita_santa_rosa_de_lima = Edge(vertex_moita_bonita, vertex_santa_rosa_de_lima, 22)
+  edge_moita_bonita_sao_miguel_do_aleixo = Edge(vertex_moita_bonita, vertex_sao_miguel_do_aleixo, 27.7)
+  
+  graph_citys_sergipe.add_edge(edge_moita_bonita_nossa_s_das_dores)
+  graph_citys_sergipe.add_edge(edge_moita_bonita_ribeiropolis)
+  graph_citys_sergipe.add_edge(edge_moita_bonita_sao_miguel_do_aleixo)
+  graph_citys_sergipe.add_edge(edge_moita_bonita_santa_rosa_de_lima)
+  
+  #Vizinhos Monte Alegre de Sergipe
+  
+  edge_monte_alegre_de_Sergipe_nossa_s_d_gloria = Edge(vertex_monte_alegre_de_sergipe, vertex_nossa_senhora_da_gloria, )
+  edge_monte_alegre_de_Sergipe_porto_da_folha = Edge(vertex_monte_alegre_de_sergipe, vertex_porto_da_folha, )
+  edge_monte_alegre_de_Sergipe_poco_redondo = Edge(vertex_monte_alegre_de_sergipe, vertex_poco_redondo, )
+  edge_monte_alegre_de_Sergipe_caninde_de_sao_francisco = Edge(vertex_monte_alegre_de_sergipe, vertex_caninde_de_sao_francisco, ) #passando por pelado
+  
+  graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_poco_redondo)
+  graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_nossa_s_d_gloria)
+  graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_porto_da_folha)
+  graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_caninde_de_sao_francisco)
