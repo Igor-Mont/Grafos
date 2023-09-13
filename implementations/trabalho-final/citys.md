@@ -77,28 +77,28 @@
 - [ x ] Neópolis
 - [ x ] Nossa Senhora Aparecida
 - [ x ] Nossa Senhora da Glória
-- [ ] Nossa Senhora das Dores
-- [ ] Nossa Senhora de Lourdes
-- [ ] Nossa Senhora do Socorro
+- [ x ] Nossa Senhora das Dores
+- [ x ] Nossa Senhora de Lourdes
+- [ x ] Nossa Senhora do Socorro
 
 ### Cidades com a letra P
 
-- [ ] Pacatuba
-- [ ] Pedra Mole
-- [ ] Pedrinhas
-- [ ] Pinhão
-- [ ] Pirambu
-- [ ] Porto da Folha
-- [ ] Poço Redondo
-- [ ] Poço Verde
-- [ ] Propriá
+- [ x ] Pacatuba
+- [ x ] Pedra Mole
+- [ x ] Pedrinhas
+- [ x ] Pinhão
+- [ x ] Pirambu
+- [ x ] Porto da Folha
+- [ x ] Poço Redondo
+- [ x ] Poço Verde
+- [ x ] Propriá
 
 ### Cidades com a letra R
 
-- [ ] Riachuelo
-- [ ] Riachão do Dantas
-- [ ] Ribeirópolis
-- [ ] Rosário do Catete
+- [ x ] Riachuelo
+- [ x ] Riachão do Dantas
+- [ x ] Ribeirópolis
+- [ x ] Rosário do Catete
 
 ### Cidades com a letra S
 
