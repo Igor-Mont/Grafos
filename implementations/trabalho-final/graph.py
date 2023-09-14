@@ -156,6 +156,8 @@ def dijkstra(graph, src):
   dist = [float('inf')] * amount_edges
   dist[src.index] = 0
 
+  path = {}  
+
   while pq:
     d, u = heapq.heappop(pq)
     for vertex in list(graph.adjacency_list.values())[u.index]:
@@ -163,9 +165,19 @@ def dijkstra(graph, src):
       if dist[vertex.index] > dist[u.index] + weight:
         dist[vertex.index] = dist[u.index] + weight
         heapq.heappush(pq, (dist[vertex.index], vertex))
+        path[vertex] = u  
 
-  for i in range(amount_edges):
-    print(f"{i} \t\t {dist[i]}")
+  for vertex in graph.adjacency_list:
+    if vertex == src:
+      continue
+    path_list = []
+    current_vertex = vertex
+    while current_vertex != src:
+      path_list.append(current_vertex)
+      current_vertex = path[current_vertex]
+    path_list.append(src)
+    path_list.reverse()
+    print(f"{src.data} para {vertex.data}: {', '.join(v.data for v in path_list)}, Custo Minimo: {dist[vertex.index]}")
 
 graph = Graph() 
 
@@ -237,4 +249,4 @@ graph.add_edge(edge_n)
 # graph.remove_edge(edge_g)
 # graph.remove_edge(edge_h)
 dijkstra(graph, vertex_a)
-graph.print_graph()
+# graph.print_graph()
