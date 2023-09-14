@@ -1,7 +1,7 @@
 from graph import Graph
 from graph import Vertex
 from graph import Edge
-from graph import dijkstra;
+from graph import dijkstra
 
 # Link para ver os vizinhos
 # https://www.cidade-brasil.com.br/estado-sergipe.html?c=nom
