@@ -10,6 +10,9 @@ class Vertex:
   def __le__(self, other):
     return False
   
+  def __lt__(self, other):
+    return False
+  
 class Edge:
   def __init__(self, v1, v2, weight):
     self._v1 = v1
@@ -150,8 +153,7 @@ class Graph:
       neighbors_data = [neighbor.data for neighbor in self.adjacency_list[vertex]]
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
 
-
-def dijkstra(graph, src):
+def dijkstra(graph, src, dest):
   pq = []
   heapq.heappush(pq, (0, src))
 
@@ -170,17 +172,20 @@ def dijkstra(graph, src):
         heapq.heappush(pq, (dist[vertex.index], vertex))
         path[vertex] = u  
 
+
   for vertex in graph.adjacency_list:
     if vertex == src:
       continue
-    path_list = []
-    current_vertex = vertex
-    while current_vertex != src:
-      path_list.append(current_vertex)
-      current_vertex = path[current_vertex]
-    path_list.append(src)
-    path_list.reverse()
-    print(f"{src.data} para {vertex.data}: {', '.join(v.data for v in path_list)}, Custo Minimo: {dist[vertex.index]}")
+    if vertex == dest:
+      path_list = []
+      current_vertex = vertex
+      while current_vertex != src:
+        path_list.append(current_vertex)
+        current_vertex = path[current_vertex]
+      path_list.append(src)
+      path_list.reverse()
+      print(f"{src.data} para {vertex.data}: {' -> '.join(v.data for v in path_list[1:])}, Custo Minimo: {dist[vertex.index]:.2f}")
+      print()
 
 graph = Graph() 
 
@@ -1063,5 +1068,5 @@ edge_tobias_barreto_tomar_do_geru = Edge(vertex_tobias_barreto, vertex_tomar_do_
 graph_citys_sergipe.add_edge(edge_tobias_barreto_tomar_do_geru)
 
 # Vizinhos Umbauba
-# graph_citys_sergipe.print_graph()
-dijkstra(graph_citys_sergipe, vertex_monte_alegre_de_sergipe)
+ 
+dijkstra(graph_citys_sergipe, vertex_aracaju, vertex_boquim)
