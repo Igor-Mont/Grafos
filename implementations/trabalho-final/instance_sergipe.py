@@ -7,7 +7,7 @@ from graph import dijkstra
 # https://www.cidade-brasil.com.br/estado-sergipe.html?c=nom
 
 def instance():
-  graph_citys_sergipe = Graph()
+  graph_cities_sergipe = Graph()
 
   vertex_amparo_de_sao_francisco = Vertex("Amparo de São Francisco", 1)
   vertex_aquidaba = Vertex("Aquidabã", 2)
@@ -86,81 +86,81 @@ def instance():
   vertex_umbauba = Vertex("Umbaúba", 75)
 
   # Adicione os vértices ao grafo
-  graph_citys_sergipe.add_vertex(vertex_amparo_de_sao_francisco)
-  graph_citys_sergipe.add_vertex(vertex_aquidaba)
-  graph_citys_sergipe.add_vertex(vertex_aracaju)
-  graph_citys_sergipe.add_vertex(vertex_araua)
-  graph_citys_sergipe.add_vertex(vertex_areia_branca)
-  graph_citys_sergipe.add_vertex(vertex_barra_dos_coqueiros)
-  graph_citys_sergipe.add_vertex(vertex_boquim)
-  graph_citys_sergipe.add_vertex(vertex_brejo_grande)
-  graph_citys_sergipe.add_vertex(vertex_campo_do_brito)
-  graph_citys_sergipe.add_vertex(vertex_canhoba)
-  graph_citys_sergipe.add_vertex(vertex_caninde_de_sao_francisco)
-  graph_citys_sergipe.add_vertex(vertex_capela)
-  graph_citys_sergipe.add_vertex(vertex_carira)
-  graph_citys_sergipe.add_vertex(vertex_carmopolis)
-  graph_citys_sergipe.add_vertex(vertex_cedro_de_sao_joao)
-  graph_citys_sergipe.add_vertex(vertex_cristinapolis)
-  graph_citys_sergipe.add_vertex(vertex_cumbe)
-  graph_citys_sergipe.add_vertex(vertex_divina_pastora)
-  graph_citys_sergipe.add_vertex(vertex_estancia)
-  graph_citys_sergipe.add_vertex(vertex_feira_nova)
-  graph_citys_sergipe.add_vertex(vertex_frei_paulo)
-  graph_citys_sergipe.add_vertex(vertex_gararu)
-  graph_citys_sergipe.add_vertex(vertex_general_maynard)
-  graph_citys_sergipe.add_vertex(vertex_gracho_cardoso)
-  graph_citys_sergipe.add_vertex(vertex_ilha_das_flores)
-  graph_citys_sergipe.add_vertex(vertex_indiaroba)
-  graph_citys_sergipe.add_vertex(vertex_itabaiana)
-  graph_citys_sergipe.add_vertex(vertex_itabaianinha)
-  graph_citys_sergipe.add_vertex(vertex_itabi)
-  graph_citys_sergipe.add_vertex(vertex_itaporanga_d_ajuda)
-  graph_citys_sergipe.add_vertex(vertex_japaratuba)
-  graph_citys_sergipe.add_vertex(vertex_japoata)
-  graph_citys_sergipe.add_vertex(vertex_lagarto)
-  graph_citys_sergipe.add_vertex(vertex_laranjeiras)
-  graph_citys_sergipe.add_vertex(vertex_macambira)
-  graph_citys_sergipe.add_vertex(vertex_malhada_dos_bois)
-  graph_citys_sergipe.add_vertex(vertex_malhador)
-  graph_citys_sergipe.add_vertex(vertex_maruim)
-  graph_citys_sergipe.add_vertex(vertex_moita_bonita)
-  graph_citys_sergipe.add_vertex(vertex_monte_alegre_de_sergipe)
-  graph_citys_sergipe.add_vertex(vertex_muribeca)
-  graph_citys_sergipe.add_vertex(vertex_neopolis)
-  graph_citys_sergipe.add_vertex(vertex_nossa_senhora_aparecida)
-  graph_citys_sergipe.add_vertex(vertex_nossa_senhora_da_gloria)
-  graph_citys_sergipe.add_vertex(vertex_nossa_senhora_das_dores)
-  graph_citys_sergipe.add_vertex(vertex_nossa_senhora_de_lourdes)
-  graph_citys_sergipe.add_vertex(vertex_nossa_senhora_do_socorro)
-  graph_citys_sergipe.add_vertex(vertex_pacatuba)
-  graph_citys_sergipe.add_vertex(vertex_pedra_mole)
-  graph_citys_sergipe.add_vertex(vertex_pedrinhas)
-  graph_citys_sergipe.add_vertex(vertex_pinhao)
-  graph_citys_sergipe.add_vertex(vertex_pirambu)
-  graph_citys_sergipe.add_vertex(vertex_porto_da_folha)
-  graph_citys_sergipe.add_vertex(vertex_poco_redondo)
-  graph_citys_sergipe.add_vertex(vertex_poco_verde)
-  graph_citys_sergipe.add_vertex(vertex_propria)
-  graph_citys_sergipe.add_vertex(vertex_riachuelo)
-  graph_citys_sergipe.add_vertex(vertex_riachao_do_dantas)
-  graph_citys_sergipe.add_vertex(vertex_ribeiropolis)
-  graph_citys_sergipe.add_vertex(vertex_rosario_do_catete)
-  graph_citys_sergipe.add_vertex(vertex_salgado)
-  graph_citys_sergipe.add_vertex(vertex_santa_luzia_do_itanhy)
-  graph_citys_sergipe.add_vertex(vertex_santa_rosa_de_lima)
-  graph_citys_sergipe.add_vertex(vertex_santana_do_sao_francisco)
-  graph_citys_sergipe.add_vertex(vertex_santo_amaro_das_brotas)
-  graph_citys_sergipe.add_vertex(vertex_simao_dias)
-  graph_citys_sergipe.add_vertex(vertex_siriri)
-  graph_citys_sergipe.add_vertex(vertex_sao_cristovao)
-  graph_citys_sergipe.add_vertex(vertex_sao_domingos)
-  graph_citys_sergipe.add_vertex(vertex_sao_francisco)
-  graph_citys_sergipe.add_vertex(vertex_sao_miguel_do_aleixo)
-  graph_citys_sergipe.add_vertex(vertex_telha)
-  graph_citys_sergipe.add_vertex(vertex_tobias_barreto)
-  graph_citys_sergipe.add_vertex(vertex_tomar_do_geru)
-  graph_citys_sergipe.add_vertex(vertex_umbauba)
+  graph_cities_sergipe.add_vertex(vertex_amparo_de_sao_francisco)
+  graph_cities_sergipe.add_vertex(vertex_aquidaba)
+  graph_cities_sergipe.add_vertex(vertex_aracaju)
+  graph_cities_sergipe.add_vertex(vertex_araua)
+  graph_cities_sergipe.add_vertex(vertex_areia_branca)
+  graph_cities_sergipe.add_vertex(vertex_barra_dos_coqueiros)
+  graph_cities_sergipe.add_vertex(vertex_boquim)
+  graph_cities_sergipe.add_vertex(vertex_brejo_grande)
+  graph_cities_sergipe.add_vertex(vertex_campo_do_brito)
+  graph_cities_sergipe.add_vertex(vertex_canhoba)
+  graph_cities_sergipe.add_vertex(vertex_caninde_de_sao_francisco)
+  graph_cities_sergipe.add_vertex(vertex_capela)
+  graph_cities_sergipe.add_vertex(vertex_carira)
+  graph_cities_sergipe.add_vertex(vertex_carmopolis)
+  graph_cities_sergipe.add_vertex(vertex_cedro_de_sao_joao)
+  graph_cities_sergipe.add_vertex(vertex_cristinapolis)
+  graph_cities_sergipe.add_vertex(vertex_cumbe)
+  graph_cities_sergipe.add_vertex(vertex_divina_pastora)
+  graph_cities_sergipe.add_vertex(vertex_estancia)
+  graph_cities_sergipe.add_vertex(vertex_feira_nova)
+  graph_cities_sergipe.add_vertex(vertex_frei_paulo)
+  graph_cities_sergipe.add_vertex(vertex_gararu)
+  graph_cities_sergipe.add_vertex(vertex_general_maynard)
+  graph_cities_sergipe.add_vertex(vertex_gracho_cardoso)
+  graph_cities_sergipe.add_vertex(vertex_ilha_das_flores)
+  graph_cities_sergipe.add_vertex(vertex_indiaroba)
+  graph_cities_sergipe.add_vertex(vertex_itabaiana)
+  graph_cities_sergipe.add_vertex(vertex_itabaianinha)
+  graph_cities_sergipe.add_vertex(vertex_itabi)
+  graph_cities_sergipe.add_vertex(vertex_itaporanga_d_ajuda)
+  graph_cities_sergipe.add_vertex(vertex_japaratuba)
+  graph_cities_sergipe.add_vertex(vertex_japoata)
+  graph_cities_sergipe.add_vertex(vertex_lagarto)
+  graph_cities_sergipe.add_vertex(vertex_laranjeiras)
+  graph_cities_sergipe.add_vertex(vertex_macambira)
+  graph_cities_sergipe.add_vertex(vertex_malhada_dos_bois)
+  graph_cities_sergipe.add_vertex(vertex_malhador)
+  graph_cities_sergipe.add_vertex(vertex_maruim)
+  graph_cities_sergipe.add_vertex(vertex_moita_bonita)
+  graph_cities_sergipe.add_vertex(vertex_monte_alegre_de_sergipe)
+  graph_cities_sergipe.add_vertex(vertex_muribeca)
+  graph_cities_sergipe.add_vertex(vertex_neopolis)
+  graph_cities_sergipe.add_vertex(vertex_nossa_senhora_aparecida)
+  graph_cities_sergipe.add_vertex(vertex_nossa_senhora_da_gloria)
+  graph_cities_sergipe.add_vertex(vertex_nossa_senhora_das_dores)
+  graph_cities_sergipe.add_vertex(vertex_nossa_senhora_de_lourdes)
+  graph_cities_sergipe.add_vertex(vertex_nossa_senhora_do_socorro)
+  graph_cities_sergipe.add_vertex(vertex_pacatuba)
+  graph_cities_sergipe.add_vertex(vertex_pedra_mole)
+  graph_cities_sergipe.add_vertex(vertex_pedrinhas)
+  graph_cities_sergipe.add_vertex(vertex_pinhao)
+  graph_cities_sergipe.add_vertex(vertex_pirambu)
+  graph_cities_sergipe.add_vertex(vertex_porto_da_folha)
+  graph_cities_sergipe.add_vertex(vertex_poco_redondo)
+  graph_cities_sergipe.add_vertex(vertex_poco_verde)
+  graph_cities_sergipe.add_vertex(vertex_propria)
+  graph_cities_sergipe.add_vertex(vertex_riachuelo)
+  graph_cities_sergipe.add_vertex(vertex_riachao_do_dantas)
+  graph_cities_sergipe.add_vertex(vertex_ribeiropolis)
+  graph_cities_sergipe.add_vertex(vertex_rosario_do_catete)
+  graph_cities_sergipe.add_vertex(vertex_salgado)
+  graph_cities_sergipe.add_vertex(vertex_santa_luzia_do_itanhy)
+  graph_cities_sergipe.add_vertex(vertex_santa_rosa_de_lima)
+  graph_cities_sergipe.add_vertex(vertex_santana_do_sao_francisco)
+  graph_cities_sergipe.add_vertex(vertex_santo_amaro_das_brotas)
+  graph_cities_sergipe.add_vertex(vertex_simao_dias)
+  graph_cities_sergipe.add_vertex(vertex_siriri)
+  graph_cities_sergipe.add_vertex(vertex_sao_cristovao)
+  graph_cities_sergipe.add_vertex(vertex_sao_domingos)
+  graph_cities_sergipe.add_vertex(vertex_sao_francisco)
+  graph_cities_sergipe.add_vertex(vertex_sao_miguel_do_aleixo)
+  graph_cities_sergipe.add_vertex(vertex_telha)
+  graph_cities_sergipe.add_vertex(vertex_tobias_barreto)
+  graph_cities_sergipe.add_vertex(vertex_tomar_do_geru)
+  graph_cities_sergipe.add_vertex(vertex_umbauba)
 
   # Vizinhos Amparo de São Francisco
 
@@ -168,9 +168,9 @@ def instance():
   edge_amparo_canhoba = Edge(vertex_amparo_de_sao_francisco, vertex_canhoba, 9.6)
   edge_amparo_propria = Edge(vertex_amparo_de_sao_francisco, vertex_propria, 19.3)
 
-  graph_citys_sergipe.add_edge(edge_amparo_telha)
-  graph_citys_sergipe.add_edge(edge_amparo_canhoba)
-  graph_citys_sergipe.add_edge(edge_amparo_propria)
+  graph_cities_sergipe.add_edge(edge_amparo_telha)
+  graph_cities_sergipe.add_edge(edge_amparo_canhoba)
+  graph_cities_sergipe.add_edge(edge_amparo_propria)
 
   # Vizinhos Aquidabã
 
@@ -184,15 +184,15 @@ def instance():
   edge_aquidaba_japoata = Edge(vertex_aquidaba, vertex_japoata, 38.5)
   edge_aquidaba_malhada_dos_bois = Edge(vertex_aquidaba, vertex_malhada_dos_bois, 27.5)
 
-  graph_citys_sergipe.add_edge(edge_aquidaba_capela)
-  graph_citys_sergipe.add_edge(edge_aquidaba_cumbe)
-  graph_citys_sergipe.add_edge(edge_aquidaba_cedro)
-  graph_citys_sergipe.add_edge(edge_aquidaba_canhoba)
-  graph_citys_sergipe.add_edge(edge_aquidaba_gracho)
-  graph_citys_sergipe.add_edge(edge_aquidaba_muribeca)
-  graph_citys_sergipe.add_edge(edge_aquidaba_japaratuba)
-  graph_citys_sergipe.add_edge(edge_aquidaba_japoata)
-  graph_citys_sergipe.add_edge(edge_aquidaba_malhada_dos_bois)
+  graph_cities_sergipe.add_edge(edge_aquidaba_capela)
+  graph_cities_sergipe.add_edge(edge_aquidaba_cumbe)
+  graph_cities_sergipe.add_edge(edge_aquidaba_cedro)
+  graph_cities_sergipe.add_edge(edge_aquidaba_canhoba)
+  graph_cities_sergipe.add_edge(edge_aquidaba_gracho)
+  graph_cities_sergipe.add_edge(edge_aquidaba_muribeca)
+  graph_cities_sergipe.add_edge(edge_aquidaba_japaratuba)
+  graph_cities_sergipe.add_edge(edge_aquidaba_japoata)
+  graph_cities_sergipe.add_edge(edge_aquidaba_malhada_dos_bois)
 
   # Vizinhos Aracaju
 
@@ -203,12 +203,12 @@ def instance():
   edge_aracaju_socorro = Edge(vertex_aracaju, vertex_nossa_senhora_do_socorro, 16)
   edge_aracaju_sao_cristovao = Edge(vertex_aracaju, vertex_sao_cristovao, 22.9)
 
-  graph_citys_sergipe.add_edge(edge_aracaju_areia_branca)
-  graph_citys_sergipe.add_edge(edge_aracaju_barra_dos_coqueiros)
-  graph_citys_sergipe.add_edge(edge_aracaju_itaporanga)
-  graph_citys_sergipe.add_edge(edge_aracaju_laranjeiras)
-  graph_citys_sergipe.add_edge(edge_aracaju_sao_cristovao)
-  graph_citys_sergipe.add_edge(edge_aracaju_socorro)
+  graph_cities_sergipe.add_edge(edge_aracaju_areia_branca)
+  graph_cities_sergipe.add_edge(edge_aracaju_barra_dos_coqueiros)
+  graph_cities_sergipe.add_edge(edge_aracaju_itaporanga)
+  graph_cities_sergipe.add_edge(edge_aracaju_laranjeiras)
+  graph_cities_sergipe.add_edge(edge_aracaju_sao_cristovao)
+  graph_cities_sergipe.add_edge(edge_aracaju_socorro)
 
   # Vizinhos Arauá
 
@@ -217,10 +217,10 @@ def instance():
   edge_arua_pedrinhas = Edge(vertex_araua, vertex_pedrinhas, 10)
   edge_arua_umbauba = Edge(vertex_araua, vertex_umbauba, 18.5)
 
-  graph_citys_sergipe.add_edge(edge_arua_estancia)
-  graph_citys_sergipe.add_edge(edge_arua_pedrinhas)
-  graph_citys_sergipe.add_edge(edge_arua_itabaianinha)
-  graph_citys_sergipe.add_edge(edge_arua_umbauba)
+  graph_cities_sergipe.add_edge(edge_arua_estancia)
+  graph_cities_sergipe.add_edge(edge_arua_pedrinhas)
+  graph_cities_sergipe.add_edge(edge_arua_itabaianinha)
+  graph_cities_sergipe.add_edge(edge_arua_umbauba)
 
   # Vizinhos Areia Branca
 
@@ -229,18 +229,18 @@ def instance():
   edge_areia_branca_riachuelo = Edge(vertex_areia_branca, vertex_riachuelo, 21.6)
   edge_areia_branca_socorro = Edge(vertex_areia_branca, vertex_nossa_senhora_do_socorro, 31.2)
 
-  graph_citys_sergipe.add_edge(edge_areia_branca_itabaiana)
-  graph_citys_sergipe.add_edge(edge_areia_branca_laranjeiras)
-  graph_citys_sergipe.add_edge(edge_areia_branca_riachuelo)
-  graph_citys_sergipe.add_edge(edge_areia_branca_socorro)
+  graph_cities_sergipe.add_edge(edge_areia_branca_itabaiana)
+  graph_cities_sergipe.add_edge(edge_areia_branca_laranjeiras)
+  graph_cities_sergipe.add_edge(edge_areia_branca_riachuelo)
+  graph_cities_sergipe.add_edge(edge_areia_branca_socorro)
 
   # Vizinhos Barra dos Coqueiros
 
   edge_barra_coqueiros_santo_amaro = Edge(vertex_barra_dos_coqueiros, vertex_santo_amaro_das_brotas, 33.3)
   edge_barra_coqueiros_pirambu = Edge(vertex_barra_dos_coqueiros, vertex_pirambu, 29.7)
 
-  graph_citys_sergipe.add_edge(edge_barra_coqueiros_santo_amaro)
-  graph_citys_sergipe.add_edge(edge_barra_coqueiros_pirambu)
+  graph_cities_sergipe.add_edge(edge_barra_coqueiros_santo_amaro)
+  graph_cities_sergipe.add_edge(edge_barra_coqueiros_pirambu)
 
   # Vizinhos Boquim
 
@@ -249,10 +249,10 @@ def instance():
   edge_boquim_pedrinhas = Edge(vertex_boquim, vertex_pedrinhas, 7.9)
   edge_boquim_salgado = Edge(vertex_boquim, vertex_salgado, 24.2)
 
-  graph_citys_sergipe.add_edge(edge_boquim_estancia)
-  graph_citys_sergipe.add_edge(edge_boquim_lagarto)
-  graph_citys_sergipe.add_edge(edge_boquim_pedrinhas)
-  graph_citys_sergipe.add_edge(edge_boquim_salgado)
+  graph_cities_sergipe.add_edge(edge_boquim_estancia)
+  graph_cities_sergipe.add_edge(edge_boquim_lagarto)
+  graph_cities_sergipe.add_edge(edge_boquim_pedrinhas)
+  graph_cities_sergipe.add_edge(edge_boquim_salgado)
 
   # Vizinhos Brejo Grande
 
@@ -260,17 +260,17 @@ def instance():
   edge_brejo_grande_pacatuba = Edge(vertex_brejo_grande, vertex_pacatuba, 26.2)
   edge_brejo_grande_pirambu = Edge(vertex_brejo_grande, vertex_pirambu, 70.5)
 
-  graph_citys_sergipe.add_edge(edge_brejo_grande_ilha_das_flores)
-  graph_citys_sergipe.add_edge(edge_brejo_grande_pacatuba)
-  graph_citys_sergipe.add_edge(edge_brejo_grande_pirambu)
+  graph_cities_sergipe.add_edge(edge_brejo_grande_ilha_das_flores)
+  graph_cities_sergipe.add_edge(edge_brejo_grande_pacatuba)
+  graph_cities_sergipe.add_edge(edge_brejo_grande_pirambu)
 
   # Vizinhos Campo do Brito
 
   edge_campo_do_brito_itabaiana = Edge(vertex_campo_do_brito, vertex_itabaiana, 11.7)
   edge_campo_do_brito_sao_domingos = Edge(vertex_campo_do_brito, vertex_sao_domingos, 11.9)
 
-  graph_citys_sergipe.add_edge(edge_campo_do_brito_itabaiana)
-  graph_citys_sergipe.add_edge(edge_campo_do_brito_sao_domingos)
+  graph_cities_sergipe.add_edge(edge_campo_do_brito_itabaiana)
+  graph_cities_sergipe.add_edge(edge_campo_do_brito_sao_domingos)
 
   # Vizinhos Canhoba
 
@@ -278,17 +278,17 @@ def instance():
   edge_canhoba_telha = Edge(vertex_canhoba, vertex_telha, 17.1)
   edge_canhoba_propria = Edge(vertex_canhoba, vertex_propria, 21.5)
 
-  graph_citys_sergipe.add_edge(edge_canhoba_nossa_senhora_de_lourdes)
-  graph_citys_sergipe.add_edge(edge_canhoba_telha)
-  graph_citys_sergipe.add_edge(edge_canhoba_propria)
+  graph_cities_sergipe.add_edge(edge_canhoba_nossa_senhora_de_lourdes)
+  graph_cities_sergipe.add_edge(edge_canhoba_telha)
+  graph_cities_sergipe.add_edge(edge_canhoba_propria)
 
   # Vizinhos Canindé de São Fransisco
 
   edge_caninde_sao_francisco_poco_redondo = Edge(vertex_caninde_de_sao_francisco, vertex_poco_redondo, 20.9)
   edge_caninde_de_sao_francisco_monte_alegre_de_Sergipe = Edge(vertex_caninde_de_sao_francisco, vertex_monte_alegre_de_sergipe, 100) #passando por pelado
 
-  graph_citys_sergipe.add_edge(edge_caninde_sao_francisco_poco_redondo)
-  graph_citys_sergipe.add_edge(edge_caninde_de_sao_francisco_monte_alegre_de_Sergipe)
+  graph_cities_sergipe.add_edge(edge_caninde_sao_francisco_poco_redondo)
+  graph_cities_sergipe.add_edge(edge_caninde_de_sao_francisco_monte_alegre_de_Sergipe)
 
   # Vizinhos Capela
 
@@ -300,13 +300,13 @@ def instance():
   edge_capela_rosario_do_catete = Edge(vertex_capela, vertex_rosario_do_catete, 32.7)
   edge_capela_malhada_dos_bois = Edge(vertex_capela, vertex_malhada_dos_bois, 31.8)
 
-  graph_citys_sergipe.add_edge(edge_capela_carmopolis)
-  graph_citys_sergipe.add_edge(edge_capela_japaratuba)
-  graph_citys_sergipe.add_edge(edge_capela_nossa_senhora_das_dores)
-  graph_citys_sergipe.add_edge(edge_capela_muribeca)
-  graph_citys_sergipe.add_edge(edge_capela_rosario_do_catete)
-  graph_citys_sergipe.add_edge(edge_capela_siriri)
-  graph_citys_sergipe.add_edge(edge_capela_malhada_dos_bois)
+  graph_cities_sergipe.add_edge(edge_capela_carmopolis)
+  graph_cities_sergipe.add_edge(edge_capela_japaratuba)
+  graph_cities_sergipe.add_edge(edge_capela_nossa_senhora_das_dores)
+  graph_cities_sergipe.add_edge(edge_capela_muribeca)
+  graph_cities_sergipe.add_edge(edge_capela_rosario_do_catete)
+  graph_cities_sergipe.add_edge(edge_capela_siriri)
+  graph_cities_sergipe.add_edge(edge_capela_malhada_dos_bois)
 
   # Vizinhos Carira
 
@@ -317,12 +317,12 @@ def instance():
   edge_carira_pinhao = Edge(vertex_carira, vertex_pinhao, 32.4)
   edge_carira_pedra_mole = Edge(vertex_carira, vertex_pedra_mole, 35.9)
 
-  graph_citys_sergipe.add_edge(edge_carira_frei_paulo)
-  graph_citys_sergipe.add_edge(edge_carira_monte_alegre_de_sergipe)
-  graph_citys_sergipe.add_edge(edge_carira_nossa_senhora_da_gloria)
-  graph_citys_sergipe.add_edge(edge_carira_nossa_senhora_aparecida)
-  graph_citys_sergipe.add_edge(edge_carira_pinhao)
-  graph_citys_sergipe.add_edge(edge_carira_pedra_mole)
+  graph_cities_sergipe.add_edge(edge_carira_frei_paulo)
+  graph_cities_sergipe.add_edge(edge_carira_monte_alegre_de_sergipe)
+  graph_cities_sergipe.add_edge(edge_carira_nossa_senhora_da_gloria)
+  graph_cities_sergipe.add_edge(edge_carira_nossa_senhora_aparecida)
+  graph_cities_sergipe.add_edge(edge_carira_pinhao)
+  graph_cities_sergipe.add_edge(edge_carira_pedra_mole)
 
   # Vizinhos Carmópolis
 
@@ -337,16 +337,16 @@ def instance():
   edge_carmopolis_sao_francisco = Edge(vertex_carmopolis, vertex_sao_francisco, 40.8)
   edge_carmopolis_malhada_dos_bois = Edge(vertex_carmopolis, vertex_malhada_dos_bois, 39.9)
 
-  graph_citys_sergipe.add_edge(edge_carmopolis_aquidaba)
-  graph_citys_sergipe.add_edge(edge_carmopolis_general_maynard)
-  graph_citys_sergipe.add_edge(edge_carmopolis_japaratuba)
-  graph_citys_sergipe.add_edge(edge_carmopolis_japoata)
-  graph_citys_sergipe.add_edge(edge_carmopolis_muribeca)
-  graph_citys_sergipe.add_edge(edge_carmopolis_pirambu)
-  graph_citys_sergipe.add_edge(edge_carmopolis_rosario_do_catete)
-  graph_citys_sergipe.add_edge(edge_carmopolis_siriri)
-  graph_citys_sergipe.add_edge(edge_carmopolis_sao_francisco)
-  graph_citys_sergipe.add_edge(edge_carmopolis_malhada_dos_bois)
+  graph_cities_sergipe.add_edge(edge_carmopolis_aquidaba)
+  graph_cities_sergipe.add_edge(edge_carmopolis_general_maynard)
+  graph_cities_sergipe.add_edge(edge_carmopolis_japaratuba)
+  graph_cities_sergipe.add_edge(edge_carmopolis_japoata)
+  graph_cities_sergipe.add_edge(edge_carmopolis_muribeca)
+  graph_cities_sergipe.add_edge(edge_carmopolis_pirambu)
+  graph_cities_sergipe.add_edge(edge_carmopolis_rosario_do_catete)
+  graph_cities_sergipe.add_edge(edge_carmopolis_siriri)
+  graph_cities_sergipe.add_edge(edge_carmopolis_sao_francisco)
+  graph_cities_sergipe.add_edge(edge_carmopolis_malhada_dos_bois)
 
   # Vizinhos Cedro de São João
 
@@ -357,12 +357,12 @@ def instance():
   edge_cedro_sao_joao_telha = Edge(vertex_cedro_de_sao_joao, vertex_telha, 5.8)
   edge_cedro_sao_joao_malhada_dos_bois = Edge(vertex_cedro_de_sao_joao, vertex_malhada_dos_bois, 19.2)
 
-  graph_citys_sergipe.add_edge(edge_cedro_sao_joao_japoata)
-  graph_citys_sergipe.add_edge(edge_cedro_sao_joao_muribeca)
-  graph_citys_sergipe.add_edge(edge_cedro_sao_joao_telha)
-  graph_citys_sergipe.add_edge(edge_cedro_sao_joao_sao_francisco)
-  graph_citys_sergipe.add_edge(edge_cedro_sao_joao_propria)
-  graph_citys_sergipe.add_edge(edge_cedro_sao_joao_malhada_dos_bois)
+  graph_cities_sergipe.add_edge(edge_cedro_sao_joao_japoata)
+  graph_cities_sergipe.add_edge(edge_cedro_sao_joao_muribeca)
+  graph_cities_sergipe.add_edge(edge_cedro_sao_joao_telha)
+  graph_cities_sergipe.add_edge(edge_cedro_sao_joao_sao_francisco)
+  graph_cities_sergipe.add_edge(edge_cedro_sao_joao_propria)
+  graph_cities_sergipe.add_edge(edge_cedro_sao_joao_malhada_dos_bois)
 
   # Vizinhos Cristinápolis
 
@@ -370,9 +370,9 @@ def instance():
   edge_cristinapolis_tomar_do_geru = Edge(vertex_cristinapolis, vertex_tomar_do_geru, 17.1)
   edge_cristinapolis_umbauba = Edge(vertex_cristinapolis, vertex_umbauba, 16.5)
 
-  graph_citys_sergipe.add_edge(edge_cristinapolis_indiaroba)
-  graph_citys_sergipe.add_edge(edge_cristinapolis_tomar_do_geru)
-  graph_citys_sergipe.add_edge(edge_cristinapolis_umbauba)
+  graph_cities_sergipe.add_edge(edge_cristinapolis_indiaroba)
+  graph_cities_sergipe.add_edge(edge_cristinapolis_tomar_do_geru)
+  graph_cities_sergipe.add_edge(edge_cristinapolis_umbauba)
 
   # Vizinhos Cumbe
 
@@ -381,10 +381,10 @@ def instance():
   edge_cumbe_nossa_senhora_das_dores = Edge(vertex_cumbe, vertex_nossa_senhora_das_dores, 18.3)
   edge_cumbe_sao_miguel_do_aleixo = Edge(vertex_cumbe, vertex_sao_miguel_do_aleixo, 30.1)
 
-  graph_citys_sergipe.add_edge(edge_cumbe_feira_nova)
-  graph_citys_sergipe.add_edge(edge_cumbe_itabi)
-  graph_citys_sergipe.add_edge(edge_cumbe_nossa_senhora_das_dores)
-  graph_citys_sergipe.add_edge(edge_cumbe_sao_miguel_do_aleixo)
+  graph_cities_sergipe.add_edge(edge_cumbe_feira_nova)
+  graph_cities_sergipe.add_edge(edge_cumbe_itabi)
+  graph_cities_sergipe.add_edge(edge_cumbe_nossa_senhora_das_dores)
+  graph_cities_sergipe.add_edge(edge_cumbe_sao_miguel_do_aleixo)
 
   # Vizinhos Divina Pastora
 
@@ -393,10 +393,10 @@ def instance():
   edge_divina_pastora_siriri = Edge(vertex_divina_pastora, vertex_siriri, 10.9)
   edge_divina_pastora_malhador = Edge(vertex_divina_pastora, vertex_malhador, 27)
 
-  graph_citys_sergipe.add_edge(edge_divina_pastora_riachuelo)
-  graph_citys_sergipe.add_edge(edge_divina_pastora_santa_rosa_de_lima)
-  graph_citys_sergipe.add_edge(edge_divina_pastora_siriri)
-  graph_citys_sergipe.add_edge(edge_divina_pastora_malhador)
+  graph_cities_sergipe.add_edge(edge_divina_pastora_riachuelo)
+  graph_cities_sergipe.add_edge(edge_divina_pastora_santa_rosa_de_lima)
+  graph_cities_sergipe.add_edge(edge_divina_pastora_siriri)
+  graph_cities_sergipe.add_edge(edge_divina_pastora_malhador)
 
   # Vizinhos Estancia
 
@@ -405,10 +405,10 @@ def instance():
   edge_estancia_salgado = Edge(vertex_estancia, vertex_salgado, 42.1)
   edge_estancia_itaporanga_d_ajuda = Edge(vertex_estancia, vertex_itaporanga_d_ajuda, 38.6)
 
-  graph_citys_sergipe.add_edge(edge_estancia_santa_luiza_do_itanhy)
-  graph_citys_sergipe.add_edge(edge_estancia_itaporanga_d_ajuda)
-  graph_citys_sergipe.add_edge(edge_estancia_umabuba)
-  graph_citys_sergipe.add_edge(edge_estancia_salgado)
+  graph_cities_sergipe.add_edge(edge_estancia_santa_luiza_do_itanhy)
+  graph_cities_sergipe.add_edge(edge_estancia_itaporanga_d_ajuda)
+  graph_cities_sergipe.add_edge(edge_estancia_umabuba)
+  graph_cities_sergipe.add_edge(edge_estancia_salgado)
 
   # Vizinhos Feira Nova
 
@@ -417,10 +417,10 @@ def instance():
   edge_feira_nova_nossa_s_dores = Edge(vertex_feira_nova, vertex_nossa_senhora_das_dores, 32)
   edge_feira_nova_sao_miguel_aleixo = Edge(vertex_feira_nova, vertex_sao_miguel_do_aleixo, 20)
 
-  graph_citys_sergipe.add_edge(edge_feira_nova_nossa_s_dores)
-  graph_citys_sergipe.add_edge(edge_feira_nova_graccho)
-  graph_citys_sergipe.add_edge(edge_feira_nova_nossa_s_gloria)
-  graph_citys_sergipe.add_edge(edge_feira_nova_sao_miguel_aleixo)
+  graph_cities_sergipe.add_edge(edge_feira_nova_nossa_s_dores)
+  graph_cities_sergipe.add_edge(edge_feira_nova_graccho)
+  graph_cities_sergipe.add_edge(edge_feira_nova_nossa_s_gloria)
+  graph_cities_sergipe.add_edge(edge_feira_nova_sao_miguel_aleixo)
 
   # Vizinhos Frei Paulo
 
@@ -430,11 +430,11 @@ def instance():
   edge_frei_paulo_pedra_mole = Edge(vertex_frei_paulo, vertex_pedra_mole, 22)
   edge_frei_paulo_itabaiana = Edge(vertex_frei_paulo, vertex_itabaiana, 20.2)
 
-  graph_citys_sergipe.add_edge(edge_frei_paulo_ribeiropolis)
-  graph_citys_sergipe.add_edge(edge_frei_paulo_pinhao)
-  graph_citys_sergipe.add_edge(edge_frei_paulo_nossa_s_aparecida)
-  graph_citys_sergipe.add_edge(edge_frei_paulo_pedra_mole)
-  graph_citys_sergipe.add_edge(edge_frei_paulo_itabaiana)
+  graph_cities_sergipe.add_edge(edge_frei_paulo_ribeiropolis)
+  graph_cities_sergipe.add_edge(edge_frei_paulo_pinhao)
+  graph_cities_sergipe.add_edge(edge_frei_paulo_nossa_s_aparecida)
+  graph_cities_sergipe.add_edge(edge_frei_paulo_pedra_mole)
+  graph_cities_sergipe.add_edge(edge_frei_paulo_itabaiana)
 
   # Vizinhos Gararu
 
@@ -443,22 +443,22 @@ def instance():
   edge_gararu_nossa_senhora_de_lourdes = Edge(vertex_gararu, vertex_nossa_senhora_de_lourdes, 19.4)
   edge_gararu_nossa_senhora_da_gloria = Edge(vertex_gararu, vertex_nossa_senhora_da_gloria, 66.4)
 
-  graph_citys_sergipe.add_edge(edge_gararu_itabi)
-  graph_citys_sergipe.add_edge(edge_gararu_porto_da_folha)
-  graph_citys_sergipe.add_edge(edge_gararu_nossa_senhora_de_lourdes)
-  graph_citys_sergipe.add_edge(edge_gararu_nossa_senhora_da_gloria)
+  graph_cities_sergipe.add_edge(edge_gararu_itabi)
+  graph_cities_sergipe.add_edge(edge_gararu_porto_da_folha)
+  graph_cities_sergipe.add_edge(edge_gararu_nossa_senhora_de_lourdes)
+  graph_cities_sergipe.add_edge(edge_gararu_nossa_senhora_da_gloria)
 
   # Vizinhos General Maynard
 
   edge_general_maynard_rosario_do_catete = Edge(vertex_general_maynard, vertex_rosario_do_catete, 6.6)
 
-  graph_citys_sergipe.add_edge(edge_general_maynard_rosario_do_catete)
+  graph_cities_sergipe.add_edge(edge_general_maynard_rosario_do_catete)
 
   # Vizinhos Gracho Cardoso
 
   edge_graccho_itabi = Edge(vertex_gracho_cardoso, vertex_itabi, 18.6)
 
-  graph_citys_sergipe.add_edge(edge_graccho_itabi)
+  graph_cities_sergipe.add_edge(edge_graccho_itabi)
 
   # Vizinhos Ilha das Flores
 
@@ -467,18 +467,18 @@ def instance():
   edge_ilha_das_flores_neopolis = Edge(vertex_ilha_das_flores, vertex_neopolis, 17)
   edge_ilha_das_flores_japaratuba = Edge(vertex_ilha_das_flores, vertex_japaratuba, 67.4)
 
-  graph_citys_sergipe.add_edge(edge_ilha_das_flores_brejo_grande)
-  graph_citys_sergipe.add_edge(edge_ilha_das_flores_pacatuba)
-  graph_citys_sergipe.add_edge(edge_ilha_das_flores_neopolis)
-  graph_citys_sergipe.add_edge(edge_ilha_das_flores_japaratuba)
+  graph_cities_sergipe.add_edge(edge_ilha_das_flores_brejo_grande)
+  graph_cities_sergipe.add_edge(edge_ilha_das_flores_pacatuba)
+  graph_cities_sergipe.add_edge(edge_ilha_das_flores_neopolis)
+  graph_cities_sergipe.add_edge(edge_ilha_das_flores_japaratuba)
 
   # Vizinhos Indiabora
 
   edge_indiabora_santa_luzia_do_itanhy = Edge(vertex_indiaroba, vertex_santa_luzia_do_itanhy, 22.6)
   edge_indiabora_umbauba = Edge(vertex_indiaroba, vertex_umbauba, 25.9)
 
-  graph_citys_sergipe.add_edge(edge_indiabora_santa_luzia_do_itanhy)
-  graph_citys_sergipe.add_edge(edge_indiabora_umbauba)
+  graph_cities_sergipe.add_edge(edge_indiabora_santa_luzia_do_itanhy)
+  graph_cities_sergipe.add_edge(edge_indiabora_umbauba)
 
 
   # Vizinhos Itabaiana
@@ -488,10 +488,10 @@ def instance():
   edge_itabaiana_ribeiropolis = Edge(vertex_itabaiana, vertex_ribeiropolis, 21.5)
   edge_itabaiana_macambira = Edge(vertex_itabaiana, vertex_macambira, 14.2)
 
-  graph_citys_sergipe.add_edge(edge_itabaiana_malhador)
-  graph_citys_sergipe.add_edge(edge_itabaiana_moita_bonita)
-  graph_citys_sergipe.add_edge(edge_itabaiana_ribeiropolis)
-  graph_citys_sergipe.add_edge(edge_itabaiana_macambira)
+  graph_cities_sergipe.add_edge(edge_itabaiana_malhador)
+  graph_cities_sergipe.add_edge(edge_itabaiana_moita_bonita)
+  graph_cities_sergipe.add_edge(edge_itabaiana_ribeiropolis)
+  graph_cities_sergipe.add_edge(edge_itabaiana_macambira)
 
   # Vizinhos Itabaianinha
 
@@ -499,15 +499,15 @@ def instance():
   edge_itabaianinha_umbauba = Edge(vertex_itabaianinha, vertex_umbauba, 20.5)
   edge_itabaianinha_tobias_barreto = Edge(vertex_itabaianinha, vertex_tobias_barreto, 30.8)
 
-  graph_citys_sergipe.add_edge(edge_itabaianinha_tomar_do_geru)
-  graph_citys_sergipe.add_edge(edge_itabaianinha_umbauba)
-  graph_citys_sergipe.add_edge(edge_itabaianinha_tobias_barreto)
+  graph_cities_sergipe.add_edge(edge_itabaianinha_tomar_do_geru)
+  graph_cities_sergipe.add_edge(edge_itabaianinha_umbauba)
+  graph_cities_sergipe.add_edge(edge_itabaianinha_tobias_barreto)
 
   # Vizinhos Itabi
 
   edge_itabi_nossa_senhora_de_lourdes = Edge(vertex_itabi, vertex_nossa_senhora_de_lourdes, 12.2)
 
-  graph_citys_sergipe.add_edge(edge_itabi_nossa_senhora_de_lourdes)
+  graph_cities_sergipe.add_edge(edge_itabi_nossa_senhora_de_lourdes)
 
   # Vizinhos Itaporanga d'Ajuda
 
@@ -516,10 +516,10 @@ def instance():
   edge_itaporanga_d_ajuda_sao_cristovao = Edge(vertex_itaporanga_d_ajuda, vertex_sao_cristovao, 15.6)
   edge_itaporanga_d_ajuda_nossa_senhora_do_socorro = Edge(vertex_itaporanga_d_ajuda, vertex_nossa_senhora_do_socorro, 31.5)
 
-  graph_citys_sergipe.add_edge(edge_itaporanga_d_ajuda_salgado)
-  graph_citys_sergipe.add_edge(edge_itaporanga_d_ajuda_lagarto)
-  graph_citys_sergipe.add_edge(edge_itaporanga_d_ajuda_sao_cristovao)
-  graph_citys_sergipe.add_edge(edge_itaporanga_d_ajuda_nossa_senhora_do_socorro)
+  graph_cities_sergipe.add_edge(edge_itaporanga_d_ajuda_salgado)
+  graph_cities_sergipe.add_edge(edge_itaporanga_d_ajuda_lagarto)
+  graph_cities_sergipe.add_edge(edge_itaporanga_d_ajuda_sao_cristovao)
+  graph_cities_sergipe.add_edge(edge_itaporanga_d_ajuda_nossa_senhora_do_socorro)
 
   # Vizinhos Japaratuba
 
@@ -532,14 +532,14 @@ def instance():
   edge_japaratuba_japoata = Edge(vertex_japaratuba, vertex_japoata, 43.2)
   edge_japaratuba_malhada_dos_bois = Edge(vertex_japaratuba, vertex_malhada_dos_bois, 37)
 
-  graph_citys_sergipe.add_edge(edge_japaratuba_muribeca)
-  graph_citys_sergipe.add_edge(edge_japaratuba_sao_francisco)
-  graph_citys_sergipe.add_edge(edge_japaratuba_pirambu)
-  graph_citys_sergipe.add_edge(edge_japaratuba_pacatuba)
-  graph_citys_sergipe.add_edge(edge_japaratuba_rosario_do_catete)
-  graph_citys_sergipe.add_edge(edge_japaratuba_siriri)
-  graph_citys_sergipe.add_edge(edge_japaratuba_japoata)
-  graph_citys_sergipe.add_edge(edge_japaratuba_malhada_dos_bois)
+  graph_cities_sergipe.add_edge(edge_japaratuba_muribeca)
+  graph_cities_sergipe.add_edge(edge_japaratuba_sao_francisco)
+  graph_cities_sergipe.add_edge(edge_japaratuba_pirambu)
+  graph_cities_sergipe.add_edge(edge_japaratuba_pacatuba)
+  graph_cities_sergipe.add_edge(edge_japaratuba_rosario_do_catete)
+  graph_cities_sergipe.add_edge(edge_japaratuba_siriri)
+  graph_cities_sergipe.add_edge(edge_japaratuba_japoata)
+  graph_cities_sergipe.add_edge(edge_japaratuba_malhada_dos_bois)
 
   # Vizinhos Japoatã
 
@@ -550,12 +550,12 @@ def instance():
   edge_japoata_muribeca = Edge(vertex_japoata, vertex_muribeca, 25.6)
   edge_japoata_santana_do_sao_francisco = Edge(vertex_japoata, vertex_santana_do_sao_francisco, 28.5)
 
-  graph_citys_sergipe.add_edge(edge_japoata_propria)
-  graph_citys_sergipe.add_edge(edge_japoata_neopolis)
-  graph_citys_sergipe.add_edge(edge_japoata_pacatuba)
-  graph_citys_sergipe.add_edge(edge_japoata_malhada_dos_bois)
-  graph_citys_sergipe.add_edge(edge_japoata_muribeca)
-  graph_citys_sergipe.add_edge(edge_japoata_santana_do_sao_francisco)
+  graph_cities_sergipe.add_edge(edge_japoata_propria)
+  graph_cities_sergipe.add_edge(edge_japoata_neopolis)
+  graph_cities_sergipe.add_edge(edge_japoata_pacatuba)
+  graph_cities_sergipe.add_edge(edge_japoata_malhada_dos_bois)
+  graph_cities_sergipe.add_edge(edge_japoata_muribeca)
+  graph_cities_sergipe.add_edge(edge_japoata_santana_do_sao_francisco)
 
   # Vizinhos Lagarto
 
@@ -564,10 +564,10 @@ def instance():
   edge_lagarto_sao_domingos = Edge(vertex_lagarto, vertex_sao_domingos, 21.7)
   edge_lagarto_salgado = Edge(vertex_lagarto, vertex_salgado, 25.5)
 
-  graph_citys_sergipe.add_edge(edge_lagarto_simao_dias)
-  graph_citys_sergipe.add_edge(edge_lagarto_riachao_do_dantas)
-  graph_citys_sergipe.add_edge(edge_lagarto_sao_domingos)
-  graph_citys_sergipe.add_edge(edge_lagarto_salgado)
+  graph_cities_sergipe.add_edge(edge_lagarto_simao_dias)
+  graph_cities_sergipe.add_edge(edge_lagarto_riachao_do_dantas)
+  graph_cities_sergipe.add_edge(edge_lagarto_sao_domingos)
+  graph_cities_sergipe.add_edge(edge_lagarto_salgado)
 
   # Vizinhos Laranjeiras
 
@@ -575,9 +575,9 @@ def instance():
   edge_laranjeiras_maruim = Edge(vertex_laranjeiras, vertex_maruim, 13.3)
   edge_laranjeiras_nossa_sra_socorro = Edge(vertex_laranjeiras, vertex_nossa_senhora_do_socorro, 9.1)
 
-  graph_citys_sergipe.add_edge(edge_laranjeiras_riachuelo)
-  graph_citys_sergipe.add_edge(edge_laranjeiras_maruim)
-  graph_citys_sergipe.add_edge(edge_laranjeiras_nossa_sra_socorro)
+  graph_cities_sergipe.add_edge(edge_laranjeiras_riachuelo)
+  graph_cities_sergipe.add_edge(edge_laranjeiras_maruim)
+  graph_cities_sergipe.add_edge(edge_laranjeiras_nossa_sra_socorro)
 
   # Vizinhos Macambira
 
@@ -588,12 +588,12 @@ def instance():
   edge_macambira_nossa_senhora_da_gloria = Edge(vertex_macambira, vertex_nossa_senhora_da_gloria, 99.6)
   edge_macambira_pedra_mole = Edge(vertex_macambira, vertex_pedra_mole, 21.3)
 
-  graph_citys_sergipe.add_edge(edge_macambira_pinhao)
-  graph_citys_sergipe.add_edge(edge_macambira_frei_paulo)
-  graph_citys_sergipe.add_edge(edge_macambira_ribeiropolis)
-  graph_citys_sergipe.add_edge(edge_macambira_carira)
-  graph_citys_sergipe.add_edge(edge_macambira_nossa_senhora_da_gloria)
-  graph_citys_sergipe.add_edge(edge_macambira_pedra_mole)
+  graph_cities_sergipe.add_edge(edge_macambira_pinhao)
+  graph_cities_sergipe.add_edge(edge_macambira_frei_paulo)
+  graph_cities_sergipe.add_edge(edge_macambira_ribeiropolis)
+  graph_cities_sergipe.add_edge(edge_macambira_carira)
+  graph_cities_sergipe.add_edge(edge_macambira_nossa_senhora_da_gloria)
+  graph_cities_sergipe.add_edge(edge_macambira_pedra_mole)
 
   # Vizinhos Malhada dos Bois
 
@@ -602,18 +602,18 @@ def instance():
   edge_malhada_dos_bois_rosario_do_catete = Edge(vertex_malhada_dos_bois, vertex_rosario_do_catete, 46.5)
   edge_malhada_dos_bois_muribeca = Edge(vertex_malhada_dos_bois, vertex_muribeca, 12.2)
 
-  graph_citys_sergipe.add_edge(edge_malhada_dos_bois_sao_francisco)
-  graph_citys_sergipe.add_edge(edge_malhada_dos_bois_propria)
-  graph_citys_sergipe.add_edge(edge_malhada_dos_bois_rosario_do_catete)
-  graph_citys_sergipe.add_edge(edge_malhada_dos_bois_muribeca)
+  graph_cities_sergipe.add_edge(edge_malhada_dos_bois_sao_francisco)
+  graph_cities_sergipe.add_edge(edge_malhada_dos_bois_propria)
+  graph_cities_sergipe.add_edge(edge_malhada_dos_bois_rosario_do_catete)
+  graph_cities_sergipe.add_edge(edge_malhada_dos_bois_muribeca)
 
   # Vizinhos Malhador
 
   edge_malhador_riachuelo = Edge(vertex_malhador, vertex_riachuelo, 19.5)
   edge_malhador_moita_bonita = Edge(vertex_malhador, vertex_moita_bonita, 14.2)
 
-  graph_citys_sergipe.add_edge(edge_malhador_riachuelo)
-  graph_citys_sergipe.add_edge(edge_malhador_moita_bonita)
+  graph_cities_sergipe.add_edge(edge_malhador_riachuelo)
+  graph_cities_sergipe.add_edge(edge_malhador_moita_bonita)
 
   # Vizinhos Maruim
 
@@ -622,10 +622,10 @@ def instance():
   edge_maruim_nossa_senhora_do_socorro = Edge(vertex_maruim, vertex_nossa_senhora_do_socorro, 17.7)
   edge_maruim_pirambu = Edge(vertex_maruim, vertex_pirambu, 36.6)
 
-  graph_citys_sergipe.add_edge(edge_maruim_santo_amaro_das_brotas)
-  graph_citys_sergipe.add_edge(edge_maruim_rosario_do_catete)
-  graph_citys_sergipe.add_edge(edge_maruim_nossa_senhora_do_socorro)
-  graph_citys_sergipe.add_edge(edge_maruim_pirambu)
+  graph_cities_sergipe.add_edge(edge_maruim_santo_amaro_das_brotas)
+  graph_cities_sergipe.add_edge(edge_maruim_rosario_do_catete)
+  graph_cities_sergipe.add_edge(edge_maruim_nossa_senhora_do_socorro)
+  graph_cities_sergipe.add_edge(edge_maruim_pirambu)
 
   # Vizinhos Moita Bonita
 
@@ -634,10 +634,10 @@ def instance():
   edge_moita_bonita_santa_rosa_de_lima = Edge(vertex_moita_bonita, vertex_santa_rosa_de_lima, 22)
   edge_moita_bonita_sao_miguel_do_aleixo = Edge(vertex_moita_bonita, vertex_sao_miguel_do_aleixo, 27.7)
 
-  graph_citys_sergipe.add_edge(edge_moita_bonita_nossa_s_das_dores)
-  graph_citys_sergipe.add_edge(edge_moita_bonita_ribeiropolis)
-  graph_citys_sergipe.add_edge(edge_moita_bonita_sao_miguel_do_aleixo)
-  graph_citys_sergipe.add_edge(edge_moita_bonita_santa_rosa_de_lima)
+  graph_cities_sergipe.add_edge(edge_moita_bonita_nossa_s_das_dores)
+  graph_cities_sergipe.add_edge(edge_moita_bonita_ribeiropolis)
+  graph_cities_sergipe.add_edge(edge_moita_bonita_sao_miguel_do_aleixo)
+  graph_cities_sergipe.add_edge(edge_moita_bonita_santa_rosa_de_lima)
 
   # Vizinhos Monte Alegre de Sergipe
 
@@ -645,17 +645,17 @@ def instance():
   edge_monte_alegre_de_Sergipe_porto_da_folha = Edge(vertex_monte_alegre_de_sergipe, vertex_porto_da_folha, 41.7)
   edge_monte_alegre_de_Sergipe_poco_redondo = Edge(vertex_monte_alegre_de_sergipe, vertex_poco_redondo, 29.2)
 
-  graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_poco_redondo)
-  graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_nossa_s_d_gloria)
-  graph_citys_sergipe.add_edge(edge_monte_alegre_de_Sergipe_porto_da_folha)
+  graph_cities_sergipe.add_edge(edge_monte_alegre_de_Sergipe_poco_redondo)
+  graph_cities_sergipe.add_edge(edge_monte_alegre_de_Sergipe_nossa_s_d_gloria)
+  graph_cities_sergipe.add_edge(edge_monte_alegre_de_Sergipe_porto_da_folha)
 
   # Vizinhos Muribeca
 
   edge_muribeca_propria = Edge(vertex_muribeca, vertex_propria, 30.9)
   edge_muribeca_sao_francisco = Edge(vertex_muribeca, vertex_sao_francisco, 14.9)
 
-  graph_citys_sergipe.add_edge(edge_muribeca_propria)
-  graph_citys_sergipe.add_edge(edge_muribeca_sao_francisco)
+  graph_cities_sergipe.add_edge(edge_muribeca_propria)
+  graph_cities_sergipe.add_edge(edge_muribeca_sao_francisco)
 
   # Vizinhos Neópolis
 
@@ -663,9 +663,9 @@ def instance():
   edge_neopolis_santana_do_sao_francisco = Edge(vertex_neopolis, vertex_santana_do_sao_francisco, 4.4)
   edge_neopolis_propria = Edge(vertex_neopolis, vertex_propria, 41)
 
-  graph_citys_sergipe.add_edge(edge_neopolis_pacatuba)
-  graph_citys_sergipe.add_edge(edge_neopolis_santana_do_sao_francisco)
-  graph_citys_sergipe.add_edge(edge_neopolis_propria)
+  graph_cities_sergipe.add_edge(edge_neopolis_pacatuba)
+  graph_cities_sergipe.add_edge(edge_neopolis_santana_do_sao_francisco)
+  graph_cities_sergipe.add_edge(edge_neopolis_propria)
 
   # Vizinhos Nossa Senhora Aparecida
 
@@ -673,15 +673,15 @@ def instance():
   edge_nossa_senhora_aparecida_sao_miguel_do_aleixo  = Edge(vertex_nossa_senhora_aparecida, vertex_sao_miguel_do_aleixo, 9)
   edge_nossa_senhora_aparecida_ribeiropolis  = Edge(vertex_nossa_senhora_aparecida, vertex_ribeiropolis, 18.2)
 
-  graph_citys_sergipe.add_edge(edge_nossa_senhora_aparecida_nossa_senhora_da_gloria)
-  graph_citys_sergipe.add_edge(edge_nossa_senhora_aparecida_sao_miguel_do_aleixo)
-  graph_citys_sergipe.add_edge(edge_nossa_senhora_aparecida_ribeiropolis)
+  graph_cities_sergipe.add_edge(edge_nossa_senhora_aparecida_nossa_senhora_da_gloria)
+  graph_cities_sergipe.add_edge(edge_nossa_senhora_aparecida_sao_miguel_do_aleixo)
+  graph_cities_sergipe.add_edge(edge_nossa_senhora_aparecida_ribeiropolis)
 
   # Vizinhos Nossa Senhora da Glória
 
   edge_nossa_senhora_da_gloria_porto_da_folha = Edge(vertex_nossa_senhora_da_gloria, vertex_porto_da_folha ,56.6)
 
-  graph_citys_sergipe.add_edge(edge_nossa_senhora_da_gloria_porto_da_folha)
+  graph_cities_sergipe.add_edge(edge_nossa_senhora_da_gloria_porto_da_folha)
 
   # Vizinhos Nossa Senhora das Dores
 
@@ -689,9 +689,9 @@ def instance():
   edge_nossa_senhora_das_dores_sao_miguel_do_aleixo = Edge(vertex_nossa_senhora_das_dores, vertex_sao_miguel_do_aleixo, 40)
   edge_nossa_senhora_das_dores_ribeiropolis = Edge(vertex_nossa_senhora_das_dores, vertex_ribeiropolis, 33.3)
 
-  graph_citys_sergipe.add_edge(edge_nossa_senhora_das_dores_siriri)
-  graph_citys_sergipe.add_edge(edge_nossa_senhora_das_dores_sao_miguel_do_aleixo)
-  graph_citys_sergipe.add_edge(edge_nossa_senhora_das_dores_ribeiropolis)
+  graph_cities_sergipe.add_edge(edge_nossa_senhora_das_dores_siriri)
+  graph_cities_sergipe.add_edge(edge_nossa_senhora_das_dores_sao_miguel_do_aleixo)
+  graph_cities_sergipe.add_edge(edge_nossa_senhora_das_dores_ribeiropolis)
 
   # Vizinhos Nossa Senhora de Lourdes
 
@@ -701,39 +701,39 @@ def instance():
 
   edge_pacatuba_pirambu = Edge(vertex_pacatuba, vertex_pirambu, 60.3)
 
-  graph_citys_sergipe.add_edge(edge_pacatuba_pirambu)
+  graph_cities_sergipe.add_edge(edge_pacatuba_pirambu)
 
   # Vizinhos Pedra Mole
 
   edge_pedra_mole_pinhao = Edge(vertex_pedra_mole, vertex_pinhao, 9.5)
   edge_pedra_mole_simao_dias = Edge(vertex_pedra_mole, vertex_simao_dias, 27)
 
-  graph_citys_sergipe.add_edge(edge_pedra_mole_pinhao)
-  graph_citys_sergipe.add_edge(edge_pedra_mole_simao_dias)
+  graph_cities_sergipe.add_edge(edge_pedra_mole_pinhao)
+  graph_cities_sergipe.add_edge(edge_pedra_mole_simao_dias)
 
   # Vizinhos Pedrinhas
 
   edge_pedinhas_riachao_do_dantas = Edge(vertex_pedrinhas, vertex_riachao_do_dantas, 16.6)
 
-  graph_citys_sergipe.add_edge(edge_pedinhas_riachao_do_dantas)
+  graph_cities_sergipe.add_edge(edge_pedinhas_riachao_do_dantas)
 
   # Vizinhos Pinhão
 
   edge_pinhao_simao_dias = Edge(vertex_pinhao, vertex_simao_dias, 24.4)
 
-  graph_citys_sergipe.add_edge(edge_pinhao_simao_dias)
+  graph_cities_sergipe.add_edge(edge_pinhao_simao_dias)
 
   # Vizinhos Pirambu
 
   edge_pirambu_santo_amaro_das_brotas = Edge(vertex_pirambu, vertex_santo_amaro_das_brotas, 35.7)
 
-  graph_citys_sergipe.add_edge(edge_pirambu_santo_amaro_das_brotas)
+  graph_cities_sergipe.add_edge(edge_pirambu_santo_amaro_das_brotas)
 
   # Vizinhos Porto da Folha
 
   edge_porto_da_folha_poco_redondo = Edge(vertex_porto_da_folha, vertex_poco_redondo, 71.1)
 
-  graph_citys_sergipe.add_edge(edge_porto_da_folha_poco_redondo)
+  graph_cities_sergipe.add_edge(edge_porto_da_folha_poco_redondo)
 
   # Vizinhos Poço Redondo
 
@@ -742,8 +742,8 @@ def instance():
   edge_poco_verde_simao_dias = Edge(vertex_poco_verde, vertex_simao_dias, 44.9)
   edge_poco_verde_tobias_barreto = Edge(vertex_poco_verde, vertex_tobias_barreto, 56.3)
 
-  graph_citys_sergipe.add_edge(edge_poco_verde_simao_dias)
-  graph_citys_sergipe.add_edge(edge_poco_verde_tobias_barreto)
+  graph_cities_sergipe.add_edge(edge_poco_verde_simao_dias)
+  graph_cities_sergipe.add_edge(edge_poco_verde_tobias_barreto)
 
   # Vizinhos Propriá
 
@@ -751,41 +751,41 @@ def instance():
   edge_propria_telha = Edge(vertex_propria, vertex_telha, 9.4)
   edge_propria_sanatana_do_sao_fracisco = Edge(vertex_propria, vertex_santana_do_sao_francisco, 39.3)
 
-  graph_citys_sergipe.add_edge(edge_propria_sao_fracisco)
-  graph_citys_sergipe.add_edge(edge_propria_sanatana_do_sao_fracisco)
-  graph_citys_sergipe.add_edge(edge_propria_telha)
+  graph_cities_sergipe.add_edge(edge_propria_sao_fracisco)
+  graph_cities_sergipe.add_edge(edge_propria_sanatana_do_sao_fracisco)
+  graph_cities_sergipe.add_edge(edge_propria_telha)
 
   # Vizinhos Riachuelo
 
   edge_riachuelo_santa_rosa_de_lima = Edge(vertex_riachuelo, vertex_santa_rosa_de_lima, 11.5)
 
-  graph_citys_sergipe.add_edge(edge_riachuelo_santa_rosa_de_lima)
+  graph_cities_sergipe.add_edge(edge_riachuelo_santa_rosa_de_lima)
 
   # Vizinhos Riachão do Dantas
 
   edge_riachao_tobias_barreto = Edge(vertex_riachao_do_dantas, vertex_tobias_barreto, 33.1)
 
-  graph_citys_sergipe.add_edge(edge_riachao_tobias_barreto)
+  graph_cities_sergipe.add_edge(edge_riachao_tobias_barreto)
 
   # Vizinhos Ribeirópolis
 
   edge_ribeiropolis_sao_miguel_do_aleixo = Edge(vertex_ribeiropolis, vertex_sao_miguel_do_aleixo, 36.4)
 
-  graph_citys_sergipe.add_edge(edge_ribeiropolis_sao_miguel_do_aleixo)
+  graph_cities_sergipe.add_edge(edge_ribeiropolis_sao_miguel_do_aleixo)
 
   # Vizinhos Rosário do Catete  
 
   edge_rosario_do_catete_santo_amaro_das_brotas = Edge(vertex_rosario_do_catete, vertex_santo_amaro_das_brotas, 15.9)
   edge_rosario_do_catete_siriri = Edge(vertex_rosario_do_catete, vertex_siriri, 17.2)
 
-  graph_citys_sergipe.add_edge(edge_rosario_do_catete_siriri)
-  graph_citys_sergipe.add_edge(edge_rosario_do_catete_santo_amaro_das_brotas)
+  graph_cities_sergipe.add_edge(edge_rosario_do_catete_siriri)
+  graph_cities_sergipe.add_edge(edge_rosario_do_catete_santo_amaro_das_brotas)
 
   # Vizinhos Salgado  
 
   edge_salgado_sao_domingos = Edge(vertex_salgado, vertex_sao_domingos, 40.3)
 
-  graph_citys_sergipe.add_edge(edge_salgado_sao_domingos)  
+  graph_cities_sergipe.add_edge(edge_salgado_sao_domingos)  
 
   # Vizinhos Santa Luiza do Itanhy
 
@@ -813,8 +813,8 @@ def instance():
 
   edge_tobias_barreto_tomar_do_geru = Edge(vertex_tobias_barreto, vertex_tomar_do_geru, 47.9)
 
-  graph_citys_sergipe.add_edge(edge_tobias_barreto_tomar_do_geru)
+  graph_cities_sergipe.add_edge(edge_tobias_barreto_tomar_do_geru)
 
   # Vizinhos Umbauba
 
-  dijkstra(graph_citys_sergipe, vertex_aracaju)
+  dijkstra(graph_cities_sergipe, vertex_aracaju)
