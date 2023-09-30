@@ -154,8 +154,8 @@ class Graph:
       print("Grau: {} | {} -> {}".format(vertex.degree, vertex.data, neighbors_data))
 
 def dijkstra(graph, src, dest):
-  pq = []
-  heapq.heappush(pq, (0, src))
+  priority_queue = []
+  heapq.heappush(priority_queue, (0, src))
 
   amount_edges = graph.get_vertex_count()
   dist = [float('inf')] * amount_edges
@@ -163,13 +163,13 @@ def dijkstra(graph, src, dest):
 
   path = {}  
 
-  while pq:
-    d, u = heapq.heappop(pq)
+  while priority_queue:
+    d, u = heapq.heappop(priority_queue)
     for vertex in list(graph.adjacency_list.values())[u.index]:
       weight = graph.get_weight_edge(vertex, u)
       if dist[vertex.index] > dist[u.index] + weight:
         dist[vertex.index] = dist[u.index] + weight
-        heapq.heappush(pq, (dist[vertex.index], vertex))
+        heapq.heappush(priority_queue, (dist[vertex.index], vertex))
         path[vertex] = u  
 
 
