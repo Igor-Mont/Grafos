@@ -184,8 +184,7 @@ def dijkstra(graph, src, dest):
         current_vertex = path[current_vertex]
       path_list.append(src)
       path_list.reverse()
-      print(f"{src.data} para {vertex.data}: {' -> '.join(v.data for v in path_list[1:])}, Custo Minimo: {dist[vertex.index]:.2f}")
-      print()
+      print(f"----- {src.data} para {vertex.data} -----\nRota: {' -> '.join(v.data for v in path_list[1:])}\nCusto Mínimo: {dist[vertex.index]:.2f}km")
 
 graph_cities_sergipe = Graph()
 vertex_amparo_de_sao_francisco = Vertex("Amparo de São Francisco", 0)
